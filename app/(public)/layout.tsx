@@ -1,3 +1,4 @@
+import { ContenLayout } from '@/src/context/components';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -10,9 +11,6 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    // <div className="flex items-center justify-center h-dvh">
-    <div className="mx-auto grid grid-cols-1 items-center">
-      {children}
-    </div>
+      <ContenLayout type="desktop">{children}</ContenLayout>
   );
 }
