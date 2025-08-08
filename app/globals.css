@@ -1,28 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  --custom-neutral-0: #FFFFFF;
-  --custom-neutral-50: #F5F7FA;
-  --custom-neutral-100: #F3F5F8;
-  --custom-neutral-200: #E0E4EA;
-  --custom-neutral-300: #CACFD8;
-  --custom-neutral-400: #99A0AE;
-  --custom-neutral-500: #717784;
-  --custom-neutral-600: #525866;
-  --custom-neutral-700: #2B303B;
-  --custom-neutral-800: #232530;
-  --custom-neutral-900: #191B25;
-  --custom-neutral-950: #0E121B;
+  --color-custom-neutral-0: #FFFFFF;
+  --color-custom-neutral-50: #F5F7FA;
+  --color-custom-neutral-100: #F3F5F8;
+  --color-custom-neutral-200: #E0E4EA;
+  --color-custom-neutral-300: #CACFD8;
+  --color-custom-neutral-400: #99A0AE;
+  --color-custom-neutral-500: #717784;
+  --color-custom-neutral-600: #525866;
+  --color-custom-neutral-700: #2B303B;
+  --color-custom-neutral-800: #232530;
+  --color-custom-neutral-900: #191B25;
+  --color-custom-neutral-950: #0E121B;
 
-  --custom-blue-700: #2547D0;
-  --custom-blue-500: #335CFF;
-  --custom-blue-50: #EBF1FF;
+  --color-custom-blue-700: #2547D0;
+  --color-custom-blue-500: #335CFF;
+  --color-custom-blue-50: #EBF1FF;
 
-  --custom-green-500: #21C16B;
-  --custom-green-100: #D1FBE9;
+  --color-custom-green-500: #21C16B;
+  --color-custom-green-100: #D1FBE9;
 
-  --custom-red-500: #FB3748;
-  --custom-red-100: #FFD5D8;
+  --color-custom-red-500: #FB3748;
+  --color-custom-red-100: #FFD5D8;
 }
 
 @utility font-preset-1 {

@@ -2,7 +2,7 @@ import { ContenLayout } from '@/src/components';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Testing',
+  title: 'privade',
 };
 
 export default function Layout({
@@ -11,6 +11,6 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-      <ContenLayout type="desktop">{children}</ContenLayout>
+      <ContenLayout type="sidebar">{children}</ContenLayout>
   );
 }
