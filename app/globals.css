@@ -25,29 +25,54 @@
   --custom-red-100: #FFD5D8;
 }
 
-@layer components {
-  .font_preset-1 {
-    @apply text-2xl leading-[120%] -tracking-[-0.5px] font-bold 
-  }
+@utility font-preset-1 {
+  font-size: 1.5rem;
+  line-height: 120%;
+  letter-spacing: -0.5px;
+  font-weight: 700;
+}
 
-  .font_preset-2 {
-    @apply text-xl leading-[120%] -tracking-[-0.5px] font-bold
-  }
+@utility font-preset-2 {
+  font-size: 1.25rem;
+  line-height: 120%;
+  letter-spacing: -0.5px;
+  font-weight: 700;
+}
 
-  .font_preset-3 {
-    @apply text-base leading-[120%] -tracking-[-0.3px] font-semibold
-  }
+@utility font-preset-3 {
+  font-size: 1rem;
+  line-height: 120%;
+  letter-spacing: -0.3px;
+  font-weight: 600;
+}
 
-  .font_preset-4 {
-    @apply text-sm leading-[120%] -tracking-[-0.2px] font-medium
-  }
+@utility font-preset-4 {
+  font-size: 0.875rem;
+  line-height: 120%;
+  letter-spacing: -0.2px;
+  font-weight: 500;
+}
 
-  .font_preset-5 {
-    @apply text-sm leading-[120%] -tracking-[-0.2px] font-normal
-  }
+@utility font-preset-5 {
+  font-size: 0.875rem;
+  line-height: 120%;
+  letter-spacing: -0.2px;
+  font-weight: 400;
+}
 
-  .font_preset-6 {
-    @apply text-xs leading-[120%] -tracking-[-0.2px] font-normal
-  }
+@utility font-preset-6 {
+  font-size: 0.75rem;
+  line-height: 120%;
+  letter-spacing: -0.2px;
+  font-weight: 400;
+}
 
+@utility shadow-small {
+  background-color: white;
+  box-shadow: 0 4px 6px 0 rgba(240, 240, 240, 0.6);
+}
+
+@utility shadow-large {
+  background-color: white;
+  box-shadow: 0 8px 12px 0 rgba(240, 240, 240, 0.6);
 }

@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className='ease-in-out duration-75'>
         <FontContextProvider>{children}</FontContextProvider>
       </body>
     </html>
