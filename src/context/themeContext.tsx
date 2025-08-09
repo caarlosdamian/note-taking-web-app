@@ -31,8 +31,6 @@ export const ThemeContextProvider = ({ children }: PropsWithChildren) => {
     }
   }, []);
 
-  console.log(isDarkMode)
-
   return (
     <themeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
       <div className={`${isDarkMode ? 'dark' : ''}`}>{children}</div>

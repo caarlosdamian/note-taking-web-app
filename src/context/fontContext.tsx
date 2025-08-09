@@ -20,7 +20,7 @@ const fontContext = createContext({});
 
 export const FontContextProvider = ({ children }: PropsWithChildren) => {
 
-  const [font, setFont] = useState(codePro.className);
+  const [font, setFont] = useState(inter.className);
 
   return (
     <fontContext.Provider
