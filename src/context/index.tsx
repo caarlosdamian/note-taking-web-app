@@ -1,1 +1,2 @@
-export * from './fontContext'
+export * from './fontContext';
+export * from './themeContext';
