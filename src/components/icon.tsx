@@ -11,7 +11,6 @@ interface Props {
 export const Icon = ({ icon, color, className, width, height }: Props) => {
   return (
     <div
-      // className="absolute right-4 top-4 stroke-custom-blue-700 fill-custom-blue-500 text-red-500"
       className={className}
       dangerouslySetInnerHTML={{
         __html: modifySvg(icons[icon], { color, width, height }),

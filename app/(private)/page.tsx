@@ -20,6 +20,8 @@ const HomePage = () => {
         placeholder="testing..."
         name="pass"
         hint='This is a hint text to help user.'
+        linkLabel='Login'
+        linkUrl='/login'
         // error='esto es error'
       />
     </div>
