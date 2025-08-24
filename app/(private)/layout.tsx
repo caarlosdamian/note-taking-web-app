@@ -1,4 +1,4 @@
-import { ContenLayout } from '@/src/components';
+import { ContenLayout, MenuBar } from '@/src/components';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -11,6 +11,37 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-      <ContenLayout type="sidebar">{children}</ContenLayout>
+      <ContenLayout type="sidebar">
+            <MenuBar
+        elements={[
+          {
+            label: 'Home',
+            icon: 'home',
+            path: '/'
+          },
+          {
+            label: 'Search',
+            icon: 'search',
+            path: '/search'
+          },
+          {
+            label: 'Archived',
+            icon: 'archived',
+            path: '/archived'
+          },
+          {
+            label: 'Tags',
+            icon: 'tags',
+            path: '/tags'
+          },
+          {
+            label: 'Settings',
+            icon: 'settings',
+            path: '/settings'
+          },
+        ]}
+      />
+        
+        {children}</ContenLayout>
   );
 }

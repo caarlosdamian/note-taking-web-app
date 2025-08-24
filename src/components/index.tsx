@@ -6,3 +6,4 @@ export { ToastContainer } from './toastContainer';
 export { ContenLayout } from './contenLayout';
 export { Sidebar } from './sidebar';
 export { Icon } from './icon';
+export {MenuBar} from './menuBar'

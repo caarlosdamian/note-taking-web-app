@@ -1,4 +1,4 @@
-import { TextInput } from '@/src/components';
+import { MenuBar, TextInput } from '@/src/components';
 import { Button } from '@/src/components/button';
 import { Toast } from '@/src/components/toast';
 import React from 'react';
@@ -13,17 +13,7 @@ import React from 'react';
 const HomePage = () => {
   return (
     <div className="flex gap-4">
-      <TextInput
-        iconLeft="checkmark"
-        iconRight='clock'
-        label="New Password"
-        placeholder="testing..."
-        name="pass"
-        hint='This is a hint text to help user.'
-        linkLabel='Login'
-        linkUrl='/login'
-        // error='esto es error'
-      />
+  
     </div>
   );
 };

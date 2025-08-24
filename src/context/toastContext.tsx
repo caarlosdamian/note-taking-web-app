@@ -32,24 +32,24 @@ export const toastContext = createContext<ToasContextI>({
 
 export const ToastContextProvider = ({ children }: PropsWithChildren) => {
   const [toastInstances, setToastInstances] = useState<ToastI[]>([
-    {
-      id: 'toast-1',
-      title: 'Sesión iniciada correctamente',
-      linkLabel: 'Ver perfil',
-      linkPath: '/perfil',
-      callback: () => {
-        setTimeout(() => handleClose('toast-1'), 3000);
-      },
-    },
-    {
-      id: 'toast-2',
-      title: 'Error al guardar los cambios',
-      linkLabel: 'Reintentar',
-      linkPath: '/editar',
-      callback: () => {
-        setTimeout(() => handleClose('toast-2'), 5000);
-      },
-    },
+    // {
+    //   id: 'toast-1',
+    //   title: 'Sesión iniciada correctamente',
+    //   linkLabel: 'Ver perfil',
+    //   linkPath: '/perfil',
+    //   callback: () => {
+    //     setTimeout(() => handleClose('toast-1'), 3000);
+    //   },
+    // },
+    // {
+    //   id: 'toast-2',
+    //   title: 'Error al guardar los cambios',
+    //   linkLabel: 'Reintentar',
+    //   linkPath: '/editar',
+    //   callback: () => {
+    //     setTimeout(() => handleClose('toast-2'), 5000);
+    //   },
+    // },
   ]);
 
   const handleClose = (id: string) => {
