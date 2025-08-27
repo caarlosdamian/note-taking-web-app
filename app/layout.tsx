@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { FontContextProvider, ThemeContextProvider } from '@/src/context';
 import './globals.css';
 import { ToastContextProvider } from '@/src/context/toastContext';
+import { ModalContextProvider } from '@/src/context/modalContext';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,7 +19,9 @@ export default function RootLayout({
       <body className="ease-in-out duration-75">
         <FontContextProvider>
           <ThemeContextProvider>
-            <ToastContextProvider>{children}</ToastContextProvider>
+            <ModalContextProvider>
+              <ToastContextProvider>{children}</ToastContextProvider>
+            </ModalContextProvider>
           </ThemeContextProvider>
         </FontContextProvider>
       </body>

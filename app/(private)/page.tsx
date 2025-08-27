@@ -1,6 +1,7 @@
 import { MenuBar, TextInput } from '@/src/components';
 import { Button } from '@/src/components/button';
 import { Toast } from '@/src/components/toast';
+import { Testing } from '@/src/sections/Testing';
 import React from 'react';
 
 // sin icono
@@ -13,7 +14,7 @@ import React from 'react';
 const HomePage = () => {
   return (
     <div className="flex gap-4">
-  
+      <Testing />
     </div>
   );
 };
