@@ -1,10 +1,12 @@
+export { Logo } from './shared/logo';
+export { Notes } from './sidebar/notes';
+export { Navegation } from './sidebar/navegation';
 export { TextInput } from './textInput';
 export { Button } from './button';
 export { Header } from './header';
 export { Toast } from './toast';
 export { ToastContainer } from './toastContainer';
-export { ContenLayout } from './contenLayout';
-export { Sidebar } from './sidebar';
+export { ContentLayout } from './contenLayout';
 export { Icon } from './icon';
 export { MenuBar } from './menuBar';
 export { Modal } from './modal';

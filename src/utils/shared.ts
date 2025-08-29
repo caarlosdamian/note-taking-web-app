@@ -30,10 +30,7 @@ export const modifySvg = (
       /stroke="#[0-9a-fA-F]{3,6}"/g,
       `stroke="${colorWithHash}"`
     );
-     svg = svg.replace(
-      /fill="#[0-9a-fA-F]{3,6}"/g,
-      `fill="${colorWithHash}"`
-    );
+    svg = svg.replace(/fill="#[0-9a-fA-F]{3,6}"/g, `fill="${colorWithHash}"`);
   }
 
   // Cambiar width y height si se pasan
@@ -55,3 +52,13 @@ export const modifySvg = (
 
   return svg;
 };
+
+/**
+ * Compara el pathname con el link devuelve true si es igual
+ *
+ * @param pathname - Ruta actual
+ * @param link - String cualquiera
+ * @returns  Booleando
+ */
+export const isActive = (pathname: string, link: string): Boolean =>
+  pathname === link;

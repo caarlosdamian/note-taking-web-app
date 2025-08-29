@@ -1,4 +1,4 @@
-import { ContenLayout, MenuBar, Modal } from '@/src/components';
+import { ContentLayout, MenuBar, Modal } from '@/src/components';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -10,5 +10,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <ContenLayout type="sidebar">{children}</ContenLayout>;
+  return <ContentLayout type="sidebar">{children}</ContentLayout>;
 }

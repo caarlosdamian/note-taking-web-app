@@ -14,7 +14,7 @@ import React from 'react';
 const HomePage = () => {
   return (
     <div className="flex gap-4">
-      <Testing />
+      
     </div>
   );
 };
