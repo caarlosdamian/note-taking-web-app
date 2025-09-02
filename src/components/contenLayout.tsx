@@ -1,8 +1,12 @@
 import { Children, PropsWithChildren } from 'react';
-import { Sidebar } from './sidebar';
 import { Header } from './header';
 import { MenuBar } from './menuBar';
 import { Navegation } from './sidebar/navegation';
+import {
+  generateNavElements,
+  homeNavegation,
+  tagsNavegation,
+} from '../utils';
 
 const menu = [
   {
@@ -33,6 +37,13 @@ interface Props extends PropsWithChildren {
 
 export const ContentLayout = ({ type, children }: Props) => {
   const sidebar = type === 'sidebar'; // true
+
+  const navElements = generateNavElements([homeNavegation, tagsNavegation], {
+    index: 2,
+    title: 'Tags',
+  });
+
+
   return (
     <main
       // className={`flex flex-col-reverse ${
@@ -40,7 +51,7 @@ export const ContentLayout = ({ type, children }: Props) => {
       // }`}
       className="flex"
     >
-      <Navegation />
+      <Navegation navElements={navElements} />
       <div className="w-full">
         <Header />
         <div className="bg-amber-900 h-[calc(100dvh-110px)] md:h-[calc(100dvh-148px)] lg:h-[calc(100dvh-74px)]">

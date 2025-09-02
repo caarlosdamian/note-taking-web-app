@@ -6,32 +6,47 @@ import { themeContext } from '@/src/context';
 import { use } from 'react';
 import Link from 'next/link';
 
-interface Props {
+export interface ItemListI {
   label: string;
   icon: IconList;
   path: string;
   isNavegation?: Boolean;
 }
 
-export const ItemList = ({ icon, label, path, isNavegation }: Props) => {
+export const ItemList = ({ icon, label, path, isNavegation }: ItemListI) => {
   const pathname = usePathname();
   const { isDarkMode } = use(themeContext);
   return (
-    <li className={`${isActive(pathname, path) ? 'dark:bg-custom-neutral-700 bg-custom-neutral-200' : ''} p-3 rounded-lg`}>
-      <Link href={path} className='flex items-center gap-2'>
-        <Icon
-          icon={icon}
-          color={
-            isActive(pathname, path)
-              ? '#335CFF'
-              : isDarkMode
-              ? '#99A0AE'
-              : '#525866'
-          }
-        />
-        <span className="font-preset-4 text-neutral-950 dark:text-white">
-          {label}
-        </span>
+    <li
+      className={`${
+        isActive(pathname, path)
+          ? 'dark:bg-custom-neutral-700 bg-custom-neutral-200'
+          : ''
+      } p-3 rounded-lg`}
+    >
+      <Link href={path} className="flex items-center gap-2 justify-between">
+        <div className="flex items-center gap-2">
+          <Icon
+            icon={icon}
+            color={
+              isActive(pathname, path)
+                ? '#335CFF'
+                : isDarkMode
+                ? '#99A0AE'
+                : '#525866'
+            }
+          />
+          <span className="font-preset-4 text-neutral-950 dark:text-white">
+            {label}
+          </span>
+        </div>
+        {isActive(pathname, path) && (
+          <Icon
+            icon="arrowLeft"
+            className="rotate-180"
+            color={isDarkMode ? '#99A0AE' : '#525866'}
+          />
+        )}
       </Link>
     </li>
   );

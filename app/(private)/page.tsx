@@ -1,7 +1,8 @@
-import { MenuBar, TextInput } from '@/src/components';
+import { MenuBar, Navegation, TextInput } from '@/src/components';
 import { Button } from '@/src/components/button';
 import { Toast } from '@/src/components/toast';
 import { Testing } from '@/src/sections/Testing';
+import { generateNavElements, homeNavegation } from '@/src/utils';
 import React from 'react';
 
 // sin icono
@@ -14,7 +15,7 @@ import React from 'react';
 const HomePage = () => {
   return (
     <div className="flex gap-4">
-      
+      <Navegation whitoutLogo navElements={generateNavElements([homeNavegation])} />
     </div>
   );
 };

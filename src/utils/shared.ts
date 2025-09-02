@@ -1,3 +1,6 @@
+import { ItemListI } from '../components/shared/itemList';
+import { NavElement } from '../components/sidebar/navegation';
+
 /**
  * Modifica un SVG string permitiendo cambiar color (stroke) y dimensiones.
  * Si el SVG no tiene viewBox, se le agrega uno.
@@ -62,3 +65,27 @@ export const modifySvg = (
  */
 export const isActive = (pathname: string, link: string): Boolean =>
   pathname === link;
+
+/**
+ * Genera una lista de elementos de navegación a partir de una matriz de items.
+ *
+ * - Cada grupo (`ItemListI[]`) se convierte en un objeto `NavElement`.
+ * - Se genera un `id` único para cada elemento con `crypto.randomUUID()`.
+ * - Se puede asignar un título opcional a un grupo si coincide con el `index` proporcionado en `opts`.
+ *
+ * @param elements - Matriz de matrices de items (`ItemListI[][]`), cada subarreglo representa un grupo de items de navegación.
+ * @param opts - Objeto opcional para asignar título:
+ *   - `index`: posición (1-based) del grupo al que se le aplicará el título.
+ *   - `title`: título a asignar al grupo correspondiente.
+ * @returns Lista de elementos de navegación (`NavElement[]`).
+ */
+export const generateNavElements = (
+  elements: ItemListI[][],
+  opts?: { index: number; title: string }
+): NavElement[] => {
+  return elements.map((el, index) => ({
+    id: crypto.randomUUID(),
+    items: el,
+    title: opts?.index === index + 1 ? opts.title : undefined,
+  }));
+};
