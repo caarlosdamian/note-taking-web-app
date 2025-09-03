@@ -1,12 +1,8 @@
-import { Children, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { Header } from './header';
 import { MenuBar } from './menuBar';
 import { Navegation } from './sidebar/navegation';
-import {
-  generateNavElements,
-  homeNavegation,
-  tagsNavegation,
-} from '../utils';
+import { generateNavElements, homeNavegation, tagsNavegation } from '../utils';
 
 const menu = [
   {
@@ -15,46 +11,41 @@ const menu = [
     path: '/',
   },
   {
-    label: 'Perfil',
-    icon: 'user',
-    path: '/perfil',
+    label: 'Search',
+    icon: 'search',
+    path: '/search',
   },
   {
-    label: 'Notificaciones',
-    icon: 'bell',
-    path: '/notificaciones',
+    label: 'Archived',
+    icon: 'archived',
+    path: '/archived',
   },
   {
-    label: 'Configuración',
+    label: 'Tags',
+    icon: 'tags',
+    path: '/tags',
+  },
+  {
+    label: 'Settings',
     icon: 'settings',
-    path: '/configuracion',
+    path: '/settings',
   },
 ];
 
-interface Props extends PropsWithChildren {
-  type: 'desktop' | 'sidebar';
-}
-
-export const ContentLayout = ({ type, children }: Props) => {
-  const sidebar = type === 'sidebar'; // true
-
+export const ContentLayout = ({ children }: PropsWithChildren) => {
+  // Todo: login layout
+  // Todo: Change name
   const navElements = generateNavElements([homeNavegation, tagsNavegation], {
     index: 2,
     title: 'Tags',
   });
 
-
   return (
-    <main
-      // className={`flex flex-col-reverse ${
-      //   sidebar ? 'lg:flex-row lg:p-l-0 lg:gap-8' : ''
-      // }`}
-      className="flex"
-    >
+    <main className="flex">
       <Navegation navElements={navElements} />
       <div className="w-full">
         <Header />
-        <div className="bg-amber-900 h-[calc(100dvh-110px)] md:h-[calc(100dvh-148px)] lg:h-[calc(100dvh-74px)]">
+        <div className="bg-white h-[calc(100dvh-110px)] md:h-[calc(100dvh-148px)] lg:h-[calc(100dvh-81px)]">
           {children}
         </div>
         <MenuBar elements={menu} />
@@ -62,33 +53,3 @@ export const ContentLayout = ({ type, children }: Props) => {
     </main>
   );
 };
-
-// {sidebar && (
-//   <>
-//     <div className="order-1 max bg-amber-600">
-//       <Header />
-//     </div>
-//     <div className="min-w-[272px] max-h-[74px] lg:max-h-screen bg-amber-400">
-//       <Sidebar />
-//       {/* <MenuBar elements={[]}/> */}
-//     </div>
-//   </>
-// )}
-// <div className="">
-//     <div className="">
-//       <div className="">
-//         <Header />
-//       </div>
-//       <div className="grid grid-cols-12 gap-4 md:gap-6 basis-full px-4 md:px-8">
-//         <div
-//           className={`col-span-12 ${
-//             sidebar
-//               ? 'h-[calc(100vh-110px)] md:h-[calc(100vh-148px)] lg:h-screen'
-//               : 'h-screen'
-//           }`}
-//         >
-//           {children}
-//         </div>
-//       </div>
-//     </div>
-//   </div>

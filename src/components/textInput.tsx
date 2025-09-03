@@ -7,7 +7,7 @@ import { themeContext } from '../context';
 import Link from 'next/link';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label?: string;
   iconLeft?: IconList;
   iconRight?: IconList;
   hint?: string;
@@ -30,14 +30,16 @@ export const TextInput = ({
 }: Props) => {
   const { isDarkMode } = use(themeContext);
   return (
-    <div className="m-2.5 flex flex-col gap-1.5 ">
+    <div className="flex flex-col gap-1.5 ">
       <div className="flex justify-between">
-        <label
-          className="font-preset-4 text-neutral-950 dark:text-white"
-          htmlFor={name}
-        >
-          {label}
-        </label>
+        {label && (
+          <label
+            className="font-preset-4 text-neutral-950 dark:text-white"
+            htmlFor={name}
+          >
+            {label}
+          </label>
+        )}
         {linkLabel && linkUrl && (
           <Link
             href={linkUrl}

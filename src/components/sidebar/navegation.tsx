@@ -17,8 +17,8 @@ export const Navegation = ({ navElements, whitoutLogo }: Props) => {
   return (
     <aside
       className={`${
-        whitoutLogo ? 'h-[calc(100dvh-74px)]' : 'h-dvh'
-      } min-w-[272px] h dark:bg-custom-neutral-800 bg-custom-neutral-100 hidden  px-4 py-3 lg:flex flex-col gap-4`}
+        whitoutLogo ? 'h-[calc(100dvh-81px)]' : 'h-dvh'
+      } min-w-[272px] h dark:bg-custom-neutral-950 bg-white hidden  px-4 py-3 lg:flex flex-col gap-4 border-r-[1px] border-custom-neutral-200 dark:border-custom-neutral-800`}
     >
       {!whitoutLogo && (
         <div className="py-3">
@@ -30,7 +30,7 @@ export const Navegation = ({ navElements, whitoutLogo }: Props) => {
         <React.Fragment key={element.id}>
           <List elements={element.items} title={element.title} />
           {index !== navElements.length - 1 && (
-            <hr className="bg-custom-neutral-200 dark:bg-custom-neutral-600 border-0 h-[1px]" />
+            <hr className="bg-custom-neutral-200 dark:bg-custom-neutral-800 border-0 h-[1px]" />
           )}
         </React.Fragment>
       ))}

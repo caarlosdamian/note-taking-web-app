@@ -1,4 +1,4 @@
-import { ContenLayout } from '@/src/components';
+import { ContentLayout } from '@/src/components';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -10,7 +10,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-      <ContenLayout type="desktop">{children}</ContenLayout>
-  );
+  return <ContentLayout>{children}</ContentLayout>;
 }

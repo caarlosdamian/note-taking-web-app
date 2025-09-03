@@ -22,7 +22,7 @@ export const Toast = ({ title, linkPath, linkLabel, ...props }: Props) => {
     return () => {
       clearTimeout(timeout as unknown as string);
     };
-  }, []);
+  }, []); 
 
   return (
     <div className="transition-all min-w-[274px] md:min-w-[390px] gap-6  mt-5 flex bg-white border-custom-neutral-200 text-custom-neutral-950 dark:text-white dark:bg-custom-neutral-700 justify-between items-center p-2 border-[1px] rounded-lg">

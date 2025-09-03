@@ -26,4 +26,13 @@ const tagsNavegation: ItemListI[] = [
   },
 ];
 
-export { homeNavegation, tagsNavegation };
+const sectionTitles = {
+  archived: {
+    title: 'Archived Notes',
+  },
+  home: {
+    title: 'All Notes',
+  },
+};
+
+export { homeNavegation, tagsNavegation, sectionTitles };
