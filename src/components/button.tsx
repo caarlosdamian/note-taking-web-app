@@ -1,11 +1,13 @@
 import Image from 'next/image';
 import React, { ButtonHTMLAttributes, PropsWithChildren } from 'react';
+import { Icon } from './icon';
+import { IconList } from '../utils';
 
 export type BtnVariant = 'primary' | 'secondary' | 'border' | 'danger';
 interface Props
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     PropsWithChildren {
-  icon?: string;
+  icon?: IconList;
   variant: BtnVariant;
 }
 
@@ -25,12 +27,13 @@ export const Button = ({ variant, children, icon, ...props }: Props) => {
       className={`focus:outline-2 focus:outline-offset-4
    focus:outline-custom-neutral-400 cursor-pointer rounded-lg w-fit font-preset-4 
     disabled:bg-custom-neutral-50 disabled:text-neutral-300
-    px-4 py-3.5 flex gap-3 items-center
+    px-4 py-3.5 flex gap-1 items-center ${props.className}
         
     ${variantStyles[variant]}
     `}
     >
-      {icon && <Image src={icon} width={14} height={14} alt="btn-icon" />}
+      {icon && <Icon color='fff' icon={icon} width={14} height={14} />}
+      {/* <Image src={icon}  alt="btn-icon" /> */}
       {children}
     </button>
   );

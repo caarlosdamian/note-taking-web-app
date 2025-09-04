@@ -70,9 +70,8 @@ export const icons = {
     <path stroke="#000" stroke-width="1.5" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
   </svg>`,
 
-  plus: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
-    <path stroke="#000" stroke-width="1.5" d="M12 5v14m-7-7h14"/>
-  </svg>`,
+  plus: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="#000" d="M12 5a.75.75 0 0 1 .75.75V11H18a.75.75 0 0 1 0 1.5h-5.25v5.25a.75.75 0 0 1-1.5 0V12.5H6A.75.75 0 0 1 6 11h5.25V5.75A.75.75 0 0 1 12 5Z"/></svg>`,
+  cross: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="#0E121B" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m6 6 12 12M18 6 6 18"/></svg>`,
 
   restore: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
     <path stroke="#000" stroke-width="1.5" d="M4 4v6h6M20 20v-6h-6"/>

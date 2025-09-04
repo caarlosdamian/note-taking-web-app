@@ -1,7 +1,7 @@
 import React from 'react';
 import { Logo } from '../shared/logo';
-import { List } from './list';
 import { ItemListI } from '../shared/itemList';
+import { List } from '../shared/list';
 
 export interface NavElement {
   title?: string;
