@@ -1,0 +1,9 @@
+import React from 'react';
+
+interface Props {
+  note: string;
+}
+
+export const Tag = ({ note }: Props) => {
+  return <div className='py-0.5 px-1.5 bg-custom-neutral-200 rounded-sm font-preset-6'>{note}</div>;
+};

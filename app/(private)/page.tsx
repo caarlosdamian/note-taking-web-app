@@ -2,7 +2,7 @@ import { MenuBar, Navegation, Notes, TextInput } from '@/src/components';
 import { Button } from '@/src/components/button';
 import { Toast } from '@/src/components/toast';
 import { Testing } from '@/src/sections/Testing';
-import { generateNavElements, homeNavegation } from '@/src/utils';
+import { generateNavElements, homeNavegation, notes } from '@/src/utils';
 import React from 'react';
 
 // sin icono
@@ -16,6 +16,7 @@ const HomePage = () => {
   return (
     <div className="flex gap-4">
       <Notes
+      notes={notes}
         btnLabel="Create New Note"
         btnIcon='plus'
         upperNote='All notes with the ”Dev” tag are shown here.'

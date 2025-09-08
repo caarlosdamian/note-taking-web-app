@@ -89,3 +89,15 @@ export const generateNavElements = (
     title: opts?.index === index + 1 ? opts.title : undefined,
   }));
 };
+
+export const formatDate = (date: string) => {
+  const dateFromParam = new Date(date);
+
+  const formatedDate = dateFromParam.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  });
+
+  return formatedDate;
+};

@@ -118,4 +118,4 @@ const notes = [
   },
 ];
 
-export { homeNavegation, tagsNavegation, sectionTitles };
+export { homeNavegation, tagsNavegation, sectionTitles, notes };
