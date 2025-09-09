@@ -1,10 +1,11 @@
 import { ItemListI } from '../components/shared/itemList';
+import { Note } from '../types';
 
 const homeNavegation: ItemListI[] = [
   {
     label: 'All Notes',
     icon: 'home',
-    path: '/',
+    path: '/notes',
   },
   {
     label: 'Archived Notes',
@@ -33,10 +34,14 @@ const sectionTitles = {
   home: {
     title: 'All Notes',
   },
+  // Todo: maybe change logic for archived notes
+  notes: {
+    title: 'All Notes',
+  },
 };
-
-const notes = [
+const notes: Note[] = [
   {
+    id: '1a2b3c',
     title: 'React Performance Optimization',
     tags: ['Dev', 'React'],
     content:
@@ -45,6 +50,7 @@ const notes = [
     isArchived: false,
   },
   {
+    id: '4d5e6f',
     title: 'Japan Travel Planning',
     tags: ['Travel', 'Personal'],
     content:
@@ -53,6 +59,7 @@ const notes = [
     isArchived: false,
   },
   {
+    id: '7g8h9i',
     title: 'Favorite Pasta Recipes',
     tags: ['Cooking', 'Recipes'],
     content:
@@ -61,6 +68,7 @@ const notes = [
     isArchived: false,
   },
   {
+    id: '0j1k2l',
     title: 'TypeScript Migration Guide',
     tags: ['Dev', 'React', 'TypeScript'],
     content:
@@ -69,6 +77,7 @@ const notes = [
     isArchived: true,
   },
   {
+    id: '3m4n5o',
     title: 'Weekly Workout Plan',
     tags: ['Fitness', 'Health'],
     content:
@@ -77,6 +86,7 @@ const notes = [
     isArchived: false,
   },
   {
+    id: '6p7q8r',
     title: 'Gift Ideas',
     tags: ['Personal', 'Shopping'],
     content:
@@ -85,6 +95,7 @@ const notes = [
     isArchived: true,
   },
   {
+    id: '9s0t1u',
     title: 'React Component Library',
     tags: ['Dev', 'React'],
     content:
@@ -93,6 +104,7 @@ const notes = [
     isArchived: true,
   },
   {
+    id: '2v3w4x',
     title: 'Meal Prep Ideas',
     tags: ['Cooking', 'Health', 'Recipes'],
     content:
@@ -101,6 +113,7 @@ const notes = [
     isArchived: false,
   },
   {
+    id: '5y6z7a',
     title: 'Reading List',
     tags: ['Personal', 'Dev'],
     content:
@@ -109,6 +122,7 @@ const notes = [
     isArchived: false,
   },
   {
+    id: '8b9c0d',
     title: 'Fitness Goals 2025',
     tags: ['Fitness', 'Health', 'Personal'],
     content:

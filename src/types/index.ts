@@ -4,4 +4,5 @@ export interface Note {
   content: string;
   lastEdited: string;
   isArchived: boolean;
+  id:string
 }

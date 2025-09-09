@@ -24,7 +24,7 @@ export const Header = () => {
         <span className="font-preset-1 text-neutral-950 dark:text-white">
           {
             sectionTitles[titleKey as unknown as keyof typeof sectionTitles]
-              .title
+              ?.title
           }
         </span>
         <div className="flex items-center gap-6">

@@ -63,8 +63,8 @@ export const modifySvg = (
  * @param link - String cualquiera
  * @returns  Booleando
  */
-export const isActive = (pathname: string, link: string): Boolean =>
-  pathname === link;
+export const isActive = (pathname: string, link: string,includes?:boolean): boolean =>
+  includes ? pathname === link || pathname.includes(link) : pathname === link;
 
 /**
  * Genera una lista de elementos de navegación a partir de una matriz de items.
