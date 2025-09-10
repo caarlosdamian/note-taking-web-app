@@ -10,6 +10,7 @@ interface Props {
   action?: () => void;
   btnLabel?: string;
   btnIcon?: IconList;
+  emptyNote?: string;
   upperNote?: string;
   notes: Note[];
 }
@@ -20,11 +21,13 @@ export const Notes = ({
   btnIcon,
   upperNote,
   notes,
+  emptyNote,
 }: Props) => {
   const router = useRouter();
   const pathname = useParams();
 
   useEffect(() => {
+    // puede cambiar la logica
     if (notes.length >= 1) {
       router.push(`/notes/${notes[0].id}`);
     }
@@ -49,13 +52,24 @@ export const Notes = ({
           {upperNote}
         </p>
       )}
-      {notes.map((elemento) => (
-        <NoteItem
-          isActive={isActive(pathname.id as unknown as string, elemento.id)}
-          key={elemento.title}
-          note={elemento}
-        />
-      ))}
+      {notes.length >= 1 ? (
+        notes.map((elemento) => (
+          <NoteItem
+            isActive={isActive(
+              pathname.id as unknown as string,
+              elemento.id as string
+            )}
+            key={elemento.title}
+            note={elemento}
+          />
+        ))
+      ) : (
+        <p className="font-preset-5 dark:text-custom-neutral-200 text-custom-neutral-700 dark:bg-custom-neutral-800 bg-custom-neutral-100 rounded-md p-2">
+          {emptyNote ??
+            `No notes have been archived yet. Move notes here for safekeeping, or`}
+          {!emptyNote && <a href="" className='ml-2 underline'>create a new note.</a>}
+        </p>
+      )}
       {/* Actions btns opcional o nota  */}
       {/* Notas opcional  */}
       {/* List opcial o nota   */}

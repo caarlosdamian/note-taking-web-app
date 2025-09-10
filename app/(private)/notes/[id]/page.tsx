@@ -3,11 +3,7 @@ import { notes } from '@/src/utils';
 import React from 'react';
 
 const NotesPage = () => {
-  return (
-    <div>
- nota
-    </div>
-  );
+  return <div>nota</div>;
 };
 
 export default NotesPage;

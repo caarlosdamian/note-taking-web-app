@@ -1,8 +1,8 @@
 export interface Note {
   title: string;
-  tags: string[];
-  content: string;
-  lastEdited: string;
-  isArchived: boolean;
-  id:string
+  tags?: string[];
+  content?: string;
+  lastEdited?: string;
+  isArchived?: boolean;
+  id?:string
 }

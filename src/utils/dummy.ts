@@ -41,6 +41,10 @@ const sectionTitles = {
 };
 const notes: Note[] = [
   {
+    id: 'fsdf',
+    title: 'Untitled Note',
+  },
+  {
     id: '1a2b3c',
     title: 'React Performance Optimization',
     tags: ['Dev', 'React'],

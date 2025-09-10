@@ -19,22 +19,28 @@ export const NoteItem = ({
   console.log('isActive', isActive);
   return (
     <Link
-      href={id ? `/notes/${id}` : ''}
-      className={`flex flex-col gap-3 p-2 border-b-[1px] border-b-custom-neutral-200 dark:border-b-custom-neutral-800 rounded-md  ${
-        isActive ? 'dark:bg-custom-neutral-800 bg-custom-neutral-100' : ''
+      href={id ? `/notes/${id}` : '/notes'}
+      className={`flex flex-col gap-3 p-2    ${
+        isActive
+          ? 'dark:bg-custom-neutral-800 bg-custom-neutral-100 rounded-md'
+          : 'border-b-[1px] border-b-custom-neutral-200 dark:border-b-custom-neutral-800'
       }`}
     >
       <span className="font-preset-3 text-custom-neutral-950  dark:text-white">
         {title}
       </span>
-      <div className="flex flex-wrap gap-2.5">
-        {tags.map((el) => {
-          return <Tag key={el} note={el} />;
-        })}
-      </div>
-      <span className="font-preset-6 text-custom-neutral-950  dark:text-custom-neutral-300">
-        {formatDate(lastEdited)}
-      </span>
+      {tags && (
+        <div className="flex flex-wrap gap-2.5">
+          {tags.map((el) => {
+            return <Tag key={el} note={el} />;
+          })}
+        </div>
+      )}
+      {lastEdited && (
+        <span className="font-preset-6 text-custom-neutral-950  dark:text-custom-neutral-300">
+          {formatDate(lastEdited)}
+        </span>
+      )}
     </Link>
   );
 };

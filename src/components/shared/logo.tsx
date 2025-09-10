@@ -9,8 +9,8 @@ export const Logo = () => {
     <Image
       src={
         isDarkMode
-          ? './assets/images/logo-dark.svg'
-          : './assets/images/logo.svg'
+          ? '/assets/images/logo-dark.svg'
+          : '/assets/images/logo.svg'
       }
       alt="logo"
       width={95}
