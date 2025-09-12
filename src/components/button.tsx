@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React, { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 import { Icon } from './icon';
 import { IconList } from '../utils';
@@ -33,7 +32,6 @@ export const Button = ({ variant, children, icon, ...props }: Props) => {
     `}
     >
       {icon && <Icon color='fff' icon={icon} width={14} height={14} />}
-      {/* <Image src={icon}  alt="btn-icon" /> */}
       {children}
     </button>
   );

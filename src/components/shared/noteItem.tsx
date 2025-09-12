@@ -16,7 +16,6 @@ export const NoteItem = ({
   // Todo: agregar dark mode
   // Todo: agregar modo edicion
 
-  console.log('isActive', isActive);
   return (
     <Link
       href={id ? `/notes/${id}` : '/notes'}

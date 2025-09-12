@@ -4,7 +4,8 @@ import { Button } from '../button';
 import { IconList, isActive } from '@/src/utils';
 import { Note } from '@/src/types';
 import { NoteItem } from '../shared/noteItem';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useQueryParamsTools } from '@/src/hooks/useQueryParamsTools';
 
 interface Props {
   action?: () => void;
@@ -13,6 +14,7 @@ interface Props {
   emptyNote?: string;
   upperNote?: string;
   notes: Note[];
+  redirect?: boolean;
 }
 
 export const Notes = ({
@@ -22,14 +24,15 @@ export const Notes = ({
   upperNote,
   notes,
   emptyNote,
+  redirect,
 }: Props) => {
-  const router = useRouter();
+  const { createQueryString, setUrlQueryParams } = useQueryParamsTools();
+
   const pathname = useParams();
 
   useEffect(() => {
-    // puede cambiar la logica
-    if (notes.length >= 1) {
-      router.push(`/notes/${notes[0].id}`);
+    if (notes.length >= 1 && redirect) {
+      setUrlQueryParams(createQueryString({ note: notes[0].id as string }));
     }
   }, []);
 
@@ -67,7 +70,11 @@ export const Notes = ({
         <p className="font-preset-5 dark:text-custom-neutral-200 text-custom-neutral-700 dark:bg-custom-neutral-800 bg-custom-neutral-100 rounded-md p-2">
           {emptyNote ??
             `No notes have been archived yet. Move notes here for safekeeping, or`}
-          {!emptyNote && <a href="" className='ml-2 underline'>create a new note.</a>}
+          {!emptyNote && (
+            <a href="" className="ml-2 underline">
+              create a new note.
+            </a>
+          )}
         </p>
       )}
       {/* Actions btns opcional o nota  */}
