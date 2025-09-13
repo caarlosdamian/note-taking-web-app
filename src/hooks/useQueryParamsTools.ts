@@ -17,13 +17,21 @@ export const useQueryParamsTools = () => {
     [searchParams]
   );
 
-  const setUrlQueryParams = (newParams: string) => {
-    if (searchParams.size) {
-      const createdNewParams = searchParams.toString() + '&'.concat(newParams);
-      const params = new URLSearchParams(createdNewParams);
-      return router.push(`${pathname}?${params.toString()}`);
+  const replaceQuery = (recordParams: Record<string, string>) => {
+    const actualParams = new URLSearchParams(params as Record<string, string>);
+    for (const [key, value] of Object.entries(recordParams)) {
+      actualParams.set(key, value);
     }
-    return router.push(`${pathname}?${params.toString()}`);
+    return actualParams.toString();
+  };
+
+  const setUrlQueryParams = (recordParams: Record<string, string>) => {
+    if (searchParams.size) {
+      const newParams = replaceQuery(recordParams);
+      return router.push(`${pathname}?${newParams}`);
+    }
+
+    return router.push(`${pathname}?${createQueryString(recordParams)}`);
   };
 
   return { createQueryString, setUrlQueryParams };

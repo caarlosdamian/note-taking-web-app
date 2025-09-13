@@ -26,13 +26,14 @@ export const Notes = ({
   emptyNote,
   redirect,
 }: Props) => {
-  const { createQueryString, setUrlQueryParams } = useQueryParamsTools();
+  // const { createQueryString, setUrlQueryParams } = useQueryParamsTools();
 
   const pathname = useParams();
+  const router = useRouter();
 
   useEffect(() => {
-    if (notes.length >= 1 && redirect) {
-      setUrlQueryParams(createQueryString({ note: notes[0].id as string }));
+    if (notes.length) {
+      router.push(`/notes/${notes[0].id}`);
     }
   }, []);
 

@@ -41,7 +41,7 @@ const sectionTitles = {
 };
 const notes: Note[] = [
   {
-    id: 'fsdf',
+    id: '1a2b3ce',
     title: 'Untitled Note',
   },
   {
