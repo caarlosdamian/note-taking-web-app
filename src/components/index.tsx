@@ -1,3 +1,4 @@
+export { Note } from './notes/Note';
 export { InnerHeader } from './shared/innerHeader';
 export { Logo } from './shared/logo';
 export { Notes } from './sidebar/notes';

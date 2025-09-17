@@ -45,7 +45,7 @@ export const ContentLayout = ({ children }: PropsWithChildren) => {
       <Navegation navElements={navElements} />
       <div className="w-full">
         <Header />
-        <div className="bg-white h-[calc(100dvh-110px)] md:h-[calc(100dvh-148px)] lg:h-[calc(100dvh-81px)] flex">
+        <div className="dark:bg-custom-neutral-950 bg-white h-[calc(100dvh-110px)] md:h-[calc(100dvh-148px)] lg:h-[calc(100dvh-81px)] flex ">
           {children}
         </div>
         <MenuBar elements={menu} />
