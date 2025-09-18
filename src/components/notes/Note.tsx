@@ -3,7 +3,18 @@ import { notes } from '@/src/utils';
 import { useParams } from 'next/navigation';
 import React from 'react';
 import { Icon } from '../icon';
-import { Span } from 'next/dist/trace';
+import { Button } from '../button';
+
+const transformText = (text: string) => {
+  const formatedContent = text.split('\n').map((el, index) => {
+    if (el === '') {
+      return <br key={index} />;
+    }
+    return <p key={el}>{el}</p>;
+  });
+
+  return formatedContent;
+};
 
 export const Note = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,7 +33,7 @@ export const Note = () => {
   // todo : mobile add innerHeader
 
   return (
-    <section>
+    <section className="flex flex-col gap-5 basis-full lg:basis-2/3 px-6 py-5 h-full">
       {/* navegacion mobile */}
       <h1 className="font-preset-1 text-neutral-950 dark:text-white">
         {noteInfo.title}
@@ -34,6 +45,7 @@ export const Note = () => {
             <span className="text-neutral-950 dark:text-white">Tags</span>
           </div>
           {/* tags van a ser ids */}
+          {/* Todo: estas se editan en linea */}
           <div className="flex items-center">
             {tags?.map((tag, index) => (
               <span
@@ -62,6 +74,15 @@ export const Note = () => {
             </div>
           </div>
         )}
+      </div>
+      <hr className="bg-custom-neutral-200 dark:bg-custom-neutral-800 border-0 h-[1px] w-full" />
+      <div className={`text-neutral-950 dark:text-white basis-full`}>
+        {content && transformText(content as string)}
+      </div>
+      <hr className="bg-custom-neutral-200 dark:bg-custom-neutral-800 border-0 h-[1px] w-full" />
+      <div className="flex gap-4 justify-self-end  items-end">
+        <Button variant="primary">Save Note</Button>
+        <Button variant="secondary">Cancel</Button>
       </div>
     </section>
   );

@@ -38,7 +38,7 @@ export const Notes = ({
   }, []);
 
   return (
-    <div className="h-[calc(100dvh-81px)] w-[242px] dark:bg-custom-neutral-950 bg-white hidden  px-4 py-5 lg:flex flex-col gap-4 border-r-[1px] border-custom-neutral-200 dark:border-custom-neutral-800 overflow-scroll">
+    <div className="h-[calc(100dvh-81px)] w-[242px] max-w-[242px] basis-1/4 dark:bg-custom-neutral-950 bg-white hidden  px-4 py-5 lg:flex flex-col gap-4 border-r-[1px] border-custom-neutral-200 dark:border-custom-neutral-800 overflow-scroll">
       {btnLabel && action && (
         <Button
           variant="primary"
