@@ -1,32 +1,13 @@
 'use client';
 // import { notes } from '@/src/utils';
 import { useParams } from 'next/navigation';
-import React, { use, useReducer } from 'react';
+import React, { use, useReducer, useState } from 'react';
 import { Icon } from '../icon';
 import { Button } from '../button';
 import { noteContext } from '@/src/context';
-import { Note as NoteI } from '@/src/types';
+import { Note as NoteI, NoteInitialState } from '@/src/types';
 import { TextInput } from '../textInput';
-
-const defaultState = {
-  id: '',
-  title: '',
-  lastEdited: '',
-  tags: [],
-  content: '',
-  isArchived: false,
-};
-
-const initialState = {
-  noteData: {
-    ...defaultState,
-  },
-  fields: {
-    title: {
-      isEditMode: false,
-    },
-  },
-};
+import { initialState, noteFormReducer } from '@/src/reducers';
 
 const transformText = (text: string) => {
   const formatedContent = text.split('\n').map((el, index) => {
@@ -39,34 +20,16 @@ const transformText = (text: string) => {
   return formatedContent;
 };
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'title':
-      return {
-        ...state,
-        fields: {
-          ...state.fields,
-          title: { isEditMode: !state.fields.title.isEditMode },
-        },
-      };
-      break;
-
-    default:
-      break;
-  }
-};
 export const Note = () => {
   const { id } = useParams<{ id: string }>();
   const { notes } = use(noteContext);
   const [noteInfo] = notes.filter(
     (ele) => (ele as unknown as NoteI).id === id
   ) as NoteI[];
-  const [state, dispatch] = useReducer(reducer, {
+  const [state, dispatch] = useReducer(noteFormReducer, {
     ...initialState,
     noteData: { ...initialState.noteData, ...noteInfo },
   });
-
-  console.log('state', state);
 
   const { title, lastEdited, tags, content, id: noteId, isArchived } = noteInfo;
 
@@ -85,21 +48,26 @@ export const Note = () => {
     <section className="flex flex-col gap-5 basis-full lg:basis-2/3 px-6 py-5 h-full">
       {/* navegacion mobile */}
       {state.fields.title.isEditMode ? (
-        // <h1 className="font-preset-1 text-neutral-950 dark:text-white">
-        //   Estas editando el titulo
-        // </h1>
         <TextInput
-          onBlur={() => {
-            console.log('llamando unnblur');
-            dispatch({ type: 'title' });
+          onBlur={() => dispatch({ type: 'SET_TITLE_EDIT' })}
+          name="title"
+          variant="sm"
+          value={
+            state.noteData.isEdited ? state.noteData.title : noteInfo.title
+          }
+          onChange={(event) => {
+            const {
+              target: { value, name },
+            } = event;
+            dispatch({ type: 'EDIT_NOTE', payload: { name, value } });
           }}
         />
       ) : (
         <h1
           className="font-preset-1 text-neutral-950 dark:text-white"
-          onClick={() => dispatch({ type: 'title' })}
+          onClick={() => dispatch({ type: 'SET_TITLE_EDIT' })}
         >
-          {noteInfo.title}
+          {state.noteData.isEdited ? state.noteData.title : noteInfo.title}
         </h1>
       )}
       <div className="flex gap-3 flex-col">
@@ -110,17 +78,40 @@ export const Note = () => {
           </div>
           {/* tags van a ser ids */}
           {/* Todo: estas se editan en linea */}
-          <div className="flex items-center">
-            {tags?.map((tag, index) => (
-              <span
-                {...(index !== 0 ? { before: ',' } : {})}
-                key={tag}
-                className="text-neutral-950 dark:text-white after:content before:content-[attr(before)]"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+          {state.fields.tags.isEditMode ? (
+            <TextInput
+              onBlur={() => dispatch({ type: 'SET_TAGS_EDIT' })}
+              name="tags"
+              variant="sm"
+              value={
+                state.noteData.isEdited ? state.noteData.tags : noteInfo.tags
+              }
+              onChange={(event) => {
+                const {
+                  target: { value, name },
+                } = event;
+                dispatch({ type: 'EDIT_NOTE', payload: { name, value } });
+              }}
+            />
+          ) : (
+            <div
+              className="flex items-center"
+              onClick={() => dispatch({ type: 'SET_TAGS_EDIT' })}
+            >
+              {(state.noteData.isEdited
+                ? (state.noteData.tags as unknown as string)?.split(',')
+                : tags
+              )?.map((tag, index) => (
+                <span
+                  {...(index !== 0 ? { before: ',' } : {})}
+                  key={tag}
+                  className="text-neutral-950 dark:text-white after:content before:content-[attr(before)]"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
         {lastEdited && (
           <div className="flex item-center gap-2">

@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import React, { InputHTMLAttributes, use } from 'react';
 import { IconList } from '../utils';
 import { Icon } from './icon';
@@ -14,6 +13,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   linkLabel?: string;
   linkUrl?: string;
+  variant?: 'sm' | 'md' | 'lg';
 }
 
 export const TextInput = ({
@@ -26,12 +26,20 @@ export const TextInput = ({
   error,
   linkLabel,
   linkUrl,
+  variant = 'lg',
   ...props
 }: Props) => {
   const { isDarkMode } = use(themeContext);
+
+  const variantStyles = {
+    sm: 'px-1',
+    md: 'p-2',
+    lg: 'py-3 px-4',
+  };
+
   // todo addd un styled version
   return (
-    <div className="flex flex-col gap-1.5 ">
+    <div className="flex flex-col gap-1.5">
       <div className="flex justify-between">
         {label && (
           <label
@@ -50,7 +58,7 @@ export const TextInput = ({
           </Link>
         )}
       </div>
-      <div className="relative ">
+      <div className="relative">
         {iconLeft && (
           <Icon
             className="absolute left-4 top-4"
@@ -72,10 +80,12 @@ export const TextInput = ({
         <input
           id={name}
           name={name}
-          className={`w-full border-[1px] text-custom-neutral-950 border-custom-neutral-300 rounded-lg outline-none py-3 px-4 placeholder:font-preset-5 placeholder:text-custom-neutral-500 dark:bg-custom-neutral-950 active:outline-solid hover:bg-custom-neutral-50 dark:hover:bg-custom-neutral-800
+          className={`w-full border-[1px] text-custom-neutral-950 border-custom-neutral-300 rounded-lg outline-none  placeholder:font-preset-5 placeholder:text-custom-neutral-500 dark:bg-custom-neutral-950 active:outline-solid hover:bg-custom-neutral-50 dark:hover:bg-custom-neutral-800
   active:outline-custom-neutral-500 dark:active:outline-custom-neutral-600 dark:text-white outline-offset-2 disabled:bg-custom-neutral-50 disabled:text-custom-neutral-50 disable:placeholder:text-custom-neutral-50 disabled:cursor-not-allowed ${
     error ? 'border-custom-red-500' : ''
-  } ${iconLeft ? 'pl-[44px]' : ''} ${iconRight ? 'pr-[44px]' : ''}`}
+  } ${iconLeft ? 'pl-[44px]' : ''} ${iconRight ? 'pr-[44px]' : ''} ${
+            variantStyles[variant]
+          }`}
           {...props}
           type="text"
         />
