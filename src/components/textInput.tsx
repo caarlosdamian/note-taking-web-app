@@ -29,6 +29,7 @@ export const TextInput = ({
   ...props
 }: Props) => {
   const { isDarkMode } = use(themeContext);
+  // todo addd un styled version
   return (
     <div className="flex flex-col gap-1.5 ">
       <div className="flex justify-between">

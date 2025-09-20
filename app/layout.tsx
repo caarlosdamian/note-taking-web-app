@@ -1,5 +1,9 @@
 import type { Metadata } from 'next';
-import { FontContextProvider, ThemeContextProvider } from '@/src/context';
+import {
+  FontContextProvider,
+  NoteContextProvider,
+  ThemeContextProvider,
+} from '@/src/context';
 import './globals.css';
 import { ToastContextProvider } from '@/src/context/toastContext';
 import { ModalContextProvider } from '@/src/context/modalContext';
@@ -20,7 +24,9 @@ export default function RootLayout({
         <FontContextProvider>
           <ThemeContextProvider>
             <ModalContextProvider>
-              <ToastContextProvider>{children}</ToastContextProvider>
+              <NoteContextProvider>
+                <ToastContextProvider>{children}</ToastContextProvider>
+              </NoteContextProvider>
             </ModalContextProvider>
           </ThemeContextProvider>
         </FontContextProvider>

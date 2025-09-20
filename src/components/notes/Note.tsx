@@ -1,9 +1,32 @@
 'use client';
-import { notes } from '@/src/utils';
+// import { notes } from '@/src/utils';
 import { useParams } from 'next/navigation';
-import React from 'react';
+import React, { use, useReducer } from 'react';
 import { Icon } from '../icon';
 import { Button } from '../button';
+import { noteContext } from '@/src/context';
+import { Note as NoteI } from '@/src/types';
+import { TextInput } from '../textInput';
+
+const defaultState = {
+  id: '',
+  title: '',
+  lastEdited: '',
+  tags: [],
+  content: '',
+  isArchived: false,
+};
+
+const initialState = {
+  noteData: {
+    ...defaultState,
+  },
+  fields: {
+    title: {
+      isEditMode: false,
+    },
+  },
+};
 
 const transformText = (text: string) => {
   const formatedContent = text.split('\n').map((el, index) => {
@@ -16,9 +39,35 @@ const transformText = (text: string) => {
   return formatedContent;
 };
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'title':
+      return {
+        ...state,
+        fields: {
+          ...state.fields,
+          title: { isEditMode: !state.fields.title.isEditMode },
+        },
+      };
+      break;
+
+    default:
+      break;
+  }
+};
 export const Note = () => {
   const { id } = useParams<{ id: string }>();
-  const [noteInfo] = notes.filter((ele) => ele.id === id);
+  const { notes } = use(noteContext);
+  const [noteInfo] = notes.filter(
+    (ele) => (ele as unknown as NoteI).id === id
+  ) as NoteI[];
+  const [state, dispatch] = useReducer(reducer, {
+    ...initialState,
+    noteData: { ...initialState.noteData, ...noteInfo },
+  });
+
+  console.log('state', state);
+
   const { title, lastEdited, tags, content, id: noteId, isArchived } = noteInfo;
 
   const date = lastEdited
@@ -35,9 +84,24 @@ export const Note = () => {
   return (
     <section className="flex flex-col gap-5 basis-full lg:basis-2/3 px-6 py-5 h-full">
       {/* navegacion mobile */}
-      <h1 className="font-preset-1 text-neutral-950 dark:text-white">
-        {noteInfo.title}
-      </h1>
+      {state.fields.title.isEditMode ? (
+        // <h1 className="font-preset-1 text-neutral-950 dark:text-white">
+        //   Estas editando el titulo
+        // </h1>
+        <TextInput
+          onBlur={() => {
+            console.log('llamando unnblur');
+            dispatch({ type: 'title' });
+          }}
+        />
+      ) : (
+        <h1
+          className="font-preset-1 text-neutral-950 dark:text-white"
+          onClick={() => dispatch({ type: 'title' })}
+        >
+          {noteInfo.title}
+        </h1>
+      )}
       <div className="flex gap-3 flex-col">
         <div className="flex item-center gap-2">
           <div className="flex items-center gap-1.5">

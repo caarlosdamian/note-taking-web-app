@@ -3,6 +3,7 @@ import {
   InnerHeader,
   MenuBar,
   Modal,
+  NoteLayout,
   Notes,
 } from '@/src/components';
 import { notes } from '@/src/utils';
@@ -26,18 +27,7 @@ export default async function Layout({
   return (
     <ContentLayout>
       {/* table y mobile es diferente */}
-      <Notes
-        redirect
-        notes={notes}
-        btnLabel="Create New Note"
-        btnIcon="plus"
-        upperNote="All notes with the ”Dev” tag are shown here."
-        action={async () => {
-          'use server';
-          // ESTO DEBE DE VIVIR EN UN COMPONENTE DE CLIENTE PARA SU CORRECTO FUNCIONAMIENTO
-          console.log('ESTO ES SERVER ACTION');
-        }}
-      />
+      <NoteLayout />
       {/* <InnerHeader /> */}
       {children}
     </ContentLayout>
