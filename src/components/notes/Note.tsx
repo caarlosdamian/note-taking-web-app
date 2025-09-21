@@ -1,20 +1,21 @@
 'use client';
-// import { notes } from '@/src/utils';
 import { useParams } from 'next/navigation';
-import React, { use, useReducer, useState } from 'react';
+import React, { use, useReducer } from 'react';
 import { Icon } from '../icon';
 import { Button } from '../button';
 import { noteContext } from '@/src/context';
-import { Note as NoteI, NoteInitialState } from '@/src/types';
+import { Note as NoteI } from '@/src/types';
 import { TextInput } from '../textInput';
 import { initialState, noteFormReducer } from '@/src/reducers';
+import { TextArea } from '../shared/textArea';
 
 const transformText = (text: string) => {
   const formatedContent = text.split('\n').map((el, index) => {
+    const id = crypto.randomUUID();
     if (el === '') {
-      return <br key={index} />;
+      return <br key={id} />;
     }
-    return <p key={el}>{el}</p>;
+    return <p key={id}>{el}</p>;
   });
 
   return formatedContent;
@@ -99,7 +100,9 @@ export const Note = () => {
               onClick={() => dispatch({ type: 'SET_TAGS_EDIT' })}
             >
               {(state.noteData.isEdited
-                ? (state.noteData.tags as unknown as string)?.split(',')
+                ? Array.isArray(state.noteData.tags)
+                  ? state.noteData.tags
+                  : (state.noteData?.tags as unknown as string)?.split(',')
                 : tags
               )?.map((tag, index) => (
                 <span
@@ -132,7 +135,28 @@ export const Note = () => {
       </div>
       <hr className="bg-custom-neutral-200 dark:bg-custom-neutral-800 border-0 h-[1px] w-full" />
       <div className={`text-neutral-950 dark:text-white basis-full`}>
-        {content && transformText(content as string)}
+        {state.fields.content.isEditMode ? (
+          <TextArea
+            onChange={(event) => {
+              const {
+                target: { value, name },
+              } = event;
+              dispatch({ type: 'EDIT_NOTE', payload: { name, value } });
+            }}
+            name="content"
+            onBlur={() => dispatch({ type: 'SET_CONTENT_EDIT' })}
+            value={state.noteData.isEdited ? state.noteData.content : content}
+          />
+        ) : (
+          <div onClick={() => dispatch({ type: 'SET_CONTENT_EDIT' })}>
+            {(content || state.noteData.content) &&
+              transformText(
+                state.noteData.isEdited
+                  ? (state.noteData.content as string)
+                  : (content as string)
+              )}
+          </div>
+        )}
       </div>
       <hr className="bg-custom-neutral-200 dark:bg-custom-neutral-800 border-0 h-[1px] w-full" />
       <div className="flex gap-4 justify-self-end  items-end">

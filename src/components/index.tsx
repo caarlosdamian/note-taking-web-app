@@ -1,3 +1,4 @@
+export { TextArea } from './shared/textArea';
 export { Note } from './notes/Note';
 export { InnerHeader } from './shared/innerHeader';
 export { Logo } from './shared/logo';
