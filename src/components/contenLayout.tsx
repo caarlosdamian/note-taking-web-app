@@ -41,11 +41,11 @@ export const ContentLayout = ({ children }: PropsWithChildren) => {
   });
 
   return (
-    <main className="flex">
+    <main className="flex bg-custom-neutral-100 dark:bg-custom-neutral-950 lg:bg-none">
       <Navegation navElements={navElements} />
       <div className="w-full">
         <Header />
-        <div className="dark:bg-custom-neutral-950 bg-white h-[calc(100dvh-110px)] md:h-[calc(100dvh-148px)] lg:h-[calc(100dvh-81px)] flex ">
+        <div className="dark:bg-custom-neutral-950 bg-white h-[calc(100dvh-110px)] md:h-[calc(100dvh-148px)] lg:h-[calc(100dvh-81px)] flex rounded-2xl lg:rounded-none">
           {children}
         </div>
         <MenuBar elements={menu} />

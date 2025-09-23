@@ -16,7 +16,7 @@ export const Header = () => {
   // Todo: add search functionality with backend
 
   return (
-    <nav className="bg-custom-neutral-100 dark:bg-custom-neutral-950 lg:bg-white h-[54px]  md:h-[81px] py-[13px] px-4 md:py-[23px] md:px-8 lg:py-3 border-b-[1px] border-custom-neutral-200 dark:border-custom-neutral-800">
+    <nav className="bg-custom-neutral-100 dark:bg-custom-neutral-950 lg:bg-white h-[54px]  md:h-[74px] lg:h-[81px] py-[13px] px-4 md:py-[23px] md:px-8 lg:py-3 lg:border-b-[1px] border-custom-neutral-200 dark:border-custom-neutral-800">
       <div className="lg:hidden">
         <Logo />
       </div>

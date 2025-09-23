@@ -15,6 +15,7 @@ interface Props {
   upperNote?: string;
   notes: Note[];
   redirect?: boolean;
+  className?: string;
 }
 
 export const Notes = ({
@@ -25,24 +26,27 @@ export const Notes = ({
   notes,
   emptyNote,
   redirect,
+  className,
 }: Props) => {
   // const { createQueryString, setUrlQueryParams } = useQueryParamsTools();
 
   const pathname = useParams();
   const router = useRouter();
 
-  useEffect(() => {
-    if (notes.length) {
-      router.push(`/notes/${notes[0].id}`);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (notes.length) {
+  //     router.push(`/notes/${notes[0].id}`);
+  //   }
+  // }, []);
 
   return (
-    <div className="h-[calc(100dvh-81px)] w-[242px] max-w-[242px] basis-1/4 dark:bg-custom-neutral-950 bg-white hidden  px-4 py-5 lg:flex flex-col gap-4 border-r-[1px] border-custom-neutral-200 dark:border-custom-neutral-800 overflow-scroll">
+    <div
+      className={`h-[calc(100dvh-81px)] w-full basis-full lg:w-[242px] lg:max-w-[242px] lg:basis-1/4 dark:bg-custom-neutral-950 bg-white px-4 py-5 lg:flex flex-col gap-4 lg:border-r-[1px] border-custom-neutral-200 dark:border-custom-neutral-800 overflow-scroll ${className}`}
+    >
       {btnLabel && action && (
         <Button
           variant="primary"
-          className="w-full justify-center"
+          className="hidden lg:flex w-full justify-center"
           onClick={async () => {
             await action();
           }}
@@ -68,7 +72,7 @@ export const Notes = ({
           />
         ))
       ) : (
-        <p className="font-preset-5 dark:text-custom-neutral-200 text-custom-neutral-700 dark:bg-custom-neutral-800 bg-custom-neutral-100 rounded-md p-2">
+        <p className="mt-4 font-preset-5 dark:text-custom-neutral-200 text-custom-neutral-700 dark:bg-custom-neutral-800 bg-custom-neutral-100 rounded-md p-2">
           {emptyNote ??
             `No notes have been archived yet. Move notes here for safekeeping, or`}
           {!emptyNote && (

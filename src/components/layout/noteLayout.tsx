@@ -5,7 +5,7 @@ import { noteContext } from '@/src/context';
 import { Note } from '@/src/types';
 import { useRouter } from 'next/navigation';
 
-export const NoteLayout = () => {
+export const NoteLayout = ({ className }: { className?: string }) => {
   // tener un estado temporal para manejo de notas no guardadas
 
   // provider
@@ -25,6 +25,7 @@ export const NoteLayout = () => {
       btnIcon="plus"
       upperNote="All notes with the ”Dev” tag are shown here."
       action={addNewNote}
+      className={className}
     />
   );
 };

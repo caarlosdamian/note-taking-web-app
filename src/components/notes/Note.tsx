@@ -8,6 +8,7 @@ import { Note as NoteI } from '@/src/types';
 import { TextInput } from '../textInput';
 import { initialState, noteFormReducer } from '@/src/reducers';
 import { TextArea } from '../shared/textArea';
+import { InnerHeader } from '../shared/innerHeader';
 
 const transformText = (text: string) => {
   const formatedContent = text.split('\n').map((el, index) => {
@@ -46,8 +47,9 @@ export const Note = () => {
   // todo : mobile add innerHeader
 
   return (
-    <section className="flex flex-col gap-5 basis-full lg:basis-2/3 px-6 py-5 h-full">
+    <section className="flex flex-col gap-5 basis-full lg:basis-2/3 px-6 py-5  lg:h-full">
       {/* navegacion mobile */}
+      <InnerHeader />
       {state.fields.title.isEditMode ? (
         <TextInput
           onBlur={() => dispatch({ type: 'SET_TITLE_EDIT' })}
@@ -134,34 +136,41 @@ export const Note = () => {
         )}
       </div>
       <hr className="bg-custom-neutral-200 dark:bg-custom-neutral-800 border-0 h-[1px] w-full" />
-      <div className={`text-neutral-950 dark:text-white basis-full`}>
-        {state.fields.content.isEditMode ? (
-          <TextArea
-            onChange={(event) => {
-              const {
-                target: { value, name },
-              } = event;
-              dispatch({ type: 'EDIT_NOTE', payload: { name, value } });
-            }}
-            name="content"
-            onBlur={() => dispatch({ type: 'SET_CONTENT_EDIT' })}
-            value={state.noteData.isEdited ? state.noteData.content : content}
-          />
-        ) : (
-          <div onClick={() => dispatch({ type: 'SET_CONTENT_EDIT' })}>
-            {(content || state.noteData.content) &&
-              transformText(
-                state.noteData.isEdited
-                  ? (state.noteData.content as string)
-                  : (content as string)
-              )}
-          </div>
-        )}
-      </div>
-      <hr className="bg-custom-neutral-200 dark:bg-custom-neutral-800 border-0 h-[1px] w-full" />
-      <div className="flex gap-4 justify-self-end  items-end">
-        <Button variant="primary">Save Note</Button>
-        <Button variant="secondary">Cancel</Button>
+      <div className="flex justify-between flex-col h-full gap-4 overflow-scroll">
+        <div
+          className={`text-neutral-950 dark:text-white overflow-scroll basis-full flex`}
+        >
+          {state.fields.content.isEditMode ? (
+            <TextArea
+              onChange={(event) => {
+                const {
+                  target: { value, name },
+                } = event;
+                dispatch({ type: 'EDIT_NOTE', payload: { name, value } });
+              }}
+              name="content"
+              onBlur={() => dispatch({ type: 'SET_CONTENT_EDIT' })}
+              value={state.noteData.isEdited ? state.noteData.content : content}
+            />
+          ) : (
+            <div
+              onClick={() => dispatch({ type: 'SET_CONTENT_EDIT' })}
+              className="overflow-scroll"
+            >
+              {(content || state.noteData.content) &&
+                transformText(
+                  state.noteData.isEdited
+                    ? (state.noteData.content as string)
+                    : (content as string)
+                )}
+            </div>
+          )}
+        </div>
+        <hr className="bg-custom-neutral-200 dark:bg-custom-neutral-800 border-0 h-[1px] w-full hidden lg:block" />
+        <div className="hidden lg:flex gap-4 justify-self-end items-end">
+          <Button variant="primary">Save Note</Button>
+          <Button variant="secondary">Cancel</Button>
+        </div>
       </div>
     </section>
   );

@@ -1,8 +1,10 @@
-import React, { ButtonHTMLAttributes, PropsWithChildren } from 'react';
+'use client';
+import React, { ButtonHTMLAttributes, PropsWithChildren, use } from 'react';
 import { Icon } from './icon';
 import { IconList } from '../utils';
+import { themeContext } from '../context';
 
-export type BtnVariant = 'primary' | 'secondary' | 'border' | 'danger';
+export type BtnVariant = 'primary' | 'secondary' | 'border' | 'danger' | 'link';
 interface Props
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     PropsWithChildren {
@@ -11,6 +13,8 @@ interface Props
 }
 
 export const Button = ({ variant, children, icon, ...props }: Props) => {
+  const { isDarkMode } = use(themeContext);
+
   const variantStyles = {
     primary: 'bg-custom-blue-500 text-white hover:bg-custom-blue-700',
     secondary:
@@ -18,6 +22,7 @@ export const Button = ({ variant, children, icon, ...props }: Props) => {
     border:
       'hover:text-neutral-600 hover:bg-custom-neutral-100 border-[1px] border-neutral-300 text-custom-neutral-950',
     danger: 'bg-custom-red-500 text-white hover:bg-custom-red-500/80',
+    link: '!px-0 !py-0 dark:text-custom-neutral-300 text-custom-neutral-950',
   };
 
   return (
@@ -26,12 +31,17 @@ export const Button = ({ variant, children, icon, ...props }: Props) => {
       className={`focus:outline-2 focus:outline-offset-4
    focus:outline-custom-neutral-400 cursor-pointer rounded-lg w-fit font-preset-4 
     disabled:bg-custom-neutral-50 disabled:text-neutral-300
-    px-4 py-3.5 flex gap-1 items-center ${props.className}
-        
-    ${variantStyles[variant]}
+    px-4 py-3.5 flex gap-1 items-center ${variantStyles[variant]} ${props.className}
     `}
     >
-      {icon && <Icon color='fff' icon={icon} width={14} height={14} />}
+      {icon && (
+        <Icon
+          color={isDarkMode ? '#fff' : '#0E121B'}
+          icon={icon}
+          width={14}
+          height={14}
+        />
+      )}
       {children}
     </button>
   );

@@ -27,7 +27,7 @@ export default async function Layout({
   return (
     <ContentLayout>
       {/* table y mobile es diferente */}
-      <NoteLayout />
+      <NoteLayout className="hidden" />
       {/* <InnerHeader /> */}
       {children}
     </ContentLayout>
