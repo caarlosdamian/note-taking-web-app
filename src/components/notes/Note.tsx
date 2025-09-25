@@ -49,7 +49,7 @@ export const Note = () => {
   return (
     <section className="flex flex-col gap-5 basis-full lg:basis-2/3 px-6 py-5  lg:h-full">
       {/* navegacion mobile */}
-      <InnerHeader />
+      <InnerHeader withArchived withDelete />
       {state.fields.title.isEditMode ? (
         <TextInput
           onBlur={() => dispatch({ type: 'SET_TITLE_EDIT' })}

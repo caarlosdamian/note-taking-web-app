@@ -1,10 +1,36 @@
 'use client';
-import React from 'react';
+import React, { use } from 'react';
 import { Button } from '../button';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { Icon } from '../icon';
+import { themeContext } from '@/src/context';
 
-export const InnerHeader = () => {
+// notes
+// => go back || eliminar , archivar , cancelar , guardar
+// archive
+// => go back || eliminar , des-archivar , cancelar , guardar
+// tags
+// => go back || eliminar , archivar , cancelar , guardar
+// search no lleva
+
+interface Props {
+  withArchived?: boolean;
+  withDelete?: boolean;
+  withoutActions?: boolean;
+  urlLabel?: string;
+}
+
+export const InnerHeader = ({
+  withArchived = false,
+  withDelete = false,
+  withoutActions = false,
+  urlLabel = 'Go back',
+}: Props) => {
   const router = useRouter();
+  const pathname = usePathname();
+  const isArchiveRoute = pathname.split('/').includes('archived');
+  const { isDarkMode } = use(themeContext);
+
   return (
     <section className="flex lg:hidden justify-between pb-4 border-b-custom-neutral-200 dark:border-b-custom-neutral-800 border-b-[1px]">
       <div className="">
@@ -12,21 +38,43 @@ export const InnerHeader = () => {
           className="!font-preset-5 md:!font-preset-4"
           variant="link"
           icon="arrowLeft"
-          onClick={() => router.push('/')}
+          onClick={() => router.back()}
         >
-          Go back
+          {urlLabel}
         </Button>
       </div>
       <div className="flex items-center gap-4">
-        <Button className="!font-preset-5 md:!font-preset-4" variant="link">
-          Go back
-        </Button>
-        <Button
-          variant="link"
-          className="!text-custom-blue-500 dark:!text-custom-blue-500 !font-preset-5 md:!font-preset-4"
-        >
-          Save
-        </Button>
+        {withDelete && (
+          <Icon
+            width={18}
+            height={18}
+            className="cursor-pointer"
+            color={isDarkMode ? '#99A0AE' : '#525866'}
+            icon="delete"
+          />
+        )}
+        {withArchived && (
+          <Icon
+            width={18}
+            height={18}
+            className="cursor-pointer"
+            color={isDarkMode ? '#99A0AE' : '#525866'}
+            icon={isArchiveRoute ? 'restore' : 'archived'}
+          />
+        )}
+        {!withoutActions && (
+          <>
+            <Button className="!font-preset-5 md:!font-preset-4" variant="link">
+              Cancel
+            </Button>
+            <Button
+              variant="link"
+              className="!text-custom-blue-500 dark:!text-custom-blue-500 !font-preset-5 md:!font-preset-4"
+            >
+              Save Note
+            </Button>
+          </>
+        )}
       </div>
     </section>
   );

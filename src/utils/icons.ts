@@ -22,9 +22,7 @@ export const icons = {
     <path stroke="#000" stroke-width="1.5" d="M6 6l12 12M6 18L18 6"/>
   </svg>`,
 
-  delete: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
-    <path stroke="#000" stroke-width="1.5" d="M6 6h12M9 6v12m6-12v12"/>
-  </svg>`,
+  delete: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" fill="none" viewBox="0 0 24 25"><path stroke="#0E121B" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m14.852 3.879.818 1.785h2.64c.811 0 1.47.658 1.47 1.47V8.22c0 .555-.45 1.005-1.006 1.005H5.005C4.45 9.226 4 8.776 4 8.221V7.133c0-.811.658-1.47 1.47-1.47h2.639l.818-1.784c.246-.536.78-.879 1.37-.879h3.185c.59 0 1.125.343 1.37.879ZM18.24 9.3v8.686c0 1.665-1.333 3.014-2.977 3.014H8.517c-1.644 0-2.977-1.349-2.977-3.014V9.301M10.2 12.816v4.509m3.38-4.509v4.509"/></svg>`,
 
   fontMonospace: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
     <text x="4" y="16" font-family="monospace" font-size="14" fill="#000">Aa</text>
@@ -71,9 +69,7 @@ export const icons = {
   plus: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="#000" d="M12 5a.75.75 0 0 1 .75.75V11H18a.75.75 0 0 1 0 1.5h-5.25v5.25a.75.75 0 0 1-1.5 0V12.5H6A.75.75 0 0 1 6 11h5.25V5.75A.75.75 0 0 1 12 5Z"/></svg>`,
   cross: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="#0E121B" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m6 6 12 12M18 6 6 18"/></svg>`,
 
-  restore: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
-    <path stroke="#000" stroke-width="1.5" d="M4 4v6h6M20 20v-6h-6"/>
-  </svg>`,
+  restore: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="#0E121B" fill-rule="evenodd" d="M3.708 7.404a.75.75 0 0 1 .983.398l1.316 3.114L9.1 9.608a.75.75 0 0 1 .584 1.382L5.9 12.59a.75.75 0 0 1-.983-.4L3.309 8.387a.75.75 0 0 1 .4-.982Z" clip-rule="evenodd"/><path fill="#0E121B" fill-rule="evenodd" d="M12.915 5.664c-3.447 0-6.249 2.746-6.335 6.16a.75.75 0 0 1-1.5-.038c.108-4.228 3.575-7.622 7.835-7.622a7.838 7.838 0 0 1 7.835 7.835 7.833 7.833 0 0 1-7.835 7.835 7.843 7.843 0 0 1-6.457-3.384.75.75 0 1 1 1.232-.856 6.343 6.343 0 0 0 5.225 2.74 6.333 6.333 0 0 0 6.335-6.335 6.339 6.339 0 0 0-6.335-6.335Z" clip-rule="evenodd"/></svg>`,
 
   search: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="#0E121B" fill-rule="evenodd" d="M11.248 3.5a7.289 7.289 0 1 0 0 14.577 7.289 7.289 0 0 0 0-14.577ZM2.46 10.79a8.789 8.789 0 1 1 17.577 0 8.789 8.789 0 0 1-17.577 0Z" clip-rule="evenodd"/><path fill="#0E121B" fill-rule="evenodd" d="m16.736 15.648 5.616 5.6-1.06 1.063-5.615-5.601 1.06-1.062Z" clip-rule="evenodd"/></svg>`,
 
