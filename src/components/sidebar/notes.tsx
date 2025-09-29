@@ -41,7 +41,7 @@ export const Notes = ({
 
   return (
     <div
-      className={`h-[calc(100dvh-81px)] w-full basis-full lg:w-[242px] lg:max-w-[242px] lg:basis-1/4 dark:bg-custom-neutral-950 bg-white px-4 py-5 lg:flex flex-col gap-4 lg:border-r-[1px] border-custom-neutral-200 dark:border-custom-neutral-800 overflow-scroll ${className}`}
+      className={`min-h-[calc(100dvh-81px)] w-full basis-full lg:w-[242px] lg:max-w-[242px] lg:basis-1/4 dark:bg-custom-neutral-950 bg-white px-4 py-5 lg:flex flex-col gap-4 lg:border-r-[1px] border-custom-neutral-200 dark:border-custom-neutral-800 overflow-scroll ${className}`}
     >
       {btnLabel && action && (
         <Button

@@ -10,7 +10,7 @@ const homeNavegation: ItemListI[] = [
   {
     label: 'Archived Notes',
     icon: 'archived',
-    path: '/archived',
+    path: '/notes/archived',
   },
 ];
 
@@ -18,12 +18,12 @@ const tagsNavegation: ItemListI[] = [
   {
     label: 'React',
     icon: 'tags',
-    path: '/dsdsd',
+    path: '/tags/react',
   },
   {
     label: 'Javascript',
     icon: 'tags',
-    path: '/archived',
+    path: '/tags/javascript',
   },
 ];
 

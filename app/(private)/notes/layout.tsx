@@ -25,10 +25,11 @@ export default async function Layout({
   // const headerds = await  headers()
   // console.log(headerds,'++')
   return (
-    <ContentLayout>
+    <>
       {/* table y mobile es diferente */}
+      <NoteLayout className="hidden" />
       {/* <InnerHeader /> */}
       {children}
-    </ContentLayout>
+    </>
   );
 }

@@ -3,7 +3,7 @@ import React, { use } from 'react';
 import { Notes } from '../sidebar/notes';
 import { noteContext } from '@/src/context';
 import { Note } from '@/src/types';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export const NoteLayout = ({ className }: { className?: string }) => {
   // tener un estado temporal para manejo de notas no guardadas
@@ -11,9 +11,11 @@ export const NoteLayout = ({ className }: { className?: string }) => {
   // provider
   const router = useRouter();
   const { notes, createLocalNote } = use(noteContext);
+  const pathname = usePathname();
+  console.log(pathname,'pathname')
   const addNewNote = () => {
     const newNote = createLocalNote() as unknown as Note;
-    router.push(`/notes/${newNote.id}`);
+    router.push(`${pathname}/${newNote.id}`);
   };
 
   return (

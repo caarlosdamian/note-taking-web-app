@@ -14,6 +14,7 @@ interface Props {
 }
 
 export const Navegation = ({ navElements, whitoutLogo }: Props) => {
+  // todo: check active functionality
   return (
     <aside
       className={`${
