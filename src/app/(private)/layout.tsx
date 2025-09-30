@@ -1,3 +1,4 @@
+import { auth } from '@/auth';
 import {
   ContentLayout,
   InnerHeader,
@@ -9,6 +10,7 @@ import {
 import { notes } from '@/src/utils';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'privade',
@@ -21,6 +23,10 @@ export default async function Layout({
   children: React.ReactNode;
   params: Promise<{ slug: string }>;
 }>) {
+  const session = await auth();
+  if (!session) {
+    redirect('/signin');
+  }
   // const testing = await params
   // const headerds = await  headers()
   // console.log(headerds,'++')

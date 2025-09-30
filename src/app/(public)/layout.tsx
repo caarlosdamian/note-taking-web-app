@@ -10,5 +10,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <ContentLayout>{children}</ContentLayout>;
+  return <ContentLayout type='screen'>{children}</ContentLayout>;
 }
