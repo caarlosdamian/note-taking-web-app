@@ -10,5 +10,11 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <ContentLayout type='screen'>{children}</ContentLayout>;
+  return (
+    <ContentLayout type="screen">
+      <div className="flex flex-col gap-2 h-screen items-center justify-center px-4">
+        {children}
+      </div>
+    </ContentLayout>
+  );
 }

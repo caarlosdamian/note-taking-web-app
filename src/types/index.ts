@@ -1,3 +1,6 @@
+import { InputHTMLAttributes } from 'react';
+import { IconList } from '../utils';
+
 export interface Note {
   title: string;
   tags?: string[];
@@ -34,4 +37,21 @@ export type Action = SetEditMode | EditNote;
 export interface NoteAction {
   type: '';
   payload: {};
+}
+
+interface IconFn {
+  iconLeft?: { fn: () => void };
+  iconRight?: { fn: () => void };
+}
+export interface InputItem extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  iconLeft?: IconList;
+  iconRight?: IconList;
+  iconActions?:IconFn;
+  hint?: string;
+  error?: string;
+  linkLabel?: string;
+  linkUrl?: string;
+  variant?: 'sm' | 'md' | 'lg';
+  name?: string;
 }

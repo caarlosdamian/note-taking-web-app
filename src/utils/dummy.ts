@@ -1,5 +1,5 @@
 import { ItemListI } from '../components/shared/itemList';
-import { Note } from '../types';
+import { InputItem, Note } from '../types';
 
 const homeNavegation: ItemListI[] = [
   {
@@ -134,6 +134,11 @@ const notes: Note[] = [
     lastEdited: '2024-09-22T07:30:00Z',
     isArchived: false,
   },
+];
+
+export const singinFormItems: InputItem[] = [
+  { label: 'Email', name: 'email' },
+  { label: 'Password', name: 'password', type:'password' },
 ];
 
 export { homeNavegation, tagsNavegation, sectionTitles, notes };

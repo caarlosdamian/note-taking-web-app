@@ -46,7 +46,13 @@ export const ContentLayout = ({ children, type = 'sidebar' }: Props) => {
 
   const isSidebar = type === 'sidebar';
   return (
-    <main className="flex bg-custom-neutral-100 dark:bg-custom-neutral-950 lg:bg-none">
+    <main
+      className={`${
+        !isSidebar
+          ? 'bg-custom-neutral-100 dark:bg-custom-neutral-700'
+          : 'bg-custom-neutral-100 dark:bg-custom-neutral-950'
+      } flex  lg:bg-none`}
+    >
       {isSidebar && <Navegation navElements={navElements} />}
       <div className="w-full">
         {isSidebar ? (

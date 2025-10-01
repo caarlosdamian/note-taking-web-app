@@ -1,20 +1,11 @@
 'use client';
 import React, { InputHTMLAttributes, use } from 'react';
-import { IconList } from '../utils';
 import { Icon } from './icon';
 import { themeContext } from '../context';
 import Link from 'next/link';
+import { InputItem } from '../types';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  iconLeft?: IconList;
-  iconRight?: IconList;
-  hint?: string;
-  error?: string;
-  linkLabel?: string;
-  linkUrl?: string;
-  variant?: 'sm' | 'md' | 'lg';
-}
+interface Props extends InputItem {}
 
 export const TextInput = ({
   label,
@@ -27,6 +18,8 @@ export const TextInput = ({
   linkLabel,
   linkUrl,
   variant = 'lg',
+  className,
+  iconActions,
   ...props
 }: Props) => {
   const { isDarkMode } = use(themeContext);
@@ -66,6 +59,11 @@ export const TextInput = ({
             icon={iconLeft}
             width={20}
             height={20}
+            onClick={() => {
+              if (iconActions) {
+                iconActions['iconLeft']?.fn && iconActions['iconLeft']?.fn();
+              }
+            }}
           />
         )}
         {iconRight && (
@@ -75,19 +73,25 @@ export const TextInput = ({
             icon={iconRight}
             width={20}
             height={20}
+            onClick={() => {
+              console.log('iconActions', iconActions);
+              if (iconActions) {
+                iconActions['iconRight']?.fn && iconActions['iconRight']?.fn();
+              }
+            }}
           />
         )}
         <input
           id={name}
           name={name}
-          className={`w-full border-[1px] text-custom-neutral-950 border-custom-neutral-300 rounded-lg outline-none  placeholder:font-preset-5 placeholder:text-custom-neutral-500 dark:bg-custom-neutral-950 active:outline-solid hover:bg-custom-neutral-50 dark:hover:bg-custom-neutral-800
+          className={`w-full border-[1px] text-custom-neutral-950 border-custom-neutral-600 rounded-lg outline-none  placeholder:font-preset-5 placeholder:text-custom-neutral-500 dark:bg-custom-neutral-950 active:outline-solid hover:bg-custom-neutral-50 dark:hover:bg-custom-neutral-800
   active:outline-custom-neutral-500 dark:active:outline-custom-neutral-600 dark:text-white outline-offset-2 disabled:bg-custom-neutral-50 disabled:text-custom-neutral-50 disable:placeholder:text-custom-neutral-50 disabled:cursor-not-allowed ${
     error ? 'border-custom-red-500' : ''
   } ${iconLeft ? 'pl-[44px]' : ''} ${iconRight ? 'pr-[44px]' : ''} ${
             variantStyles[variant]
-          }`}
+          } ${className}`}
           {...props}
-          type="text"
+          type={props.type || 'text'}
         />
       </div>
       {hint && !error && (
