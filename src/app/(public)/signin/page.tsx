@@ -17,6 +17,8 @@ export default async function SignInPage(props: {
       title="Welcome to Note"
       subtitle="Please log in to continue"
       formItems={singinFormItems}
+      actionLabel="Login"
+      className='max-w-[540px]'
     />
     // {/* <form
     //   className="flex flex-col"

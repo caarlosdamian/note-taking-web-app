@@ -1,5 +1,5 @@
 'use client';
-import React, { InputHTMLAttributes, use } from 'react';
+import React, { use, useState } from 'react';
 import { Icon } from './icon';
 import { themeContext } from '../context';
 import Link from 'next/link';
@@ -28,6 +28,13 @@ export const TextInput = ({
     sm: 'px-1',
     md: 'p-2',
     lg: 'py-3 px-4',
+  };
+  const [inputValue, setInputValue] = useState(props.value || '');
+
+  console.log(inputValue);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
   };
 
   // todo addd un styled version
@@ -84,6 +91,7 @@ export const TextInput = ({
         <input
           id={name}
           name={name}
+          value={props.value || inputValue}
           className={`w-full border-[1px] text-custom-neutral-950 border-custom-neutral-600 rounded-lg outline-none  placeholder:font-preset-5 placeholder:text-custom-neutral-500 dark:bg-custom-neutral-950 active:outline-solid hover:bg-custom-neutral-50 dark:hover:bg-custom-neutral-800
   active:outline-custom-neutral-500 dark:active:outline-custom-neutral-600 dark:text-white outline-offset-2 disabled:bg-custom-neutral-50 disabled:text-custom-neutral-50 disable:placeholder:text-custom-neutral-50 disabled:cursor-not-allowed ${
     error ? 'border-custom-red-500' : ''
@@ -91,6 +99,7 @@ export const TextInput = ({
             variantStyles[variant]
           } ${className}`}
           {...props}
+          {...{ onChange: props.onChange ? props.onChange : handleChange }}
           type={props.type || 'text'}
         />
       </div>

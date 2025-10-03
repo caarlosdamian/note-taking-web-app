@@ -10,9 +10,16 @@ interface Props
     PropsWithChildren {
   icon?: IconList;
   variant: BtnVariant;
+  iconSize?: { width: number; height: number };
 }
 
-export const Button = ({ variant, children, icon, ...props }: Props) => {
+export const Button = ({
+  variant,
+  children,
+  icon,
+  iconSize,
+  ...props
+}: Props) => {
   const { isDarkMode } = use(themeContext);
 
   const variantStyles = {
@@ -36,10 +43,11 @@ export const Button = ({ variant, children, icon, ...props }: Props) => {
     >
       {icon && (
         <Icon
+        // className='hover:cutto'
           color={isDarkMode ? '#fff' : '#0E121B'}
           icon={icon}
-          width={14}
-          height={14}
+          width={iconSize?.width || 14}
+          height={iconSize?.height || 14}
         />
       )}
       {children}

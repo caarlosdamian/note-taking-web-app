@@ -137,7 +137,8 @@ const notes: Note[] = [
 ];
 
 export const singinFormItems: InputItem[] = [
-  { label: 'Email', name: 'email' },
+  { label: 'Email', name: 'email'
+  },
   { label: 'Password', name: 'password', type:'password' },
 ];
 

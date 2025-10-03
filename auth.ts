@@ -1,13 +1,48 @@
 import NextAuth from 'next-auth';
 import { Provider } from 'next-auth/providers';
 import Credentials from 'next-auth/providers/credentials';
+import { createUser, getUser } from './src/actions/auth';
 
 const providers: Provider[] = [
   Credentials({
-    credentials: { password: { label: 'Password', type: 'password' } },
-    authorize(c) {
-      console.log(c,'teting')
-      if (c.password !== 'password') return null;
+    credentials: {
+      email: {},
+      password: {},
+      type: {},
+    },
+    async authorize(credentialValues) {
+      const { type, email, password } = credentialValues;
+      switch (type) {
+        case 'register':
+          const user = await getUser(email as string);
+
+          if (!user) {
+            await createUser({ email, password } as {
+              email: string;
+              password: string;
+            });
+          }
+
+          console.log(user, 'USERRRRRR');
+          // revisar usuario
+          // hash de password
+          // guardar usuario
+          console.log('ESTAMOS REGISTRANDO');
+          break;
+        case 'login':
+          console.log('ESTAMOS login');
+          break;
+
+        default:
+          break;
+      }
+      // login
+      // revisar que el usuario exista / si existe comparar la password
+      // register
+      // revisar que el usuario no  exista / si existe retornar
+      // tenemos que hacer un hash de password
+      // guardar en base de datos
+      // if (c.password !== 'password') return null;
       return {
         id: 'test',
         name: 'Test User',

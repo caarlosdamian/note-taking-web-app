@@ -36,9 +36,7 @@ export const icons = {
     <text x="4" y="16" font-family="serif" font-size="14" fill="#000">Aa</text>
   </svg>`,
 
-  google: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
-    <circle cx="12" cy="12" r="10" stroke="#000" stroke-width="1.5"/>
-  </svg>`,
+  google: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" fill="none" viewBox="0 0 24 25"><path fill="#0E121B" fill-rule="evenodd" d="M20.838 14.718a8.932 8.932 0 0 0 .086-2.857.558.558 0 0 0-.557-.473h-7.805a.562.562 0 0 0-.562.562v2.206c0 .31.252.562.562.562h4.275c.176 0 .305.18.239.343-.935 2.31-3.39 3.826-6.132 3.32-2.106-.39-3.832-2.06-4.284-4.153a5.477 5.477 0 0 1 8.369-5.776.572.572 0 0 0 .73-.06l1.703-1.733a.559.559 0 0 0-.046-.832 8.897 8.897 0 0 0-5.161-1.815c-4.872-.135-9.091 3.823-9.25 8.694-.167 5.108 3.927 9.302 8.995 9.302 4.383 0 8.037-3.14 8.838-7.29Z" clip-rule="evenodd"/></svg>`,
 
   hidePassword: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="#0E121B" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.42 17.73c-2.23-1.46-3.67-3.66-3.67-5.59 0-3.28 4.14-7.3 9.25-7.3 2.09 0 4.03.67 5.59 1.71M19.85 8.61c.891 1.13 1.41 2.38 1.41 3.53 0 3.28-4.15 7.3-9.26 7.3-.91 0-1.799-.13-2.63-.36"/><path stroke="#0E121B" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.766 14.367a3.12 3.12 0 0 1-.925-2.23 3.159 3.159 0 0 1 5.394-2.24M15.11 12.7a3.158 3.158 0 0 1-2.538 2.541M19.892 4.25 4.118 20.024"/></svg>`,
 
