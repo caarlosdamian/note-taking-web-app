@@ -2,6 +2,7 @@ import NextAuth from 'next-auth';
 import { Provider } from 'next-auth/providers';
 import Credentials from 'next-auth/providers/credentials';
 import { createUser, getUser } from './src/actions/auth';
+import { compare } from 'bcrypt';
 
 const providers: Provider[] = [
   Credentials({
@@ -12,37 +13,38 @@ const providers: Provider[] = [
     },
     async authorize(credentialValues) {
       const { type, email, password } = credentialValues;
+      const user = await getUser(email as string);
       switch (type) {
-        case 'register':
-          const user = await getUser(email as string);
-
+        case 'signup':
           if (!user) {
-            await createUser({ email, password } as {
+            const newUser = await createUser({ email, password } as {
               email: string;
               password: string;
             });
+
+            return newUser;
+          }
+          throw new Error('Invalid credentials.');
+          break;
+        case 'signin':
+          if (!user) {
+            throw new Error('Invalid credentials.');
           }
 
-          console.log(user, 'USERRRRRR');
-          // revisar usuario
-          // hash de password
-          // guardar usuario
-          console.log('ESTAMOS REGISTRANDO');
-          break;
-        case 'login':
-          console.log('ESTAMOS login');
+          const isPassowrdCorrect = await compare(
+            password as string,
+            user.password
+          );
+
+          if (!isPassowrdCorrect) throw new Error('Invalid credentials.');
+
+          return user;
           break;
 
         default:
           break;
       }
-      // login
-      // revisar que el usuario exista / si existe comparar la password
-      // register
-      // revisar que el usuario no  exista / si existe retornar
-      // tenemos que hacer un hash de password
-      // guardar en base de datos
-      // if (c.password !== 'password') return null;
+
       return {
         id: 'test',
         name: 'Test User',

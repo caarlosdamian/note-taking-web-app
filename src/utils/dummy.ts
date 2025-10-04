@@ -136,10 +136,49 @@ const notes: Note[] = [
   },
 ];
 
-export const singinFormItems: InputItem[] = [
-  { label: 'Email', name: 'email'
+const singinFormItems: InputItem[] = [
+  { label: 'Email', name: 'email' },
+  {
+    label: 'Password',
+    name: 'password',
+    type: 'password',
+    linkLabel: 'Forgot',
+    linkUrl: '/password',
   },
-  { label: 'Password', name: 'password', type:'password' },
+];
+const singupFormItems: InputItem[] = [
+  { label: 'Email', name: 'email' },
+  {
+    label: 'Password',
+    name: 'password',
+    type: 'password',
+    hint: 'At least 8 characters',
+  },
 ];
 
-export { homeNavegation, tagsNavegation, sectionTitles, notes };
+const forgotPasswordFormItems: InputItem[] = [
+  { label: 'Email', name: 'email', placeholder: 'email@example.com' },
+];
+
+const resertPasswordFormItems: InputItem[] = [
+  {
+    label: 'New Password',
+    name: 'password',
+    hint: 'At least 8 characters',
+  },
+  {
+    label: 'Confirm New Password',
+    name: 'confirmPassword',
+  },
+];
+
+export {
+  homeNavegation,
+  tagsNavegation,
+  sectionTitles,
+  notes,
+  singinFormItems,
+  forgotPasswordFormItems,
+  resertPasswordFormItems,
+  singupFormItems,
+};

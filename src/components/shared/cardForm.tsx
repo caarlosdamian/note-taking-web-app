@@ -5,11 +5,8 @@ import { InputItem } from '@/src/types';
 import { PasswordInput } from './passwordInput';
 import { usePathname } from 'next/navigation';
 import { signIn } from 'next-auth/react';
-
-interface FormItem {
-  label: string;
-  name: string;
-}
+import Link from 'next/link';
+// import { formActionsByType } from '@/src/utils';
 
 interface Props {
   title: string;
@@ -18,7 +15,9 @@ interface Props {
   actionLabel: string;
   className?: string;
   isLoginOrSingup?: boolean;
+  type: 'password' | 'resetPassword' | 'signin' | 'signup';
 }
+// todo : reset password / forgot password
 
 export const CardForm = ({
   subtitle,
@@ -26,20 +25,40 @@ export const CardForm = ({
   formItems,
   actionLabel,
   className,
+  type,
   isLoginOrSingup = false,
 }: Props) => {
   const pathName = usePathname();
-  // todo: link to reset password
+
+  const formActionsByType = {
+    password: {
+      action: (values: FormData) => console.log(values),
+      // signIn('credentials', { ...values, type: 'signup' }, {}),
+    },
+    resetPassword: {
+      action: (values: FormData) => console.log(values),
+      // signIn('credentials', { ...values, type: 'signup' }, {}),
+    },
+    signin: {
+      action: async (values: FormData) =>
+        signIn('credentials', { ...values, type: 'signin' }, {}),
+    },
+    signup: {
+      action: async (values: FormData) =>
+        signIn('credentials', { ...values, type: 'signup' }, {}),
+    },
+  };
+
   return (
     <div
-      className={`rounded-[12px] border border-custom-neutral-200 dark:border-custom-neutral-800 bg-white dark:bg-custom-neutral-950 shadow-lg w-full h-fit py-12 px-4 flex flex-col gap-6 items-center ${className}`}
+      className={`rounded-[12px] border border-custom-neutral-200 dark:border-custom-neutral-800 bg-white dark:bg-custom-neutral-950 shadow-lg w-full h-fit py-12 px-4 flex flex-col gap-6 items-center md:px-12 ${className}`}
     >
       <Logo />
       <div className="flex flex-col items-center gap-2 w-full">
         <h1 className="font-preset-1 text-custom-neutral-950 dark:text-white">
           {title}
         </h1>
-        <p className="font-preset-5 text-custom-neutral-950  dark:text-custom-neutral-300">
+        <p className="font-preset-5 text-custom-neutral-950  dark:text-custom-neutral-300 text-center">
           {subtitle}
         </p>
       </div>
@@ -49,16 +68,23 @@ export const CardForm = ({
           event.preventDefault();
 
           const formData = new FormData(event.currentTarget);
-          const values = Object.fromEntries(formData.entries());
+          const values = Object.fromEntries(
+            formData.entries()
+          ) as unknown as FormData;
           // todo reutilizable usar prop
-          await signIn('credentials', { ...values, type: 'register' });
+          await formActionsByType[type].action(values);
         }}
       >
+        {/*  adapt depending on the situation */}
+        <input type="hidden" name="redirectTo" value="/" />
+
         {formItems.map((input) => {
           if (input?.type === 'password') {
-            return <PasswordInput {...input} className="w-full" />;
+            return (
+              <PasswordInput key={input.name} {...input} className="w-full" />
+            );
           }
-          return <TextInput {...input} className="w-full" />;
+          return <TextInput key={input.name} {...input} className="w-full" />;
         })}
         <Button variant="primary" className="w-full justify-center text-center">
           {actionLabel}
@@ -88,9 +114,13 @@ export const CardForm = ({
               : 'Already have an account? '}
 
             {pathName.split('/')[1] === 'signin' ? (
-              <strong>Sign Up</strong>
+              <Link href="/signup">
+                <strong>Sign Up</strong>
+              </Link>
             ) : (
-              <strong>Login</strong>
+              <Link href="/signin">
+                <strong>Login</strong>
+              </Link>
             )}
           </p>
         </div>

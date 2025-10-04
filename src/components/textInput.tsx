@@ -52,7 +52,7 @@ export const TextInput = ({
         {linkLabel && linkUrl && (
           <Link
             href={linkUrl}
-            className="font-preset-6 underline underline-offset-4"
+            className="font-preset-6 underline underline-offset-4 text-custom-neutral-600 dark:text-custom-neutral-400"
           >
             {linkLabel}
           </Link>

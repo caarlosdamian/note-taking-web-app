@@ -1,21 +1,10 @@
 'use server';
 
 import dbConnect from '../lib/connectDB';
-import user from '../models/user';
 import User from '../models/user';
+import { genSalt, hash } from 'bcrypt';
 
-// import { signIn } from 'next-auth/react';
-
-// export const loginAction = async (formData: FormData) => {
-//   try {
-//     await ;
-//   } catch (error) {
-//     // if (error instanceof AuthError) {
-//     //   return redirect(`${SIGNIN_ERROR_URL}?error=${error.type}`);
-//     // }
-//     throw error;
-//   }
-// };
+const saltRounds = 10;
 
 export const getUser = async (email: string) => {
   try {
@@ -32,10 +21,16 @@ export const createUser = async (values: {
   password: string;
 }) => {
   try {
-    console.log('creando user');
+    const { password } = values;
+    const salt = await genSalt(saltRounds);
+    const hashpassword = await hash(password, salt);
     await dbConnect();
-    const user = await User.create({ ...values, name: 'tesing' });
-    console.log('entrandonad', user);
+
+    const user = await User.create({
+      ...values,
+      password: hashpassword,
+    });
+
     return user;
   } catch (error) {
     console.log(error);
