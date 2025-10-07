@@ -169,6 +169,7 @@ const resertPasswordFormItems: InputItem[] = [
   {
     label: 'Confirm New Password',
     name: 'confirmPassword',
+    equals:'password'
   },
 ];
 

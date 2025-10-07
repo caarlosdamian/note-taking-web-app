@@ -47,11 +47,19 @@ export interface InputItem extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   iconLeft?: IconList;
   iconRight?: IconList;
-  iconActions?:IconFn;
+  iconActions?: IconFn;
   hint?: string;
-  error?: string;
+  error?: string | (() => string);
   linkLabel?: string;
   linkUrl?: string;
   variant?: 'sm' | 'md' | 'lg';
   name?: string;
+  equals?:string
+}
+
+export interface IUser {
+  name?: string;
+  email?: string;
+  password?: string;
+  resetPasswordCode?: string;
 }

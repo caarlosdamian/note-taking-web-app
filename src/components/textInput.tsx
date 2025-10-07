@@ -31,8 +31,6 @@ export const TextInput = ({
   };
   const [inputValue, setInputValue] = useState(props.value || '');
 
-  console.log(inputValue);
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
@@ -112,7 +110,9 @@ export const TextInput = ({
       {error && (
         <div className="flex gap-2 items-center text-custom-red-500">
           <Icon color="FB3748" icon="info" width={20} height={20} />
-          <span className="font-preset-6 ">{error}</span>
+          <span className="font-preset-6 ">
+            {typeof error === 'function' ? error() : error}
+          </span>
         </div>
       )}
     </div>

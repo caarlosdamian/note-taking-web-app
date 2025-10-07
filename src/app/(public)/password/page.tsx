@@ -1,4 +1,3 @@
-import { checkDBConnection } from '@/src/actions/healtcheck';
 import { CardForm } from '@/src/components/shared/cardForm';
 import { forgotPasswordFormItems } from '@/src/utils';
 

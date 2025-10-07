@@ -1,12 +1,15 @@
 'use client';
-import React from 'react';
+import React, { use, useState } from 'react';
 import { Button, Logo, TextInput } from '..';
-import { InputItem } from '@/src/types';
+import { InputItem, IUser } from '@/src/types';
 import { PasswordInput } from './passwordInput';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
-// import { formActionsByType } from '@/src/utils';
+import { sendMail } from '@/src/actions/mail';
+import { toastContext } from '@/src/context';
+import { useRouter } from 'next/navigation';
+import { updatePassword, updateUser } from '@/src/actions/auth';
 
 interface Props {
   title: string;
@@ -29,26 +32,71 @@ export const CardForm = ({
   isLoginOrSingup = false,
 }: Props) => {
   const pathName = usePathname();
+  const { addNewInstance } = use(toastContext);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const code = searchParams.get('code');
+  const [formValues, setFormValues] = useState(() => {
+    const value = formItems.reduce((acc, el) => {
+      const { name } = el as { name: string };
+      acc[name as keyof typeof acc] = '';
+      return acc;
+    }, {});
+    return value;
+  });
+
+  const handleFormChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    callback: any
+  ) => {
+    console.log('callback', callback);
+    setFormValues((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
+
+    if (callback) {
+      console.log('entrando', 'kdks');
+      const fn = JSON.parse(callback as string);
+      fn(formValues);
+    }
+  };
 
   const formActionsByType = {
     password: {
-      action: (values: FormData) => console.log(values),
+      action: (values: FormData) => {
+        sendMail(values as unknown as { email: string }),
+          addNewInstance({
+            id: 'i',
+            title: 'revisa tu correo',
+          });
+        router.push('/signin');
+      },
+      redirect: '/signin',
+
       // signIn('credentials', { ...values, type: 'signup' }, {}),
     },
     resetPassword: {
-      action: (values: FormData) => console.log(values),
+      action: (values: FormData) => {
+        // @ts-ignore
+        updatePassword({ ...formValues, code });
+        router.push('/signin');
+      },
+      redirect: '/signin',
       // signIn('credentials', { ...values, type: 'signup' }, {}),
     },
     signin: {
       action: async (values: FormData) =>
         signIn('credentials', { ...values, type: 'signin' }, {}),
+      redirect: '/',
     },
     signup: {
       action: async (values: FormData) =>
         signIn('credentials', { ...values, type: 'signup' }, {}),
+      redirect: '/',
     },
   };
-
+  // todo: validar formularios
   return (
     <div
       className={`rounded-[12px] border border-custom-neutral-200 dark:border-custom-neutral-800 bg-white dark:bg-custom-neutral-950 shadow-lg w-full h-fit py-12 px-4 flex flex-col gap-6 items-center md:px-12 ${className}`}
@@ -75,16 +123,37 @@ export const CardForm = ({
           await formActionsByType[type].action(values);
         }}
       >
-        {/*  adapt depending on the situation */}
-        <input type="hidden" name="redirectTo" value="/" />
+        <input
+          type="hidden"
+          name="redirectTo"
+          value={formActionsByType[type].redirect}
+        />
 
         {formItems.map((input) => {
           if (input?.type === 'password') {
             return (
-              <PasswordInput key={input.name} {...input} className="w-full" />
+              <PasswordInput
+                key={input.name}
+                {...input}
+                value={formValues[input.name as keyof typeof formValues]}
+                className="w-full"
+                onChange={(event) => {
+                  handleFormChange(event, input.error);
+                }}
+              />
             );
           }
-          return <TextInput key={input.name} {...input} className="w-full" />;
+          return (
+            <TextInput
+              value={formValues[input.name as keyof typeof formValues]}
+              key={input.name}
+              {...input}
+              onChange={(event) => {
+                handleFormChange(event, input.error);
+              }}
+              className="w-full"
+            />
+          );
         })}
         <Button variant="primary" className="w-full justify-center text-center">
           {actionLabel}

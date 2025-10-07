@@ -1,4 +1,3 @@
-import { signIn } from '@/auth';
 import { ItemListI } from '../components/shared/itemList';
 import { NavElement } from '../components/sidebar/navegation';
 
