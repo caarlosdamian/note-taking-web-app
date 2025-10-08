@@ -68,7 +68,6 @@ export const isActive = (
   link: string,
   includes?: boolean
 ): boolean => {
-  console.log('link:', link, '__', pathname);
 
   return includes
     ? pathname === link || pathname.endsWith(link)

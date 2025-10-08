@@ -1,6 +1,6 @@
 'use client';
 import { useParams } from 'next/navigation';
-import React, { use, useReducer } from 'react';
+import React, { use, useReducer, useRef } from 'react';
 import { Icon } from '../icon';
 import { Button } from '../button';
 import { noteContext } from '@/src/context';
@@ -9,6 +9,8 @@ import { TextInput } from '../textInput';
 import { initialState, noteFormReducer } from '@/src/reducers';
 import { TextArea } from '../shared/textArea';
 import { InnerHeader } from '../shared/innerHeader';
+
+// todo: validacion de form
 
 const transformText = (text: string) => {
   const formatedContent = text.split('\n').map((el, index) => {
@@ -25,15 +27,24 @@ const transformText = (text: string) => {
 export const Note = () => {
   const { id } = useParams<{ id: string }>();
   const { notes } = use(noteContext);
-  const [noteInfo] = notes.filter(
-    (ele) => (ele as unknown as NoteI).id === id
-  ) as NoteI[];
+  const tagRef = useRef(null);
+  // todo : llamada a nota por id
+  const [noteInfo] =
+    (notes?.filter((ele) => (ele as unknown as NoteI).id === id) as NoteI[]) ||
+    ([{}] as NoteI[]);
   const [state, dispatch] = useReducer(noteFormReducer, {
     ...initialState,
     noteData: { ...initialState.noteData, ...noteInfo },
   });
 
-  const { title, lastEdited, tags, content, id: noteId, isArchived } = noteInfo;
+  const {
+    title,
+    lastEdited,
+    tags,
+    content,
+    id: noteId,
+    isArchived,
+  } = state.noteData || {};
 
   const date = lastEdited
     ? new Date(lastEdited as string).toLocaleDateString('GB', {
@@ -70,12 +81,19 @@ export const Note = () => {
           className="font-preset-1 text-neutral-950 dark:text-white"
           onClick={() => dispatch({ type: 'SET_TITLE_EDIT' })}
         >
-          {state.noteData.isEdited ? state.noteData.title : noteInfo.title}
+          {state?.noteData?.isEdited ? state?.noteData?.title : noteInfo?.title}
         </h1>
       )}
       <div className="flex gap-3 flex-col">
         <div className="flex item-center gap-2">
-          <div className="flex items-center gap-1.5">
+          <div
+            className="flex items-center gap-1.5"
+            onClick={() => {
+              console.log('tef', tagRef.current);
+
+              dispatch({ type: 'SET_TAGS_EDIT' });
+            }}
+          >
             <Icon icon="tag" color="#717784" />
             <span className="text-neutral-950 dark:text-white">Tags</span>
           </div>
@@ -83,11 +101,14 @@ export const Note = () => {
           {/* Todo: estas se editan en linea */}
           {state.fields.tags.isEditMode ? (
             <TextInput
+              ref={tagRef}
               onBlur={() => dispatch({ type: 'SET_TAGS_EDIT' })}
               name="tags"
               variant="sm"
               value={
-                state.noteData.isEdited ? state.noteData.tags : noteInfo.tags
+                state.noteData?.isEdited
+                  ? state?.noteData?.tags
+                  : noteInfo?.tags
               }
               onChange={(event) => {
                 const {
@@ -102,8 +123,8 @@ export const Note = () => {
               onClick={() => dispatch({ type: 'SET_TAGS_EDIT' })}
             >
               {(state.noteData.isEdited
-                ? Array.isArray(state.noteData.tags)
-                  ? state.noteData.tags
+                ? Array.isArray(state.noteData?.tags)
+                  ? state.noteData?.tags
                   : (state.noteData?.tags as unknown as string)?.split(',')
                 : tags
               )?.map((tag, index) => (
@@ -157,12 +178,15 @@ export const Note = () => {
               onClick={() => dispatch({ type: 'SET_CONTENT_EDIT' })}
               className="overflow-scroll"
             >
-              {(content || state.noteData.content) &&
+              {content || state.noteData.content ? (
                 transformText(
                   state.noteData.isEdited
                     ? (state.noteData.content as string)
                     : (content as string)
-                )}
+                )
+              ) : (
+                <p>Click para editar</p>
+              )}
             </div>
           )}
         </div>

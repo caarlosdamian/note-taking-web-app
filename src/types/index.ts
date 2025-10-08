@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, RefAttributes } from 'react';
 import { IconList } from '../utils';
 
 export interface Note {
@@ -8,6 +8,7 @@ export interface Note {
   lastEdited?: string;
   isArchived?: boolean;
   id?: string;
+  _id?: string;
   isEdited?: boolean;
 }
 
@@ -43,7 +44,9 @@ interface IconFn {
   iconLeft?: { fn: () => void };
   iconRight?: { fn: () => void };
 }
-export interface InputItem extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputItem
+  extends InputHTMLAttributes<HTMLInputElement>,
+    RefAttributes<HTMLInputElement> {
   label?: string;
   iconLeft?: IconList;
   iconRight?: IconList;
@@ -54,7 +57,7 @@ export interface InputItem extends InputHTMLAttributes<HTMLInputElement> {
   linkUrl?: string;
   variant?: 'sm' | 'md' | 'lg';
   name?: string;
-  equals?:string
+  equals?: string;
 }
 
 export interface IUser {

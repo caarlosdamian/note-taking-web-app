@@ -9,16 +9,19 @@ const NoteSchema = new mongoose.Schema(
     },
     title: {
       type: String,
-      required: true,
+      required: false,
+      default: '',
     },
     content: {
       type: String,
-      required: true,
+      required: false,
+      default: '',
     },
     tags: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Tag',
+        required: false,
       },
     ],
     lastEdited: {

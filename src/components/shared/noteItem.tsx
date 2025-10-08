@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const NoteItem = ({
-  note: { content, isArchived, lastEdited, tags, title, id },
+  note: { content, isArchived, lastEdited, tags, title, _id },
   isActive,
 }: Props) => {
   // Todo: agregar funcionalidad de activa
@@ -23,7 +23,7 @@ export const NoteItem = ({
 
   return (
     <Link
-      href={id ? `${segmentPath}/${id}` : '/notes'}
+      href={_id ? `${segmentPath}/${_id}` : '/notes'}
       className={`flex flex-col gap-3 p-2    ${
         isActive
           ? 'dark:bg-custom-neutral-800 bg-custom-neutral-100 rounded-md'

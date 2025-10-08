@@ -33,12 +33,6 @@ export const Notes = ({
   const pathname = useParams();
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (notes.length) {
-  //     router.push(`/notes/${notes[0].id}`);
-  //   }
-  // }, []);
-
   return (
     <div
       className={`min-h-[calc(100dvh-81px)] w-full basis-full lg:w-[242px] lg:max-w-[242px] lg:basis-1/4 dark:bg-custom-neutral-950 bg-white px-4 py-5 lg:flex flex-col gap-4 lg:border-r-[1px] border-custom-neutral-200 dark:border-custom-neutral-800 overflow-scroll ${className}`}
@@ -60,14 +54,14 @@ export const Notes = ({
           {upperNote}
         </p>
       )}
-      {notes.length >= 1 ? (
+      {notes?.length >= 1 ? (
         notes.map((elemento) => (
           <NoteItem
             isActive={isActive(
-              pathname.id as unknown as string,
-              elemento.id as string
+              pathname._id as unknown as string,
+              elemento._id as string
             )}
-            key={elemento.title}
+            key={elemento?._id}
             note={elemento}
           />
         ))

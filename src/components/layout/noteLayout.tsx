@@ -1,28 +1,28 @@
 'use client';
-import React, { use } from 'react';
+import React from 'react';
 import { Notes } from '../sidebar/notes';
-import { noteContext } from '@/src/context';
 import { Note } from '@/src/types';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { createNote } from '@/src/actions/notes';
 
-export const NoteLayout = ({ className }: { className?: string }) => {
-  // tener un estado temporal para manejo de notas no guardadas
-
-  // provider
+export const NoteLayout = ({
+  className,
+  notes,
+}: {
+  className?: string;
+  notes: any;
+}) => {
   const router = useRouter();
-  const { notes, createLocalNote } = use(noteContext);
-  const pathname = usePathname();
-  console.log(pathname,'pathname')
-  const addNewNote = () => {
-    const newNote = createLocalNote() as unknown as Note;
-    router.push(`${pathname}/${newNote.id}`);
+  const addNewNote = async () => {
+    const newNote = await createNote({ title: '', content: '' });
+    // todo: maybe pathname si lo necesitamos diferentes rutas
+    router.push(`/notes/${newNote._id}`);
   };
 
   return (
     <Notes
       redirect
-      // todo maybe by props ?
-      notes={notes as Note[]}
+      notes={typeof notes === 'string' ? JSON.parse(notes) : (notes as Note[])}
       btnLabel="Create New Note"
       btnIcon="plus"
       upperNote="All notes with the ”Dev” tag are shown here."

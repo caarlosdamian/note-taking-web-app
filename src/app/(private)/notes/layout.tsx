@@ -1,14 +1,6 @@
-import {
-  ContentLayout,
-  InnerHeader,
-  MenuBar,
-  Modal,
-  NoteLayout,
-  Notes,
-} from '@/src/components';
-import { notes } from '@/src/utils';
+import { getNotes } from '@/src/actions/notes';
+import { NoteLayout } from '@/src/components';
 import type { Metadata } from 'next';
-import { headers } from 'next/headers';
 
 export const metadata: Metadata = {
   title: 'privade',
@@ -16,18 +8,15 @@ export const metadata: Metadata = {
 
 export default async function Layout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
   params: Promise<{ slug: string }>;
 }>) {
-  // const testing = await params
-  // const headerds = await  headers()
-  // console.log(headerds,'++')
+  const notes = await getNotes();
   return (
     <>
       {/* table y mobile es diferente */}
-      <NoteLayout className="hidden" />
+      <NoteLayout notes={notes} className="hidden" />
       {/* <InnerHeader /> */}
       {children}
     </>
