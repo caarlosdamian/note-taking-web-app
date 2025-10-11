@@ -64,6 +64,14 @@ export const noteFormReducer = (state: NoteInitialState, action: Action) => {
           [action.payload.name]: action.payload.value,
         },
       };
+    case 'UPDATE_STATE':
+      return {
+        ...state,
+        noteData: {
+          ...state.noteData,
+          ...action.payload.value,
+        },
+      };
       break;
 
     default:

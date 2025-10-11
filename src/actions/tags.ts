@@ -34,3 +34,53 @@ export const getTag = async (name: string) => {
     erroResponse(error as Error);
   }
 };
+
+export const updateTag = async (body: { name: string; noteId: string }) => {
+  try {
+    const { name, noteId } = body;
+    await dbConnect();
+    const tag = await Tag.findOneAndUpdate(
+      { name: name.trim().toLowerCase() },
+      {
+        $setOnInsert: { name: name.trim().toLowerCase() },
+        $addToSet: { note_ids: noteId },
+      },
+      { new: true, upsert: true }
+    );
+    return tag;
+  } catch (error) {
+    console.log('error', error);
+    return erroResponse(error as Error);
+  }
+};
+
+export const removeNoteFromTag = async (body: {
+  noteId: string;
+  tagId: string;
+}) => {
+  try {
+    const { noteId, tagId } = body;
+    await dbConnect();
+    const tag = await Tag.findByIdAndUpdate(tagId, {
+      $pull: { note_ids: noteId },
+    });
+    return tag;
+  } catch (error) {
+    console.log('error', error);
+    return erroResponse(error as Error);
+  }
+};
+
+export const addNoteToTag = async (body: { noteId: string; tagId: string }) => {
+  try {
+    const { noteId, tagId } = body;
+    await dbConnect();
+    const tag = await Tag.findByIdAndUpdate(tagId, {
+      $addToSet: { note_ids: noteId },
+    });
+    return tag;
+  } catch (error) {
+    console.log('error', error);
+    return erroResponse(error as Error);
+  }
+};

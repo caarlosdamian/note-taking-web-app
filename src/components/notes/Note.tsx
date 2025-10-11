@@ -1,10 +1,8 @@
 'use client';
 import { useParams } from 'next/navigation';
-import React, { use, useReducer, useRef } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import { Icon } from '../icon';
 import { Button } from '../button';
-import { noteContext } from '@/src/context';
-import { Note as NoteI } from '@/src/types';
 import { TextInput } from '../textInput';
 import { initialState, noteFormReducer } from '@/src/reducers';
 import { TextArea } from '../shared/textArea';
@@ -32,7 +30,6 @@ export const Note = () => {
   const tagRef = useRef(null);
   const router = useRouter();
   const { noteInfo } = useGetNote(id);
-  // todo : llamada a nota por id
   // todo: revisar formulario
   // todo: toast de actualizacion
 
@@ -40,6 +37,20 @@ export const Note = () => {
     ...initialState,
     noteData: { ...initialState.noteData, ...noteInfo },
   });
+
+  useEffect(() => {
+    dispatch({
+      type: 'UPDATE_STATE',
+      payload: {
+        value: {
+          ...noteInfo,
+          tags: noteInfo?.tags
+            ? noteInfo?.tags?.map((tag: { name: string }) => tag.name)
+            : [],
+        },
+      },
+    });
+  }, [noteInfo]);
 
   const {
     title,
@@ -63,12 +74,14 @@ export const Note = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(state, '========state====');
     await updateNote({
+      noteInfo,
       noteId: id as string,
       body: {
         title: state.noteData.title,
-        tags: state.noteData.tags,
+        tags: Array.isArray(state.noteData.tags)
+          ? state.noteData.tags.join(',')
+          : state.noteData.tags,
         content: state.noteData.content,
       },
     });
@@ -119,19 +132,14 @@ export const Note = () => {
             <Icon icon="tag" color="#717784" />
             <span className="text-neutral-950 dark:text-white">Tags</span>
           </div>
-          {/* tags van a ser ids */}
-          {/* Todo: estas se editan en linea */}
+
           {state.fields.tags.isEditMode ? (
             <TextInput
               ref={tagRef}
               onBlur={() => dispatch({ type: 'SET_TAGS_EDIT' })}
               name="tags"
               variant="sm"
-              value={
-                state.noteData?.isEdited
-                  ? state?.noteData?.tags
-                  : noteInfo?.tags
-              }
+              value={state?.noteData?.tags}
               onChange={(event) => {
                 const {
                   target: { value, name },
@@ -144,11 +152,9 @@ export const Note = () => {
               className="flex items-center"
               onClick={() => dispatch({ type: 'SET_TAGS_EDIT' })}
             >
-              {(state.noteData.isEdited
-                ? Array.isArray(state.noteData?.tags)
-                  ? state.noteData?.tags
-                  : (state.noteData?.tags as unknown as string)?.split(',')
-                : tags
+              {(Array.isArray(state.noteData?.tags)
+                ? state.noteData?.tags
+                : state.noteData?.tags?.split(',')
               )?.map((tag: string, index: number) => (
                 <span
                   {...(index !== 0 ? { before: ',' } : {})}

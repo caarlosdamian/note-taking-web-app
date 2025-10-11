@@ -29,11 +29,15 @@ interface EditNote {
   payload: { name: string; value: string };
 }
 
+interface UpdateState {
+  type: 'UPDATE_STATE';
+  payload: { value: Record<string, string> };
+}
 interface SetEditMode {
   type: 'SET_TITLE_EDIT' | 'SET_CONTENT_EDIT' | 'SET_TAGS_EDIT';
 }
 
-export type Action = SetEditMode | EditNote;
+export type Action = SetEditMode | EditNote | UpdateState;
 
 export interface NoteAction {
   type: '';
@@ -74,6 +78,7 @@ export interface GetNoteParams {
 export interface UpdateNoteParams {
   noteId: string;
   userId?: string;
+  noteInfo: INote;
   body: {
     content: string;
     tags: string;
@@ -81,14 +86,13 @@ export interface UpdateNoteParams {
   };
 }
 
-
 import { Types, Document } from 'mongoose';
 
 export interface INote extends Document {
   user_id: Types.ObjectId;
   title: string;
   content: string;
-  tags: Types.ObjectId[];
+  tags: { name: string; _id: string }[];
   lastEdited: Date;
   isArchived: boolean;
   isEdited: boolean;
