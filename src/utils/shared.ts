@@ -68,7 +68,6 @@ export const isActive = (
   link: string,
   includes?: boolean
 ): boolean => {
-
   return includes
     ? pathname === link || pathname.endsWith(link)
     : pathname === link;
@@ -108,4 +107,8 @@ export const formatDate = (date: string) => {
   });
 
   return formatedDate;
+};
+
+export const erroResponse = (error: Error) => {
+  return { message: 'Algo salio mal', error };
 };

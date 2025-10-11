@@ -19,7 +19,8 @@ export const NoteItem = ({
   const pathname = usePathname();
   const paramas = useParams<{ id: string }>();
 
-  const segmentPath = pathname.split(paramas.id)[0];
+  const segmentPath =
+    pathname === '/' ? 'notes' : pathname.split(paramas.id)[0];
 
   return (
     <Link
@@ -35,8 +36,8 @@ export const NoteItem = ({
       </span>
       {tags && (
         <div className="flex flex-wrap gap-2.5">
-          {tags.map((el) => {
-            return <Tag key={el} note={el} />;
+          {tags.map((el: any) => {
+            return <Tag key={el._id} note={el.name} />;
           })}
         </div>
       )}

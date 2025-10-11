@@ -66,3 +66,32 @@ export interface IUser {
   password?: string;
   resetPasswordCode?: string;
 }
+
+export interface GetNoteParams {
+  noteId?: string;
+}
+
+export interface UpdateNoteParams {
+  noteId: string;
+  userId?: string;
+  body: {
+    content: string;
+    tags: string;
+    title: string;
+  };
+}
+
+
+import { Types, Document } from 'mongoose';
+
+export interface INote extends Document {
+  user_id: Types.ObjectId;
+  title: string;
+  content: string;
+  tags: Types.ObjectId[];
+  lastEdited: Date;
+  isArchived: boolean;
+  isEdited: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}

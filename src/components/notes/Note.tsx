@@ -9,6 +9,9 @@ import { TextInput } from '../textInput';
 import { initialState, noteFormReducer } from '@/src/reducers';
 import { TextArea } from '../shared/textArea';
 import { InnerHeader } from '../shared/innerHeader';
+import { useRouter } from 'next/navigation';
+import { useGetNote } from '@/src/hooks/useGetNote';
+import { updateNote } from '@/src/actions/notes';
 
 // todo: validacion de form
 
@@ -26,12 +29,13 @@ const transformText = (text: string) => {
 
 export const Note = () => {
   const { id } = useParams<{ id: string }>();
-  const { notes } = use(noteContext);
   const tagRef = useRef(null);
+  const router = useRouter();
+  const { noteInfo } = useGetNote(id);
   // todo : llamada a nota por id
-  const [noteInfo] =
-    (notes?.filter((ele) => (ele as unknown as NoteI).id === id) as NoteI[]) ||
-    ([{}] as NoteI[]);
+  // todo: revisar formulario
+  // todo: toast de actualizacion
+
   const [state, dispatch] = useReducer(noteFormReducer, {
     ...initialState,
     noteData: { ...initialState.noteData, ...noteInfo },
@@ -57,8 +61,24 @@ export const Note = () => {
   // si es create o edit
   // todo : mobile add innerHeader
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(state, '========state====');
+    await updateNote({
+      noteId: id as string,
+      body: {
+        title: state.noteData.title,
+        tags: state.noteData.tags,
+        content: state.noteData.content,
+      },
+    });
+  };
+
   return (
-    <section className="flex flex-col gap-5 basis-full lg:basis-2/3 px-6 py-5  lg:h-full">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-5 basis-full lg:basis-2/3 px-6 py-5  lg:h-full"
+    >
       {/* navegacion mobile */}
       <InnerHeader withArchived withDelete />
       {state.fields.title.isEditMode ? (
@@ -81,7 +101,9 @@ export const Note = () => {
           className="font-preset-1 text-neutral-950 dark:text-white"
           onClick={() => dispatch({ type: 'SET_TITLE_EDIT' })}
         >
-          {state?.noteData?.isEdited ? state?.noteData?.title : noteInfo?.title}
+          {state?.noteData?.isEdited
+            ? state?.noteData?.title
+            : noteInfo?.title || 'Agrega un titulo'}
         </h1>
       )}
       <div className="flex gap-3 flex-col">
@@ -127,7 +149,7 @@ export const Note = () => {
                   ? state.noteData?.tags
                   : (state.noteData?.tags as unknown as string)?.split(',')
                 : tags
-              )?.map((tag, index) => (
+              )?.map((tag: string, index: number) => (
                 <span
                   {...(index !== 0 ? { before: ',' } : {})}
                   key={tag}
@@ -191,11 +213,16 @@ export const Note = () => {
           )}
         </div>
         <hr className="bg-custom-neutral-200 dark:bg-custom-neutral-800 border-0 h-[1px] w-full hidden lg:block" />
+        {/* todo: mobile submit hay que configurarlo */}
         <div className="hidden lg:flex gap-4 justify-self-end items-end">
-          <Button variant="primary">Save Note</Button>
-          <Button variant="secondary">Cancel</Button>
+          <Button type="submit" variant="primary">
+            Save Note
+          </Button>
+          <Button variant="secondary" onClick={() => router.push('/notes')}>
+            Cancel
+          </Button>
         </div>
       </div>
-    </section>
+    </form>
   );
 };
