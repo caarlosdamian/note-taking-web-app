@@ -4,14 +4,20 @@ import { Notes } from '../sidebar/notes';
 import { Note } from '@/src/types';
 import { useRouter } from 'next/navigation';
 import { createNote } from '@/src/actions/notes';
+import { IconList } from '@/src/utils';
 
-export const NoteLayout = ({
-  className,
-  notes,
-}: {
+interface Props {
+  action?: () => void;
+  btnLabel?: string;
+  btnIcon?: IconList;
+  emptyNote?: string;
+  upperNote?: string;
+  notes: Note[] | string;
+  redirect?: boolean;
   className?: string;
-  notes: any;
-}) => {
+}
+
+export const NoteLayout = ({ className, notes, upperNote }: Props) => {
   const router = useRouter();
   const addNewNote = async () => {
     const newNote = await createNote({ title: '', content: '' });
@@ -25,7 +31,7 @@ export const NoteLayout = ({
       notes={typeof notes === 'string' ? JSON.parse(notes) : (notes as Note[])}
       btnLabel="Create New Note"
       btnIcon="plus"
-      upperNote="All notes with the ”Dev” tag are shown here."
+      upperNote={upperNote}
       action={addNewNote}
       className={className}
     />

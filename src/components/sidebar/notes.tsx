@@ -31,11 +31,10 @@ export const Notes = ({
   // const { createQueryString, setUrlQueryParams } = useQueryParamsTools();
 
   const pathname = useParams();
-  const router = useRouter();
 
   return (
     <div
-      className={`min-h-[calc(100dvh-81px)] w-full basis-full lg:w-[242px] lg:max-w-[242px] lg:basis-1/4 dark:bg-custom-neutral-950 bg-white px-4 py-5 lg:flex flex-col gap-4 lg:border-r-[1px] border-custom-neutral-200 dark:border-custom-neutral-800 overflow-scroll ${className}`}
+      className={`flex min-h-[calc(100dvh-81px)] w-full basis-full  dark:bg-custom-neutral-950 bg-white px-4 py-5 flex-col gap-4 lg:border-r-[1px] border-custom-neutral-200 dark:border-custom-neutral-800 overflow-scroll lg:w-[242px] lg:max-w-[242px] lg:basis-1/4   ${className}`}
     >
       {btnLabel && action && (
         <Button
@@ -50,7 +49,7 @@ export const Notes = ({
         </Button>
       )}
       {upperNote && (
-        <p className="font-preset-5 dark:text-custom-neutral-200 text-custom-neutral-700">
+        <p className=" font-preset-5 dark:text-custom-neutral-200 text-custom-neutral-700">
           {upperNote}
         </p>
       )}

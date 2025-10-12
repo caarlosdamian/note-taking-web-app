@@ -14,15 +14,17 @@ import { themeContext } from '@/src/context';
 // search no lleva
 
 interface Props {
-  withArchived?: boolean;
-  withDelete?: boolean;
+  archivedAction?: () => void;
+  deleteAction?: () => void;
+  saveAction?: () => void;
   withoutActions?: boolean;
   urlLabel?: string;
 }
 
 export const InnerHeader = ({
-  withArchived = false,
-  withDelete = false,
+  archivedAction,
+  deleteAction,
+  saveAction,
   withoutActions = false,
   urlLabel = 'Go back',
 }: Props) => {
@@ -44,7 +46,7 @@ export const InnerHeader = ({
         </Button>
       </div>
       <div className="flex items-center gap-4">
-        {withDelete && (
+        {deleteAction && (
           <Icon
             width={18}
             height={18}
@@ -53,7 +55,7 @@ export const InnerHeader = ({
             icon="delete"
           />
         )}
-        {withArchived && (
+        {archivedAction && (
           <Icon
             width={18}
             height={18}
@@ -64,10 +66,16 @@ export const InnerHeader = ({
         )}
         {!withoutActions && (
           <>
-            <Button className="!font-preset-5 md:!font-preset-4" variant="link">
+            <Button
+              onClick={() => router.push('/notes')}
+              className="!font-preset-5 md:!font-preset-4"
+              variant="link"
+            >
               Cancel
             </Button>
+
             <Button
+              type="submit"
               variant="link"
               className="!text-custom-blue-500 dark:!text-custom-blue-500 !font-preset-5 md:!font-preset-4"
             >

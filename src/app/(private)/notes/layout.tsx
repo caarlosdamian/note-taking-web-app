@@ -13,10 +13,11 @@ export default async function Layout({
   params: Promise<{ slug: string }>;
 }>) {
   const notes = await getNotes();
+
   return (
     <>
       {/* table y mobile es diferente */}
-      <NoteLayout notes={notes} className="hidden" />
+      <NoteLayout notes={notes as string} className="hidden" />
       {/* <InnerHeader /> */}
       {children}
     </>

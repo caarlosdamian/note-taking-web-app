@@ -93,7 +93,10 @@ export const Note = () => {
       className="flex flex-col gap-5 basis-full lg:basis-2/3 px-6 py-5  lg:h-full"
     >
       {/* navegacion mobile */}
-      <InnerHeader withArchived withDelete />
+      <InnerHeader
+        archivedAction={() => console.log('archivando')}
+        deleteAction={() => console.log('archivando')}
+      />
       {state.fields.title.isEditMode ? (
         <TextInput
           onBlur={() => dispatch({ type: 'SET_TITLE_EDIT' })}

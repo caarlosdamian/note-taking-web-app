@@ -7,7 +7,7 @@ const HomePage = async () => {
   const notes = await getNotes();
   return (
     <div className="flex flex-col gap-4 overflow-hidden w-full h-full ">
-      <NoteLayout className="hidden  w-full" notes={notes} />
+      <NoteLayout className="  w-full" notes={notes as string} />
     </div>
   );
 };
