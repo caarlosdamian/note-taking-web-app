@@ -52,6 +52,7 @@ export const InnerHeader = ({
             height={18}
             className="cursor-pointer"
             color={isDarkMode ? '#99A0AE' : '#525866'}
+            onClick={() => deleteAction()}
             icon="delete"
           />
         )}
@@ -59,6 +60,7 @@ export const InnerHeader = ({
           <Icon
             width={18}
             height={18}
+            onClick={() => archivedAction()}
             className="cursor-pointer"
             color={isDarkMode ? '#99A0AE' : '#525866'}
             icon={isArchiveRoute ? 'restore' : 'archived'}

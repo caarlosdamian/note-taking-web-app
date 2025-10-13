@@ -1,5 +1,5 @@
 'use client';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import React, { useEffect, useReducer, useRef } from 'react';
 import { Icon } from '../icon';
 import { Button } from '../button';
@@ -9,7 +9,7 @@ import { TextArea } from '../shared/textArea';
 import { InnerHeader } from '../shared/innerHeader';
 import { useRouter } from 'next/navigation';
 import { useGetNote } from '@/src/hooks/useGetNote';
-import { updateNote } from '@/src/actions/notes';
+import { archiveNote, deleteNote, updateNote } from '@/src/actions/notes';
 
 // todo: validacion de form
 
@@ -29,6 +29,7 @@ export const Note = () => {
   const { id } = useParams<{ id: string }>();
   const tagRef = useRef(null);
   const router = useRouter();
+  const pathName = usePathname();
   const { noteInfo } = useGetNote(id);
   // todo: revisar formulario
   // todo: toast de actualizacion
@@ -94,8 +95,10 @@ export const Note = () => {
     >
       {/* navegacion mobile */}
       <InnerHeader
-        archivedAction={() => console.log('archivando')}
-        deleteAction={() => console.log('archivando')}
+        archivedAction={() =>
+          archiveNote({ noteId: id, noteInfo, path: pathName })
+        }
+        deleteAction={() => deleteNote({ noteId: id, noteInfo })}
       />
       {state.fields.title.isEditMode ? (
         <TextInput

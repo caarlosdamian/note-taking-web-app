@@ -21,8 +21,8 @@ export const NoteLayout = ({ className, notes, upperNote }: Props) => {
   const router = useRouter();
   const addNewNote = async () => {
     const newNote = await createNote({ title: '', content: '' });
-    // todo: maybe pathname si lo necesitamos diferentes rutas
-    router.push(`/notes/${newNote._id}`);
+    const noteId = JSON.parse(newNote as string);
+    router.push(`/notes/${noteId._id}`);
   };
 
   return (

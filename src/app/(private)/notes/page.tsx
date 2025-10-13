@@ -1,5 +1,5 @@
 import { getNotes } from '@/src/actions/notes';
-import { InnerHeader, NoteLayout } from '@/src/components';
+import { AbsoluteBtn, InnerHeader, NoteLayout } from '@/src/components';
 import React from 'react';
 
 const page = async () => {
@@ -11,6 +11,7 @@ const page = async () => {
         All notes
       </h1>
       <NoteLayout notes={notes as string} className="lg:hidden !px-0 !py-0" />
+      <AbsoluteBtn />
     </div>
   );
 };

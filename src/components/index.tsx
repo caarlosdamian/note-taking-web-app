@@ -14,3 +14,4 @@ export { Icon } from './icon';
 export { MenuBar } from './menuBar';
 export { Modal } from './modal';
 export { NoteLayout } from './layout/noteLayout';
+export { AbsoluteBtn } from './shared/absoluteBtn';

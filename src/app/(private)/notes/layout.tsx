@@ -17,7 +17,7 @@ export default async function Layout({
   return (
     <>
       {/* table y mobile es diferente */}
-      <NoteLayout notes={notes as string} className="hidden" />
+      <NoteLayout notes={notes as string} className="hidden lg:flex" />
       {/* <InnerHeader /> */}
       {children}
     </>

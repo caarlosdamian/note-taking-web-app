@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, RefAttributes } from 'react';
 import { IconList } from '../utils';
-
+import { Types, Document } from 'mongoose';
 export interface Note {
   title: string;
   tags?: string[];
@@ -86,7 +86,16 @@ export interface UpdateNoteParams {
   };
 }
 
-import { Types, Document } from 'mongoose';
+export interface DeleteNoteParams {
+  noteId: string;
+  noteInfo: INote;
+}
+
+export interface ArchiveNoteParams {
+  noteId: string;
+  path: string;
+  noteInfo: INote;
+}
 
 export interface INote extends Document {
   user_id: Types.ObjectId;

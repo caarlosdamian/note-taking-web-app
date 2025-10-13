@@ -4,8 +4,15 @@ import { auth } from '@/auth';
 import dbConnect from '../lib/connectDB';
 import Note from '../models/note';
 import { getUser } from './auth';
-import { GetNoteParams, UpdateNoteParams } from '../types';
+import {
+  ArchiveNoteParams,
+  DeleteNoteParams,
+  GetNoteParams,
+  UpdateNoteParams,
+} from '../types';
 import { addNoteToTag, createTag, getTag, removeNoteFromTag } from './tags';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 // todo: solo notas del usuario
 export const getNotes = async () => {
   try {
@@ -42,7 +49,8 @@ export const createNote = async (body: any) => {
 
     await dbConnect();
     const note = await Note.create({ user_id: user._id, ...body });
-    return note;
+
+    return JSON.stringify(note);
   } catch (error) {
     console.error(error);
   }
@@ -58,8 +66,8 @@ export const updateNote = async ({
     let tagsIds = [];
 
     const tagIdsToRemove = noteInfo.tags
-      .filter((element) => !body.tags.includes(element.name))
-      .map((el) => el._id);
+      ?.filter((element) => !body.tags.includes(element.name))
+      ?.map((el) => el._id);
 
     if (body.tags) {
       const tags = body.tags.split(',');
@@ -100,6 +108,47 @@ export const updateNote = async ({
     );
 
     return JSON.stringify(note);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteNote = async ({ noteId, noteInfo }: DeleteNoteParams) => {
+  try {
+    await dbConnect();
+    const { tags } = noteInfo;
+
+    if (tags.length > 0) {
+      const tagsPromises = tags.map((ele) =>
+        removeNoteFromTag({ noteId, tagId: ele._id })
+      );
+      await Promise.all(tagsPromises);
+    }
+    await Note.findByIdAndDelete(noteId);
+  } catch (error) {
+    console.log('error', error);
+  }
+  redirect('/notes');
+};
+
+export const archiveNote = async ({
+  noteId,
+  path,
+  noteInfo,
+}: ArchiveNoteParams) => {
+  try {
+    await dbConnect();
+    await Note.findByIdAndUpdate(
+      noteId,
+      {
+        $set: {
+          isArchived: !noteInfo,
+        },
+      },
+      { new: true }
+    );
+    // todo: maybe mandar a otro url dependiendo de si esta archivada o no
+    return revalidatePath(path);
   } catch (error) {
     console.error(error);
   }
