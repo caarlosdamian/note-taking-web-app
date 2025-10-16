@@ -1,4 +1,5 @@
 import { auth } from '@/auth';
+import { getTags } from '@/src/actions/tags';
 import {
   ContentLayout,
   InnerHeader,
@@ -27,14 +28,7 @@ export default async function Layout({
   if (!session) {
     redirect('/signin');
   }
-  // const testing = await params
-  // const headerds = await  headers()
-  // console.log(headerds,'++')
-  return (
-    <ContentLayout>
-      {/* table y mobile es diferente */}
-      {/* <InnerHeader /> */}
-      {children}
-    </ContentLayout>
-  );
+  const tags = await getTags();
+
+  return <ContentLayout tagsData={tags}>{children}</ContentLayout>;
 }

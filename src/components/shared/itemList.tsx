@@ -36,7 +36,7 @@ export const ItemList = ({ icon, label, path, isNavegation }: ItemListI) => {
                 : '#525866'
             }
           />
-          <span className="font-preset-4 text-neutral-950 dark:text-white">
+          <span className="font-preset-4 text-neutral-950 dark:text-white capitalize">
             {label}
           </span>
         </div>

@@ -112,3 +112,6 @@ export const formatDate = (date: string) => {
 export const erroResponse = (error: Error) => {
   return { message: 'Algo salio mal', error };
 };
+
+export const capitalizeWord = (str: string) =>
+  str.charAt(0).toUpperCase() + str.slice(1);

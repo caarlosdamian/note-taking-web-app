@@ -15,3 +15,4 @@ export { MenuBar } from './menuBar';
 export { Modal } from './modal';
 export { NoteLayout } from './layout/noteLayout';
 export { AbsoluteBtn } from './shared/absoluteBtn';
+export { ActionBar } from './shared/actionBar';

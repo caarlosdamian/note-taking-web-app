@@ -8,6 +8,7 @@ import {
   ArchiveNoteParams,
   DeleteNoteParams,
   GetNoteParams,
+  INote,
   UpdateNoteParams,
 } from '../types';
 import { addNoteToTag, createTag, getTag, removeNoteFromTag } from './tags';
@@ -116,7 +117,14 @@ export const updateNote = async ({
 export const deleteNote = async ({ noteId, noteInfo }: DeleteNoteParams) => {
   try {
     await dbConnect();
-    const { tags } = noteInfo;
+    let noteInfoDB;
+
+    if (!noteInfo) {
+      const note = await getNote({ noteId });
+      noteInfoDB = JSON.parse(note as string);
+    }
+
+    const { tags } = noteInfo || (noteInfoDB as INote);
 
     if (tags.length > 0) {
       const tagsPromises = tags.map((ele) =>
@@ -135,6 +143,7 @@ export const archiveNote = async ({
   noteId,
   path,
   noteInfo,
+  forceValue,
 }: ArchiveNoteParams) => {
   try {
     await dbConnect();
@@ -142,14 +151,15 @@ export const archiveNote = async ({
       noteId,
       {
         $set: {
-          isArchived: !noteInfo,
+          isArchived: noteInfo ? !noteInfo.isArchived : forceValue,
         },
       },
       { new: true }
     );
     // todo: maybe mandar a otro url dependiendo de si esta archivada o no
-    return revalidatePath(path);
   } catch (error) {
     console.error(error);
   }
+
+  redirect(path);
 };

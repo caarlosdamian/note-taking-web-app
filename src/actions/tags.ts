@@ -35,6 +35,18 @@ export const getTag = async (name: string) => {
   }
 };
 
+export const getTags = async () => {
+  try {
+    await dbConnect();
+    const tags = await Tag.find().lean();
+    const normalizeTags = JSON.stringify(tags);
+
+    return normalizeTags;
+  } catch (error) {
+    erroResponse(error as Error);
+  }
+};
+
 export const updateTag = async (body: { name: string; noteId: string }) => {
   try {
     const { name, noteId } = body;

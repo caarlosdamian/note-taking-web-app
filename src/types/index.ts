@@ -88,13 +88,14 @@ export interface UpdateNoteParams {
 
 export interface DeleteNoteParams {
   noteId: string;
-  noteInfo: INote;
+  noteInfo?: INote;
 }
 
 export interface ArchiveNoteParams {
   noteId: string;
   path: string;
-  noteInfo: INote;
+  noteInfo?: INote;
+  forceValue?: boolean;
 }
 
 export interface INote extends Document {
