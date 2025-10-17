@@ -115,3 +115,9 @@ export const erroResponse = (error: Error) => {
 
 export const capitalizeWord = (str: string) =>
   str.charAt(0).toUpperCase() + str.slice(1);
+
+export const getIdAndArchivedFromParams = (params: string[]) => {
+  if (!params?.length) return { id: null, isArchived: false };
+  const id = params[0] === 'archived' ? params[1] : params[0];
+  return { id, isArchived: params[0] === 'archived' };
+};

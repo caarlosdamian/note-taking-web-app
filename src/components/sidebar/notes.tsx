@@ -1,11 +1,10 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button } from '../button';
 import { IconList, isActive } from '@/src/utils';
 import { Note } from '@/src/types';
 import { NoteItem } from '../shared/noteItem';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
-import { useQueryParamsTools } from '@/src/hooks/useQueryParamsTools';
+import { useGetNoteDetails } from '@/src/hooks/useGetNoteDetails';
 
 interface Props {
   action?: () => void;
@@ -30,7 +29,7 @@ export const Notes = ({
 }: Props) => {
   // const { createQueryString, setUrlQueryParams } = useQueryParamsTools();
 
-  const pathname = useParams();
+  const { id } = useGetNoteDetails();
 
   return (
     <div
@@ -56,10 +55,7 @@ export const Notes = ({
       {notes?.length >= 1 ? (
         notes.map((elemento) => (
           <NoteItem
-            isActive={isActive(
-              pathname._id as unknown as string,
-              elemento._id as string
-            )}
+            isActive={isActive(id as unknown as string, elemento._id as string)}
             key={elemento?._id}
             note={elemento}
           />

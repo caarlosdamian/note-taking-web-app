@@ -8,17 +8,46 @@ import {
   ArchiveNoteParams,
   DeleteNoteParams,
   GetNoteParams,
+  GetNotesParams,
   INote,
   UpdateNoteParams,
 } from '../types';
 import { addNoteToTag, createTag, getTag, removeNoteFromTag } from './tags';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { notes } from '../utils';
 // todo: solo notas del usuario
-export const getNotes = async () => {
+
+export const getNotes = async ({ query = {} }: GetNotesParams) => {
+  // archivadas => isArchived
+  // busqueda  => name
+  // tags => tagName
+  console.log('=======query@,', query);
   try {
+    let searchQuery = {};
+    if (query) {
+      if ('tagName' in query) {
+        const tag = await getTag(query.tagName);
+        searchQuery.tags = tag._id;
+      }
+
+      if ('isArchived' in query) {
+        searchQuery.isArchived = true;
+      }
+      if ('q' in query) {
+        searchQuery.title = { $regex: query.q, $options: 'i' };
+      }
+    }
+
+    // console.log('searchQuery=>=>=>=>', searchQuery);
+
     await dbConnect();
-    const notes = await Note.find({}).populate({ path: 'tags' }).lean();
+    const notes = await Note.find({ ...searchQuery })
+      .populate({ path: 'tags' })
+      .lean();
+
+    // console.log('notes', notes);
+
     const testing = JSON.stringify(notes);
 
     return testing;

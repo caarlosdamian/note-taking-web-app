@@ -1,17 +1,19 @@
 'use client';
 import React, { use } from 'react';
 import { Button } from '../button';
-import { useParams, usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { modalContext } from '@/src/context';
 import { archiveNote, deleteNote } from '@/src/actions/notes';
 import { IconList } from '@/src/utils';
+import { useGetNoteDetails } from '@/src/hooks/useGetNoteDetails';
 
 export const ActionBar = () => {
   const { openModal } = use(modalContext);
   // todo: hacer un redirect al archivar o restor
   const iconSize = { width: 20, height: 20 };
   const pathname = usePathname();
-  const { id } = useParams<{ id: string }>();
+  const { id } = useGetNoteDetails();
+
   const isArchive = pathname.includes('/archived');
   const ARCHIVE_INFO = isArchive
     ? {
@@ -36,7 +38,7 @@ export const ActionBar = () => {
         onClick={async () => {
           if (isArchive) {
             await archiveNote({
-              noteId: id,
+              noteId: id as string,
               path: `/notes/${id}`,
               forceValue: false,
             });
@@ -49,12 +51,12 @@ export const ActionBar = () => {
               actionLabel: ARCHIVE_INFO.actionLabel,
               actionCallback: async () => {
                 await archiveNote({
-                  noteId: id,
+                  noteId: id as string,
                   path: `/notes/archived/${id}`,
                   forceValue: true,
                 });
               },
-            });
+            }); 
           }
         }}
         icon={ARCHIVE_INFO.icon as IconList}
@@ -77,7 +79,7 @@ export const ActionBar = () => {
             btnVariant: 'danger',
             actionLabel: 'Delete Note',
             actionCallback: () => {
-              deleteNote({ noteId: id });
+              deleteNote({ noteId: id as string });
             },
           });
         }}

@@ -1,5 +1,5 @@
 'use client';
-import { useParams, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import React, { useEffect, useReducer, useRef } from 'react';
 import { Icon } from '../icon';
 import { Button } from '../button';
@@ -10,8 +10,10 @@ import { InnerHeader } from '../shared/innerHeader';
 import { useRouter } from 'next/navigation';
 import { useGetNote } from '@/src/hooks/useGetNote';
 import { archiveNote, deleteNote, updateNote } from '@/src/actions/notes';
+import { useGetNoteDetails } from '@/src/hooks/useGetNoteDetails';
 
 // todo: validacion de form
+// todo : agregar refresh al momento de guardar
 
 const transformText = (text: string) => {
   const formatedContent = text.split('\n').map((el, index) => {
@@ -26,11 +28,11 @@ const transformText = (text: string) => {
 };
 
 export const Note = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useGetNoteDetails();
   const tagRef = useRef(null);
   const router = useRouter();
   const pathName = usePathname();
-  const { noteInfo } = useGetNote(id);
+  const { noteInfo } = useGetNote(id as string);
   // todo: revisar formulario
   // todo: toast de actualizacion
 
