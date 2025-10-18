@@ -15,10 +15,9 @@ export const NoteItem = ({
   // Todo: agregar funcionalidad de activa
   // Todo: agregar dark mode
   // Todo: agregar modo edicion
-
   return (
     <Link
-      href={_id ? `/notes/${_id}` : '/notes'}
+      href={_id ? `/notes/${isArchived ? `archived/${_id}` : _id}` : '/notes'}
       className={`flex flex-col gap-3 p-2    ${
         isActive
           ? 'dark:bg-custom-neutral-800 bg-custom-neutral-100 rounded-md'
