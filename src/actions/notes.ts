@@ -22,17 +22,17 @@ export const getNotes = async ({ query = {} }: GetNotesParams) => {
   // archivadas => isArchived
   // busqueda  => name
   // tags => tagName
-  console.log('=======query@,', query);
+  // console.log('=======query@,', query);
   try {
     let searchQuery = {};
     if (query) {
       if ('tagName' in query) {
         const tag = await getTag(query.tagName);
-        searchQuery.tags = tag._id;
+        searchQuery.tags = tag?._id;
       }
 
       if ('isArchived' in query) {
-        searchQuery.isArchived = true;
+        searchQuery.isArchived = query.isArchived;
       }
       if ('q' in query) {
         searchQuery.title = { $regex: query.q, $options: 'i' };

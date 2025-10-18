@@ -1,11 +1,10 @@
 'use client';
-import React, { use } from 'react';
+import React from 'react';
 import { Notes } from '../sidebar/notes';
 import { Note } from '@/src/types';
 import { useRouter } from 'next/navigation';
 import { createNote } from '@/src/actions/notes';
 import { IconList } from '@/src/utils';
-import { noteContext } from '@/src/context';
 
 interface Props {
   action?: () => void;
@@ -18,9 +17,8 @@ interface Props {
   className?: string;
 }
 
-export const NoteLayout = ({ className, upperNote }: Props) => {
+export const NoteLayout = ({ className, upperNote, notes }: Props) => {
   // todo: quitar el contexto
-  const {normalizeNotes} = use(noteContext)
   const router = useRouter();
   const addNewNote = async () => {
     const newNote = await createNote({ title: '', content: '' });
@@ -31,7 +29,7 @@ export const NoteLayout = ({ className, upperNote }: Props) => {
   return (
     <Notes
       redirect
-      notes={normalizeNotes as Note[]}
+      notes={typeof notes === 'string' ? JSON.parse(notes) : (notes as Note[])}
       btnLabel="Create New Note"
       btnIcon="plus"
       upperNote={upperNote}
