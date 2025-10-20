@@ -10,23 +10,28 @@ const page = async ({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
   params: Promise<{ slug: string }>;
 }) => {
-  // todo: algo
-  const innerNotes = await params;
+  const tagID = (await params) as unknown as { id: string };
   const { isArchived } = getIdAndArchivedFromParams(
-    innerNotes as unknown as string[]
+    tagID as unknown as string[]
   );
 
   const filters = (await searchParams) || {};
 
-  const notes = await getNotes({ isArchived });
-
+  const notes = await getNotes({
+    isArchived,
+    tagName: tagID.id,
+  });
 
   return (
     <div className="flex w-full flex-col gap-4 p-4 md:px-8">
       <h1 className="font-preset-1 text-neutral-950 dark:text-white lg:hidden">
-        All notes
+        Tags
       </h1>
-      <NoteLayout notes={notes as string} className=" !px-0 !py-0" />
+      <NoteLayout
+        upperNote={`All notes with the ”${tagID.id}” tag are shown here.`}
+        notes={notes as string}
+        className=" !px-0 !py-0"
+      />
       <AbsoluteBtn />
     </div>
   );

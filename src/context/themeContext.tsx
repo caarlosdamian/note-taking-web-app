@@ -21,9 +21,7 @@ export const ThemeContextProvider = ({ children }: PropsWithChildren) => {
       const prefersLightTheme = window.matchMedia(
         '(prefers-color-scheme: dark)'
       );
-      console.log('testing',prefersLightTheme.matches,window.matchMedia(
-        '(prefers-color-scheme: dark)'
-      ))
+
       if (prefersLightTheme.matches) {
         setIsDarkMode(true);
         return;

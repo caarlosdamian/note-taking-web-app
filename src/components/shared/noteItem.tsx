@@ -1,23 +1,33 @@
+'use client';
 import { Note } from '@/src/types';
 import { Tag } from './tag';
 import { formatDate } from '@/src/utils';
 import Link from 'next/link';
+import { useCalculatePathName } from '@/src/hooks/useCalculatePathName';
 
 interface Props {
   note: Note;
   isActive: boolean;
 }
 
+// todo: fix url no se olvide
+
 export const NoteItem = ({
   note: { content, isArchived, lastEdited, tags, title, _id },
   isActive,
 }: Props) => {
+  const { normalizePathName } = useCalculatePathName();
+
+  // /note => /notes/archived/id => /notes/id/
+  // /tags => /tags/tagId => /tags/tagId/id
+
   // Todo: agregar funcionalidad de activa
   // Todo: agregar dark mode
   // Todo: agregar modo edicion
   return (
     <Link
-      href={_id ? `/notes/${isArchived ? `archived/${_id}` : _id}` : '/notes'}
+      href={`${normalizePathName}/${_id}`}
+      // href={'/notes'}
       className={`flex flex-col gap-3 p-2    ${
         isActive
           ? 'dark:bg-custom-neutral-800 bg-custom-neutral-100 rounded-md'

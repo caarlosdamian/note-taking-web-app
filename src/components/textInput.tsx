@@ -79,7 +79,6 @@ export const TextInput = ({
             width={20}
             height={20}
             onClick={() => {
-              console.log('iconActions', iconActions);
               if (iconActions) {
                 iconActions['iconRight']?.fn && iconActions['iconRight']?.fn();
               }

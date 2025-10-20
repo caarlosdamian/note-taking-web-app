@@ -1,6 +1,5 @@
 import { getNotes } from '@/src/actions/notes';
 import { AbsoluteBtn, NoteLayout } from '@/src/components';
-import { getIdAndArchivedFromParams } from '@/src/utils';
 import React from 'react';
 
 const page = async ({
@@ -8,25 +7,28 @@ const page = async ({
   params,
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-  params: Promise<{ slug: string }>;
+  params: Promise<{ tagId: string }>;
 }) => {
   // todo: algo
-  const innerNotes = await params;
-  const { isArchived } = getIdAndArchivedFromParams(
-    innerNotes as unknown as string[]
-  );
+  const { tagId } = await params;
 
-  const filters = (await searchParams) || {};
 
-  const notes = await getNotes({ isArchived });
+  // const filters = (await searchParams) || {};
 
+  const notes = await getNotes({
+    tagName: tagId,
+  });
 
   return (
     <div className="flex w-full flex-col gap-4 p-4 md:px-8">
       <h1 className="font-preset-1 text-neutral-950 dark:text-white lg:hidden">
-        All notes
+        Tags
       </h1>
-      <NoteLayout notes={notes as string} className=" !px-0 !py-0" />
+      <NoteLayout
+        upperNote={`All notes with the ”${tagId}” tag are shown here.`}
+        notes={notes as string}
+        className=" !px-0 !py-0"
+      />
       <AbsoluteBtn />
     </div>
   );

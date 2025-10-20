@@ -13,40 +13,35 @@ import {
   UpdateNoteParams,
 } from '../types';
 import { addNoteToTag, createTag, getTag, removeNoteFromTag } from './tags';
-import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { notes } from '../utils';
+import { FilterQuery, mongo } from 'mongoose';
 // todo: solo notas del usuario
 
-export const getNotes = async ({ query = {} }: GetNotesParams) => {
-  // archivadas => isArchived
-  // busqueda  => name
-  // tags => tagName
-  // console.log('=======query@,', query);
-  try {
-    let searchQuery = {};
-    if (query) {
-      if ('tagName' in query) {
-        const tag = await getTag(query.tagName);
-        searchQuery.tags = tag?._id;
-      }
+export const getNotes = async (params: GetNotesParams) => {
 
-      if ('isArchived' in query) {
-        searchQuery.isArchived = query.isArchived;
-      }
-      if ('q' in query) {
-        searchQuery.title = { $regex: query.q, $options: 'i' };
-      }
+  const { isArchived, q, tagName } = params;
+  try {
+    const searchQuery: FilterQuery<typeof Note> = {};
+
+    if (tagName) {
+      const tag = await getTag(tagName);
+      searchQuery.tags = new mongo.ObjectId(tag._id);
     }
 
-    // console.log('searchQuery=>=>=>=>', searchQuery);
+    if (typeof isArchived === 'boolean') {
+      searchQuery.isArchived = isArchived;
+    }
+
+    if (q) {
+      searchQuery.title = { $regex: q, $options: 'i' };
+    }
+
 
     await dbConnect();
     const notes = await Note.find({ ...searchQuery })
       .populate({ path: 'tags' })
       .lean();
 
-    // console.log('notes', notes);
 
     const testing = JSON.stringify(notes);
 

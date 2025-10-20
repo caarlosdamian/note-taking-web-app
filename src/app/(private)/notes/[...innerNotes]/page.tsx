@@ -16,9 +16,7 @@ const NotesPage = async ({
   );
   // todo : clean typing
   const notes = await getNotes({
-    query: {
-      isArchived,
-    },
+    isArchived,
   });
 
   return (

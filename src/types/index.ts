@@ -109,10 +109,8 @@ export interface INote extends Document {
   createdAt: Date;
   updatedAt: Date;
 }
- export interface GetNotesParams {
-   query?: {
-     tagName: string;
-     isArchived: boolean;
-     q: string;
-   };
- }
+export interface GetNotesParams {
+  q?: string;
+  tagName?: string;
+  isArchived?: boolean;
+}

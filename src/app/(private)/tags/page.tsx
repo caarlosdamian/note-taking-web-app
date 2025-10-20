@@ -3,6 +3,7 @@ import { AbsoluteBtn, NoteLayout } from '@/src/components';
 import { getIdAndArchivedFromParams } from '@/src/utils';
 import React from 'react';
 
+// todo: STREAM acabar seccion tags ******
 const page = async ({
   searchParams,
   params,
@@ -18,8 +19,7 @@ const page = async ({
 
   const filters = (await searchParams) || {};
 
-  const notes = await getNotes({ isArchived });
-
+  const notes = await getNotes({});
 
   return (
     <div className="flex w-full flex-col gap-4 p-4 md:px-8">

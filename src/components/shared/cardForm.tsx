@@ -49,14 +49,12 @@ export const CardForm = ({
     event: React.ChangeEvent<HTMLInputElement>,
     callback: any
   ) => {
-    console.log('callback', callback);
     setFormValues((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
     }));
 
     if (callback) {
-      console.log('entrando', 'kdks');
       const fn = JSON.parse(callback as string);
       fn(formValues);
     }

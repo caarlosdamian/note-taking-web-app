@@ -132,8 +132,6 @@ export const Note = () => {
           <div
             className="flex items-center gap-1.5"
             onClick={() => {
-              console.log('tef', tagRef.current);
-
               dispatch({ type: 'SET_TAGS_EDIT' });
             }}
           >

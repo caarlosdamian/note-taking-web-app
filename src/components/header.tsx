@@ -1,7 +1,7 @@
 'use client';
 import React, { use } from 'react';
 import { Logo } from './shared/logo';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { sectionTitles } from '../utils';
 import { TextInput } from './textInput';
 import { Icon } from './icon';
@@ -9,6 +9,7 @@ import { themeContext } from '../context';
 
 export const Header = () => {
   const pathname = usePathname();
+  const params = useParams<{ id: string; tagId: string }>();
   const { isDarkMode } = use(themeContext);
   const getTitle = pathname.split('/');
   const titleKey = getTitle[1] !== '' ? getTitle[1] : 'home';
@@ -22,10 +23,12 @@ export const Header = () => {
       </div>
       <div className="hidden lg:flex justify-between items-center">
         <span className="font-preset-1 text-neutral-950 dark:text-white">
-          {
-            sectionTitles[titleKey as unknown as keyof typeof sectionTitles]
-              ?.title
-          }
+          {params.id || params.tagId
+            ? sectionTitles[
+                titleKey as unknown as keyof typeof sectionTitles
+              ]?.title.replace('{tag}', params.tagId)
+            : sectionTitles[titleKey as unknown as keyof typeof sectionTitles]
+                ?.title}
         </span>
         <div className="flex items-center gap-6">
           <TextInput

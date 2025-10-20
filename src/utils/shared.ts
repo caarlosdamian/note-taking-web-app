@@ -119,5 +119,5 @@ export const capitalizeWord = (str: string) =>
 export const getIdAndArchivedFromParams = (params: string[]) => {
   if (!params?.length) return { id: null, isArchived: false };
   const id = params[0] === 'archived' ? params[1] : params[0];
-  return { id, isArchived: params[0] === 'archived' };
+  return { id, isArchived: params[0] === 'archived', };
 };

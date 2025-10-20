@@ -38,6 +38,10 @@ const sectionTitles = {
   notes: {
     title: 'All Notes',
   },
+
+  tags: {
+    title: 'Notes Tagged: {tag}',
+  },
 };
 const notes: Note[] = [
   {
@@ -169,7 +173,7 @@ const resertPasswordFormItems: InputItem[] = [
   {
     label: 'Confirm New Password',
     name: 'confirmPassword',
-    equals:'password'
+    equals: 'password',
   },
 ];
 
