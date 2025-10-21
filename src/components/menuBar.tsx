@@ -3,13 +3,14 @@ import React, { use, useMemo } from 'react';
 import { Icon } from './icon';
 import { IconList, isActive } from '../utils';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { themeContext } from '../context';
 
 type MenuElement = {
   label: string;
   icon: string;
   path: string;
+  keywords: string[];
 };
 
 interface Props {
@@ -26,14 +27,14 @@ export const MenuBar = ({ elements }: Props) => {
           <Link
             href={item.path}
             className={`flex flex-col items-center gap-1 min-w-[68px] md:w-[100px] rounded-sm py-1 cursor-pointer ${
-              isActive(pathname, item.path)
+              isActive(pathname, item.keywords)
                 ? 'bg-custom-blue-50 dark:bg-neutral-700'
                 : ''
             }`}
           >
             <Icon
               color={
-                isActive(pathname, item.path)
+                isActive(pathname, item.keywords)
                   ? '#335CFF'
                   : isDarkMode
                   ? '#99A0AE'
@@ -45,7 +46,7 @@ export const MenuBar = ({ elements }: Props) => {
             />
             <span
               className={`hidden md:block font-preset-6 ${
-                isActive(pathname, item.path)
+                isActive(pathname, item.keywords)
                   ? 'text-custom-blue-500'
                   : 'text-custom-neutral-400'
               }`}

@@ -10,26 +10,31 @@ const menu = [
     label: 'Inicio',
     icon: 'home',
     path: '/',
+    keywords: ['/', '/notes'],
   },
   {
     label: 'Search',
     icon: 'search',
     path: '/search',
+    keywords: ['/search'],
   },
   {
     label: 'Archived',
     icon: 'archived',
     path: '/archived',
+    keywords: ['/archived'],
   },
   {
     label: 'Tags',
     icon: 'tags',
     path: '/tags',
+    keywords: ['/tags'],
   },
   {
     label: 'Settings',
     icon: 'settings',
     path: '/settings',
+    keywords: ['/settings'],
   },
 ];
 
@@ -51,6 +56,7 @@ export const ContentLayout = ({
       label: tag.name,
       icon: 'tags',
       path: `/tags/${tag.name}`,
+      keywords: [tag.name],
     })
   ) as ItemListI[];
   const navElements = generateNavElements([homeNavegation, normalizeTags], {

@@ -4,7 +4,11 @@ import { useEffect, useState } from 'react';
 export const useCalculatePathName = () => {
   navigator;
   const pathName = usePathname();
-  const params = useParams<{ innerNotes: string[]; tagId: string }>();
+  const params = useParams<{
+    innerNotes: string[];
+    tagId: string;
+    noteId: string;
+  }>();
   const [normalizePathName, setNormalizePathName] = useState(() =>
     pathName === '/' ? '/notes' : pathName
   );
@@ -18,19 +22,10 @@ export const useCalculatePathName = () => {
   useEffect(() => {
     if (params.innerNotes) {
       removeLasteElement();
-      // if (params.innerNotes.length === 2) {
-      //   const isArchived = params.innerNotes[0] === 'archived';
-      //   if (isArchived) {
-      //     removeLasteElement();
-      //   }
-      // }
     }
-    // if (params.tagId) {
-    //   const includes = pathName.includes(params.tagId as string);
-    //   if (includes) {
-    //     removeLasteElement();
-    //   }
-    // }
+    if (params.noteId) {
+      removeLasteElement();
+    }
   }, [pathName]);
 
   /// quitar id

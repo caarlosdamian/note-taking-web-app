@@ -12,7 +12,6 @@ const page = async ({
   // todo: algo
   const { tagId } = await params;
 
-
   // const filters = (await searchParams) || {};
 
   const notes = await getNotes({
@@ -20,14 +19,13 @@ const page = async ({
   });
 
   return (
-    <div className="flex w-full flex-col gap-4 p-4 md:px-8">
+    <div className="flex w-full h-full">
       <h1 className="font-preset-1 text-neutral-950 dark:text-white lg:hidden">
         Tags
       </h1>
       <NoteLayout
         upperNote={`All notes with the ”${tagId}” tag are shown here.`}
         notes={notes as string}
-        className=" !px-0 !py-0"
       />
       <AbsoluteBtn />
     </div>

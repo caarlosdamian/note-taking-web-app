@@ -6,26 +6,28 @@ const homeNavegation: ItemListI[] = [
     label: 'All Notes',
     icon: 'home',
     path: '/notes',
+    keywords: ['/notes'],
   },
   {
     label: 'Archived Notes',
     icon: 'archived',
     path: '/notes/archived',
+    keywords: ['/archived'],
   },
 ];
 
-const tagsNavegation: ItemListI[] = [
-  {
-    label: 'React',
-    icon: 'tags',
-    path: '/tags/react',
-  },
-  {
-    label: 'Javascript',
-    icon: 'tags',
-    path: '/tags/javascript',
-  },
-];
+// const tagsNavegation: ItemListI[] = [
+//   {
+//     label: 'React',
+//     icon: 'tags',
+//     path: '/tags/react',
+//   },
+//   {
+//     label: 'Javascript',
+//     icon: 'tags',
+//     path: '/tags/javascript',
+//   },
+// ];
 
 const sectionTitles = {
   archived: {
@@ -179,7 +181,6 @@ const resertPasswordFormItems: InputItem[] = [
 
 export {
   homeNavegation,
-  tagsNavegation,
   sectionTitles,
   notes,
   singinFormItems,

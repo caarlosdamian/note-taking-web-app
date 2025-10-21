@@ -65,12 +65,14 @@ export const modifySvg = (
  */
 export const isActive = (
   pathname: string,
-  link: string,
+  keywords: string[],
   includes?: boolean
 ): boolean => {
-  return includes
-    ? pathname === link || pathname.endsWith(link)
-    : pathname === link;
+  if (typeof keywords !== 'object') return false;
+  return keywords?.some((el) => pathname.includes(el));
+  // return includes
+  //   ? pathname === link || pathname.endsWith(link)
+  //   : pathname === link;
 };
 
 /**
@@ -119,5 +121,5 @@ export const capitalizeWord = (str: string) =>
 export const getIdAndArchivedFromParams = (params: string[]) => {
   if (!params?.length) return { id: null, isArchived: false };
   const id = params[0] === 'archived' ? params[1] : params[0];
-  return { id, isArchived: params[0] === 'archived', };
+  return { id, isArchived: params[0] === 'archived' };
 };

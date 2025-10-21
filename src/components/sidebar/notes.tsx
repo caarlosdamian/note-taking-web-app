@@ -4,7 +4,7 @@ import { Button } from '../button';
 import { IconList, isActive } from '@/src/utils';
 import { Note } from '@/src/types';
 import { NoteItem } from '../shared/noteItem';
-import { useGetNoteDetails } from '@/src/hooks/useGetNoteDetails';
+import { usePathname } from 'next/navigation';
 
 interface Props {
   action?: () => void;
@@ -27,9 +27,7 @@ export const Notes = ({
   redirect,
   className,
 }: Props) => {
-  // const { createQueryString, setUrlQueryParams } = useQueryParamsTools();
-
-  const { id } = useGetNoteDetails();
+  const pathname = usePathname();
 
   return (
     <div
@@ -55,7 +53,7 @@ export const Notes = ({
       {notes?.length >= 1 ? (
         notes.map((elemento) => (
           <NoteItem
-            isActive={isActive(id as unknown as string, elemento._id as string)}
+            isActive={isActive(pathname, [elemento?._id as string])}
             key={elemento?._id}
             note={elemento}
           />

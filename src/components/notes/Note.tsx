@@ -28,7 +28,8 @@ const transformText = (text: string) => {
 };
 
 export const Note = () => {
-  const { id } = useGetNoteDetails();
+  const { id: paramId, noteId: idFromHook } = useGetNoteDetails();
+  const id = paramId || idFromHook;
   const tagRef = useRef(null);
   const router = useRouter();
   const pathName = usePathname();
@@ -98,9 +99,9 @@ export const Note = () => {
       {/* navegacion mobile */}
       <InnerHeader
         archivedAction={() =>
-          archiveNote({ noteId: id, noteInfo, path: pathName })
+          archiveNote({ noteId: id as string, noteInfo, path: pathName })
         }
-        deleteAction={() => deleteNote({ noteId: id, noteInfo })}
+        deleteAction={() => deleteNote({ noteId: id as string, noteInfo })}
       />
       {state.fields.title.isEditMode ? (
         <TextInput

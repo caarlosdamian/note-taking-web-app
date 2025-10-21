@@ -11,15 +11,22 @@ export interface ItemListI {
   icon: IconList;
   path: string;
   isNavegation?: Boolean;
+  keywords: string[];
 }
 
-export const ItemList = ({ icon, label, path, isNavegation }: ItemListI) => {
+export const ItemList = ({
+  icon,
+  label,
+  path,
+  isNavegation,
+  keywords,
+}: ItemListI) => {
   const pathname = usePathname();
   const { isDarkMode } = use(themeContext);
   return (
     <li
       className={`${
-        isActive(pathname, path, true)
+        isActive(pathname, keywords, true)
           ? 'dark:bg-custom-neutral-700 bg-custom-neutral-200'
           : ''
       } p-3 rounded-lg`}
@@ -29,7 +36,7 @@ export const ItemList = ({ icon, label, path, isNavegation }: ItemListI) => {
           <Icon
             icon={icon}
             color={
-              isActive(pathname, path, true)
+              isActive(pathname, keywords, true)
                 ? '#335CFF'
                 : isDarkMode
                 ? '#99A0AE'
@@ -40,7 +47,7 @@ export const ItemList = ({ icon, label, path, isNavegation }: ItemListI) => {
             {label}
           </span>
         </div>
-        {isActive(pathname, path, true) && (
+        {isActive(pathname, keywords, true) && (
           <Icon
             icon="arrowLeft"
             className="rotate-180"
