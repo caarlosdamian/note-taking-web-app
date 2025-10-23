@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import { Header } from './header';
 import { MenuBar } from './menuBar';
 import { Navegation } from './sidebar/navegation';
-import { generateNavElements, homeNavegation } from '../utils';
+import { generateNavElements, homeNavegation, normalizeTags } from '../utils';
 import { ItemListI } from './shared/itemList';
 
 const menu = [
@@ -51,18 +51,13 @@ export const ContentLayout = ({
   // Todo: login layout
   // Todo: Change name
 
-  const normalizeTags = (JSON.parse(tagsData as string) as []).map(
-    (tag: { name: string }) => ({
-      label: tag.name,
-      icon: 'tags',
-      path: `/tags/${tag.name}`,
-      keywords: [tag.name],
-    })
-  ) as ItemListI[];
-  const navElements = generateNavElements([homeNavegation, normalizeTags], {
-    index: 2,
-    title: 'Tags',
-  });
+  const navElements = generateNavElements(
+    [homeNavegation, normalizeTags(tagsData as string)],
+    {
+      index: 2,
+      title: 'Tags',
+    }
+  );
 
   const isSidebar = type === 'sidebar';
   return (

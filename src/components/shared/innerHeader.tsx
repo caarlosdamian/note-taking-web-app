@@ -18,6 +18,7 @@ interface Props {
   deleteAction?: () => void;
   saveAction?: () => void;
   withoutActions?: boolean;
+  withoutBorder?: boolean;
   urlLabel?: string;
 }
 
@@ -26,6 +27,7 @@ export const InnerHeader = ({
   deleteAction,
   saveAction,
   withoutActions = false,
+  withoutBorder,
   urlLabel = 'Go back',
 }: Props) => {
   const router = useRouter();
@@ -34,7 +36,13 @@ export const InnerHeader = ({
   const { isDarkMode } = use(themeContext);
 
   return (
-    <section className="flex lg:hidden justify-between pb-4 border-b-custom-neutral-200 dark:border-b-custom-neutral-800 border-b-[1px]">
+    <section
+      className={`flex lg:hidden justify-between pb-4 ${
+        withoutBorder
+          ? ''
+          : 'border-b-custom-neutral-200 dark:border-b-custom-neutral-800 border-b-[1px]'
+      }`}
+    >
       <div className="">
         <Button
           className="!font-preset-5 md:!font-preset-4"

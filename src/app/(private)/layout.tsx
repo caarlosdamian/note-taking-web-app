@@ -28,7 +28,7 @@ export default async function Layout({
   if (!session) {
     redirect('/signin');
   }
-  const tags = await getTags();
+  const tags = await getTags() as string;
 
   return <ContentLayout tagsData={tags}>{children}</ContentLayout>;
 }

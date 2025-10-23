@@ -63,16 +63,16 @@ export const modifySvg = (
  * @param link - String cualquiera
  * @returns  Booleando
  */
-export const isActive = (
-  pathname: string,
-  keywords: string[],
-  includes?: boolean
-): boolean => {
+export const isActive = (pathname: string, keywords: string[]): boolean => {
+  const normalizepaths = keywords.map((ele) =>
+    ele === '/' ? ele : ele.replace('/', '')
+  );
   if (typeof keywords !== 'object') return false;
-  return keywords?.some((el) => pathname.includes(el));
-  // return includes
-  //   ? pathname === link || pathname.endsWith(link)
-  //   : pathname === link;
+
+  if (!normalizepaths.includes('/') && !normalizepaths.includes('notes')) {
+    return normalizepaths?.some((el) => pathname.includes(el));
+  }
+  return pathname === '/' || pathname === '/notes';
 };
 
 /**
@@ -122,4 +122,15 @@ export const getIdAndArchivedFromParams = (params: string[]) => {
   if (!params?.length) return { id: null, isArchived: false };
   const id = params[0] === 'archived' ? params[1] : params[0];
   return { id, isArchived: params[0] === 'archived' };
+};
+
+export const normalizeTags = (tagsData: string): ItemListI[] => {
+  return (JSON.parse(tagsData as string) as []).map(
+    (tag: { name: string }) => ({
+      label: tag.name,
+      icon: 'tags',
+      path: `/tags/${tag.name}`,
+      keywords: [tag.name],
+    })
+  );
 };

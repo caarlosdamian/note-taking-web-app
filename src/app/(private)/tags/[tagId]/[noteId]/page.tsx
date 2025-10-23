@@ -22,12 +22,10 @@ const page = async ({
 
   return (
     <section className="flex w-full h-full">
-      <h1 className="font-preset-1 text-neutral-950 dark:text-white lg:hidden">
-        Tags
-      </h1>
       <NoteLayout
         upperNote={`All notes with the ”${tagId}” tag are shown here.`}
         notes={notes as string}
+        className="hidden lg:flex"
       />
       <Note />
       <ActionBar />

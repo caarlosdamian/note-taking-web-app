@@ -20,7 +20,7 @@ export const useCalculatePathName = () => {
   };
   // todo: remover los comentarios
   useEffect(() => {
-    if (params.innerNotes) {
+    if (params.innerNotes && params.innerNotes.length === 2) {
       removeLasteElement();
     }
     if (params.noteId) {
