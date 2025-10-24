@@ -91,6 +91,10 @@ export const Note = () => {
     });
   };
 
+  const tagToRender = Array.isArray(state.noteData?.tags)
+    ? state.noteData?.tags
+    : state.noteData?.tags?.split(',');
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -148,6 +152,7 @@ export const Note = () => {
               name="tags"
               variant="sm"
               value={state?.noteData?.tags}
+              placeholder="Add tags separated by commas (e.g. Work, Planning)"
               onChange={(event) => {
                 const {
                   target: { value, name },
@@ -160,18 +165,21 @@ export const Note = () => {
               className="flex items-center"
               onClick={() => dispatch({ type: 'SET_TAGS_EDIT' })}
             >
-              {(Array.isArray(state.noteData?.tags)
-                ? state.noteData?.tags
-                : state.noteData?.tags?.split(',')
-              )?.map((tag: string, index: number) => (
-                <span
-                  {...(index !== 0 ? { before: ',' } : {})}
-                  key={tag}
-                  className="text-neutral-950 dark:text-white after:content before:content-[attr(before)]"
-                >
-                  {tag}
+              {tagToRender.length !== 0 ? (
+                tagToRender?.map((tag: string, index: number) => (
+                  <span
+                    {...(index !== 0 ? { before: ',' } : {})}
+                    key={tag}
+                    className="text-neutral-950 dark:text-white after:content before:content-[attr(before)]"
+                  >
+                    {tag}
+                  </span>
+                ))
+              ) : (
+                <span className="text-neutral-400">
+                  Add tags separated by commas (e.g. Work, Planning)
                 </span>
-              ))}
+              )}
             </div>
           )}
         </div>

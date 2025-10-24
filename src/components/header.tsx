@@ -2,7 +2,7 @@
 import React, { use } from 'react';
 import { Logo } from './shared/logo';
 import { useParams, usePathname } from 'next/navigation';
-import { sectionTitles } from '../utils';
+import { getIdAndArchivedFromParams, sectionTitles } from '../utils';
 import { TextInput } from './textInput';
 import { Icon } from './icon';
 import { themeContext } from '../context';
@@ -15,6 +15,10 @@ export const Header = () => {
   const titleKey = getTitle[1] !== '' ? getTitle[1] : 'home';
 
   const generateTitle = () => {
+    if (pathname.includes('archived')) {
+      return sectionTitles.archived.title;
+    }
+
     if (pathname === '/tags') {
       return 'Select a Tag';
     }
