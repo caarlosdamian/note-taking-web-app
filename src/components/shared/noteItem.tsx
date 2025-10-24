@@ -28,7 +28,7 @@ export const NoteItem = ({
     <Link
       href={`${normalizePathName}/${_id}`}
       // href={'/notes'}
-      className={`flex flex-col gap-3 p-2    ${
+      className={`flex flex-col gap-3 py-2 lg:px-2    ${
         isActive
           ? 'dark:bg-custom-neutral-800 bg-custom-neutral-100 rounded-md'
           : 'border-b-[1px] border-b-custom-neutral-200 dark:border-b-custom-neutral-800'
