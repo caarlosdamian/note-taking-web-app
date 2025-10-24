@@ -18,10 +18,10 @@ const page = async ({
   const { isArchived } = getIdAndArchivedFromParams(
     innerNotes as unknown as string[]
   );
-  
+
   const filters = (await searchParams) || {};
   const tagsData = await getTags();
-  
+
   const notes = await getNotes({});
 
   return (
@@ -29,7 +29,12 @@ const page = async ({
       {/* <h1 className="font-preset-1 text-neutral-950 dark:text-white lg:hidden">
         All notes
       </h1> */}
-      <List elements={normalizeTags(tagsData as string)}  title='Tags'/>
+      <List
+        elements={normalizeTags(tagsData as string)}
+        title="Tags"
+        className="lg:hidden"
+        elementsWithBorder
+      />
       <NoteLayout
         notes={notes as string}
         className="hidden lg:flex !px-0 !py-0"

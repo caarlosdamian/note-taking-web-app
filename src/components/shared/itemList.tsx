@@ -12,6 +12,7 @@ export interface ItemListI {
   path: string;
   isNavegation?: Boolean;
   keywords: string[];
+  withBorder?: boolean;
 }
 
 export const ItemList = ({
@@ -20,23 +21,28 @@ export const ItemList = ({
   path,
   isNavegation,
   keywords,
+  withBorder,
 }: ItemListI) => {
   const pathname = usePathname();
   const { isDarkMode } = use(themeContext);
   return (
     <li
       className={`${
-        isActive(pathname, keywords, true)
+        isActive(pathname, keywords)
           ? 'dark:bg-custom-neutral-700 bg-custom-neutral-200'
           : ''
-      } p-3 rounded-lg`}
+      } p-3 ${
+        withBorder
+          ? 'border-b-custom-neutral-200 dark:border-b-custom-neutral-800 border-b-[1px]'
+          : 'rounded-lg'
+      }`}
     >
       <Link href={path} className="flex items-center gap-2 justify-between">
         <div className="flex items-center gap-2">
           <Icon
             icon={icon}
             color={
-              isActive(pathname, keywords, true)
+              isActive(pathname, keywords)
                 ? '#335CFF'
                 : isDarkMode
                 ? '#99A0AE'
@@ -47,7 +53,7 @@ export const ItemList = ({
             {label}
           </span>
         </div>
-        {isActive(pathname, keywords, true) && (
+        {isActive(pathname, keywords) && (
           <Icon
             icon="arrowLeft"
             className="rotate-180"

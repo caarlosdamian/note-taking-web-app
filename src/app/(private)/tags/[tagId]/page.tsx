@@ -23,10 +23,6 @@ const page = async ({
   const tagsData = await getTags();
   return (
     <div className="flex w-full h-full flex-col gap-4  py-5 px-4 md:py-6 md:px-9 lg:px-0 lg:py-0 lg:flex-row">
-      {/* <List
-        elements={normalizeTags(tagsData as string)}
-        title={`Notes Tagged: ${tagId}`}
-      /> */}
       <InnerHeader withoutActions withoutBorder />
       <h1 className="font-preset-1 text-custom-neutral-600 dark:text-custom-neutral-400 lg:hidden">
         All notes with the:
@@ -37,7 +33,7 @@ const page = async ({
       <NoteLayout
         upperNote={`All notes with the ”${tagId}” tag are shown here.`}
         notes={notes as string}
-        className="!px-0 !py-0"
+        className="max-md:!px-0 max-md:!py-0 "
       />
       <AbsoluteBtn />
     </div>

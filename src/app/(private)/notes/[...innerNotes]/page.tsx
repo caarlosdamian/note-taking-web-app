@@ -14,7 +14,7 @@ const NotesPage = async ({
   const { isArchived } = getIdAndArchivedFromParams(
     innerNotes as unknown as string[]
   );
-  // todo : clean typing
+  // todo : check archive main page
   const notes = await getNotes({
     isArchived,
   });

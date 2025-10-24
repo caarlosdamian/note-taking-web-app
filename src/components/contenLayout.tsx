@@ -3,7 +3,6 @@ import { Header } from './header';
 import { MenuBar } from './menuBar';
 import { Navegation } from './sidebar/navegation';
 import { generateNavElements, homeNavegation, normalizeTags } from '../utils';
-import { ItemListI } from './shared/itemList';
 
 const menu = [
   {
@@ -21,7 +20,7 @@ const menu = [
   {
     label: 'Archived',
     icon: 'archived',
-    path: '/archived',
+    path: '/notes/archived',
     keywords: ['/archived'],
   },
   {
