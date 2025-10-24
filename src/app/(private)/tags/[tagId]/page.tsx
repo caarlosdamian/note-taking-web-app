@@ -23,7 +23,7 @@ const page = async ({
   const tagsData = await getTags();
   return (
     <div className="flex w-full h-full flex-col gap-4  py-5 px-4 md:py-6 md:px-9 lg:px-0 lg:py-0 lg:flex-row">
-      <InnerHeader withoutActions withoutBorder />
+      <InnerHeader withoutActions withoutBorder breadCrumbs />
       <h1 className="font-preset-1 text-custom-neutral-600 dark:text-custom-neutral-400 lg:hidden">
         All notes with the:
         <strong className=" text-custom-neutral-950 dark:text-white capitalize">

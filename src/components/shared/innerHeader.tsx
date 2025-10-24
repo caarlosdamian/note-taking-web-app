@@ -19,6 +19,7 @@ interface Props {
   saveAction?: () => void;
   withoutActions?: boolean;
   withoutBorder?: boolean;
+  breadCrumbs?: boolean;
   urlLabel?: string;
 }
 
@@ -29,6 +30,7 @@ export const InnerHeader = ({
   withoutActions = false,
   withoutBorder,
   urlLabel = 'Go back',
+  breadCrumbs,
 }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -48,7 +50,13 @@ export const InnerHeader = ({
           className="!font-preset-5 md:!font-preset-4"
           variant="link"
           icon="arrowLeft"
-          onClick={() => router.back()}
+          onClick={() => {
+            const breadCrumbsPathname = pathname.substring(
+              0,
+              pathname.lastIndexOf('/')
+            );
+            breadCrumbs ? router.push(breadCrumbsPathname) : router.back();
+          }}
         >
           {urlLabel}
         </Button>

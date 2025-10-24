@@ -101,6 +101,7 @@ export const Note = () => {
         archivedAction={() =>
           archiveNote({ noteId: id as string, noteInfo, path: pathName })
         }
+        breadCrumbs
         deleteAction={() => deleteNote({ noteId: id as string, noteInfo })}
       />
       {state.fields.title.isEditMode ? (
