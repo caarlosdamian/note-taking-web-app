@@ -18,7 +18,7 @@ const page = async ({
 
   const filters = (await searchParams) || {};
 
-  const notes = await getNotes({ isArchived });
+  const notes = await getNotes({ isArchived, q: filters.q as string });
 
   return (
     <div className="flex w-full flex-col gap-4 px-8 lg:px-0">

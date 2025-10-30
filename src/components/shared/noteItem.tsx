@@ -4,6 +4,7 @@ import { Tag } from './tag';
 import { formatDate } from '@/src/utils';
 import Link from 'next/link';
 import { useCalculatePathName } from '@/src/hooks/useCalculatePathName';
+import { useSearchParams } from 'next/navigation';
 
 interface Props {
   note: Note;
@@ -20,13 +21,16 @@ export const NoteItem = ({
 
   // /note => /notes/archived/id => /notes/id/
   // /tags => /tags/tagId => /tags/tagId/id
+  const params = useSearchParams();
 
   // Todo: agregar funcionalidad de activa
   // Todo: agregar dark mode
   // Todo: agregar modo edicion
   return (
     <Link
-      href={`${normalizePathName}/${_id}`}
+      href={`${normalizePathName}/${_id}${
+        params.get('q') ? `?q=${params.get('q')}` : ''
+      }`}
       // href={'/notes'}
       className={`flex flex-col gap-3 py-2 lg:px-2    ${
         isActive

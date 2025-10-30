@@ -23,19 +23,14 @@ export const getNotes = async (params: GetNotesParams) => {
   try {
     const searchQuery: FilterQuery<typeof Note> = {};
 
-    if (tagName) {
-      const tag = await getTag(tagName);
+    if (tagName || q) {
+      const tag = await getTag(tagName || q as string);
       searchQuery.tags = new mongo.ObjectId(tag._id);
     }
 
     if (typeof isArchived === 'boolean') {
       searchQuery.isArchived = isArchived;
     }
-
-    if (q) {
-      searchQuery.title = { $regex: q, $options: 'i' };
-    }
-
 
     await dbConnect();
     const notes = await Note.find({ ...searchQuery })

@@ -3,8 +3,13 @@ import { AbsoluteBtn, ActionBar, NoteLayout } from '@/src/components';
 
 import React from 'react';
 
-const HomePage = async () => {
-  const notes = await getNotes({});
+const HomePage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) => {
+  const params = await searchParams;
+  const notes = await getNotes({ q: params.q as string });
   return (
     // <div className="flex flex-col gap-4 overflow-hidden w-full h-full ">
     //   <NoteLayout className="w-full" notes={notes as string} />
@@ -15,7 +20,11 @@ const HomePage = async () => {
       <h1 className="font-preset-1 text-neutral-950 dark:text-white lg:hidden">
         All notes
       </h1>
-      <NoteLayout notes={notes as string} className="max-md:!px-0 max-md:!py-0" />
+      <NoteLayout
+        notes={notes as string}
+        upperNote={params.q ? `All notes with the ”${params.q}” tag are shown here.`:undefined}
+        className="max-md:!px-0 max-md:!py-0"
+      />
       <AbsoluteBtn />
       <ActionBar />
     </div>

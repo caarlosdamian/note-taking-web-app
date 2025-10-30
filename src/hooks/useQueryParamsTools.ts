@@ -34,5 +34,9 @@ export const useQueryParamsTools = () => {
     return router.push(`${pathname}?${createQueryString(recordParams)}`);
   };
 
-  return { createQueryString, setUrlQueryParams };
+  const removeQueryParams = () => {
+    return router.push(`${pathname}`);
+  };
+
+  return { createQueryString, setUrlQueryParams, removeQueryParams };
 };

@@ -10,6 +10,8 @@ const NotesPage = async ({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
   params: Promise<{ innerNotes: string[]; noteId: string }>;
 }) => {
+  const searchParamsQuery = (await searchParams) || {};
+
   const { innerNotes, noteId, ...rest } = await params;
   const { isArchived } = getIdAndArchivedFromParams(
     innerNotes as unknown as string[]
@@ -17,9 +19,8 @@ const NotesPage = async ({
   // todo : check archive main page
   const notes = await getNotes({
     isArchived,
+    q: searchParamsQuery.q as string,
   });
-
-  console.log('noteId', innerNotes);
 
   if (innerNotes.includes('archived') && innerNotes.length === 1)
     return (
@@ -39,7 +40,15 @@ const NotesPage = async ({
 
   return (
     <section className="flex w-full h-full">
-      <NoteLayout notes={notes as string} className="hidden lg:flex" />
+      <NoteLayout
+        upperNote={
+          searchParamsQuery.q
+            ? `All notes with the ”${searchParamsQuery.q}” tag are shown here.`
+            : undefined
+        }
+        notes={notes as string}
+        className="hidden lg:flex"
+      />
       <Note />
       <ActionBar />
       <AbsoluteBtn />
