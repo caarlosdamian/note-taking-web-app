@@ -1,12 +1,11 @@
 'use client';
-import React, { use, useState } from 'react';
+import React, { use } from 'react';
 import { Logo } from './shared/logo';
 import { useParams, usePathname, useSearchParams } from 'next/navigation';
 import { sectionTitles } from '../utils';
-import { TextInput } from './textInput';
 import { Icon } from './icon';
 import { themeContext } from '../context';
-import { useQueryParamsTools } from '../hooks/useQueryParamsTools';
+import { SearchInput } from './shared/searchInput';
 
 export const Header = () => {
   const pathname = usePathname();
@@ -15,11 +14,6 @@ export const Header = () => {
   const { isDarkMode } = use(themeContext);
   const getTitle = pathname.split('/');
   const titleKey = getTitle[1] !== '' ? getTitle[1] : 'home';
-  const [searchQuery, setSearchQuery] = useState<{ q: string }>(() => ({
-    q: searchParams.get('q') || '',
-  }));
-
-  const { setUrlQueryParams, removeQueryParams } = useQueryParamsTools();
 
   const generateTitle = () => {
     if (pathname.includes('archived')) {
@@ -32,7 +26,10 @@ export const Header = () => {
     }
 
     if (searchParams.get('q')) {
-      return 'Showing results for: {query}'.replace('{query}', searchQuery.q);
+      return 'Showing results for: {query}'.replace(
+        '{query}',
+        searchParams.get('q') || ''
+      );
     }
 
     if (params.tagId || params.id) {
@@ -55,21 +52,7 @@ export const Header = () => {
           {generateTitle()}
         </span>
         <div className="flex items-center gap-6">
-          <TextInput
-            placeholder="Search by title, content, or tags…"
-            iconLeft="search"
-            value={searchQuery.q}
-            onChange={(e) => {
-              setSearchQuery(() => ({ q: e.target.value }));
-            }}
-            onKeyDown={(e) => {
-              if (e.code === 'Enter') {
-                searchQuery.q.length > 0
-                  ? setUrlQueryParams(searchQuery)
-                  : removeQueryParams();
-              }
-            }}
-          />
+          <SearchInput />
           <Icon
             width={24}
             height={24}

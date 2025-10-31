@@ -7,6 +7,7 @@ import {
 import './globals.css';
 import { ToastContextProvider } from '@/src/context/toastContext';
 import { ModalContextProvider } from '@/src/context/modalContext';
+import { SearchContextProvider } from '../context/searchContext';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -25,7 +26,9 @@ export default function RootLayout({
           <ThemeContextProvider>
             <ModalContextProvider>
               <NoteContextProvider>
-                <ToastContextProvider>{children}</ToastContextProvider>
+                <SearchContextProvider>
+                  <ToastContextProvider>{children}</ToastContextProvider>
+                </SearchContextProvider>
               </NoteContextProvider>
             </ModalContextProvider>
           </ThemeContextProvider>

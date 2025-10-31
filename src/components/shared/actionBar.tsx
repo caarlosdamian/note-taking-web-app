@@ -12,7 +12,7 @@ export const ActionBar = () => {
   // todo: hacer un redirect al archivar o restor
   const iconSize = { width: 20, height: 20 };
   const pathname = usePathname();
-  const { id } = useGetNoteDetails();
+  const { noteId } = useGetNoteDetails();
 
   const isArchive = pathname.includes('/archived');
   const ARCHIVE_INFO = isArchive
@@ -30,6 +30,9 @@ export const ActionBar = () => {
         icon: 'archived',
       };
 
+
+  if (!noteId) return null;
+
   return (
     <div className="basis-1/3 lg:px-4 lg:py-5 bg-white dark:bg-custom-neutral-950 hidden lg:flex lg:flex-col gap-3 border-l-2 border-custom-neutral-200 dark:border-custom-neutral-800">
       <Button
@@ -38,8 +41,8 @@ export const ActionBar = () => {
         onClick={async () => {
           if (isArchive) {
             await archiveNote({
-              noteId: id as string,
-              path: `/notes/${id}`,
+              noteId: noteId as string,
+              path: `/notes/${noteId}`,
               forceValue: false,
             });
           } else {
@@ -51,12 +54,12 @@ export const ActionBar = () => {
               actionLabel: ARCHIVE_INFO.actionLabel,
               actionCallback: async () => {
                 await archiveNote({
-                  noteId: id as string,
-                  path: `/notes/archived/${id}`,
+                  noteId: noteId as string,
+                  path: `/notes/archived/${noteId}`,
                   forceValue: true,
                 });
               },
-            }); 
+            });
           }
         }}
         icon={ARCHIVE_INFO.icon as IconList}
@@ -79,7 +82,7 @@ export const ActionBar = () => {
             btnVariant: 'danger',
             actionLabel: 'Delete Note',
             actionCallback: () => {
-              deleteNote({ noteId: id as string });
+              deleteNote({ noteId: noteId as string });
             },
           });
         }}
