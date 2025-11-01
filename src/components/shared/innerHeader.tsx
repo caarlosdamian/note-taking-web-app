@@ -53,7 +53,7 @@ export const InnerHeader = ({
           icon="arrowLeft"
           onClick={() => {
             if (searchQuery.get('q')) {
-              router.push('/search');
+              router.push(`/search?q=${searchQuery.get('q')}`);
               return;
             }
             const breadCrumbsPathname = pathname.substring(
