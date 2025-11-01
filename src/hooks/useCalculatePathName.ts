@@ -13,22 +13,29 @@ export const useCalculatePathName = () => {
     pathName === '/' ? '/notes' : pathName
   );
 
-  const removeLasteElement = () => {
+  const removeLasteElement = (elementsToRemove?: boolean) => {
     const newurl = pathName.split('/');
+    if (elementsToRemove) {
+      const url = newurl.slice(1, 2);
+      const newUrl = url.join('/');
+
+      setNormalizePathName(newUrl.startsWith('/') ? newUrl : '/' + newUrl);
+      return;
+    }
     newurl.pop();
     setNormalizePathName(newurl.join('/'));
   };
   // todo: remover los comentarios
   useEffect(() => {
-    if (params.innerNotes && params.innerNotes.length === 2) {
-      removeLasteElement();
+    if (params.innerNotes) {
+      removeLasteElement(true);
     }
+
     if (params.noteId) {
       removeLasteElement();
     }
   }, [pathName]);
 
-  /// quitar id
 
   return {
     normalizePathName,

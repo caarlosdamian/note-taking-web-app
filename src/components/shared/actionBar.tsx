@@ -7,7 +7,7 @@ import { archiveNote, deleteNote } from '@/src/actions/notes';
 import { IconList } from '@/src/utils';
 import { useGetNoteDetails } from '@/src/hooks/useGetNoteDetails';
 
-export const ActionBar = () => {
+export const ActionBar = ({ className }: { className?: string }) => {
   const { openModal } = use(modalContext);
   // todo: hacer un redirect al archivar o restor
   const iconSize = { width: 20, height: 20 };
@@ -29,9 +29,9 @@ export const ActionBar = () => {
         actionLabel: 'Archive Note',
         icon: 'archived',
       };
+      console.log('note',noteId)
 
-
-  if (!noteId) return null;
+  // if (!noteId) return null;
 
   return (
     <div className="basis-1/3 lg:px-4 lg:py-5 bg-white dark:bg-custom-neutral-950 hidden lg:flex lg:flex-col gap-3 border-l-2 border-custom-neutral-200 dark:border-custom-neutral-800">

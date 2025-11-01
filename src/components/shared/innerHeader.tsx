@@ -1,7 +1,7 @@
 'use client';
 import React, { use } from 'react';
 import { Button } from '../button';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Icon } from '../icon';
 import { themeContext } from '@/src/context';
 
@@ -36,6 +36,7 @@ export const InnerHeader = ({
   const pathname = usePathname();
   const isArchiveRoute = pathname.split('/').includes('archived');
   const { isDarkMode } = use(themeContext);
+  const searchQuery = useSearchParams();
 
   return (
     <section
@@ -51,10 +52,15 @@ export const InnerHeader = ({
           variant="link"
           icon="arrowLeft"
           onClick={() => {
+            if (searchQuery.get('q')) {
+              router.push('/search');
+              return;
+            }
             const breadCrumbsPathname = pathname.substring(
               0,
               pathname.lastIndexOf('/')
             );
+
             breadCrumbs ? router.push(breadCrumbsPathname) : router.back();
           }}
         >

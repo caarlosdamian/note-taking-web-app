@@ -9,5 +9,5 @@ export const useGetNoteDetails = () => {
 
   const params = getIdAndArchivedFromParams(innerNotes);
 
-  return { ...params, noteId };
+  return { ...params, noteId: noteId || params.id };
 };

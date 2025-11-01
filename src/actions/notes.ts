@@ -25,6 +25,9 @@ export const getNotes = async (params: GetNotesParams) => {
 
     if (tagName || q) {
       const tag = await getTag(tagName || q as string);
+      if(tag === null){
+        return []
+      }
       searchQuery.tags = new mongo.ObjectId(tag._id);
     }
 
