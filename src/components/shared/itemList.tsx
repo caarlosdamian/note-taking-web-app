@@ -49,7 +49,7 @@ export const ItemList = ({
                 : '#525866'
             }
           />
-          <span className="font-preset-4 text-neutral-950 dark:text-white capitalize">
+          <span className="font-preset-4 text-custom-neutral-950 dark:text-white capitalize">
             {label}
           </span>
         </div>

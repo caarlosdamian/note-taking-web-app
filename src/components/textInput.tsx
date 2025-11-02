@@ -41,7 +41,7 @@ export const TextInput = ({
       <div className="flex justify-between">
         {label && (
           <label
-            className="font-preset-4 text-neutral-950 dark:text-white"
+            className="font-preset-4 text-custom-neutral-950 dark:text-white"
             htmlFor={name}
           >
             {label}

@@ -26,9 +26,6 @@ const page = async ({
 
   return (
     <div className="flex w-full flex-col gap-4 p-4 md:px-8">
-      {/* <h1 className="font-preset-1 text-neutral-950 dark:text-white lg:hidden">
-        All notes
-      </h1> */}
       <List
         elements={normalizeTags(tagsData as string)}
         title="Tags"

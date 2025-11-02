@@ -4,11 +4,11 @@ import {
   RadioButton,
   RadioGroup,
 } from '@/src/components';
+import { ConfigLayout } from '@/src/components/layout/configLayout';
 import {
   bottomSettingsNavegation,
   generateNavElements,
-  homeNavegation,
-  normalizeTags,
+  radioDummyElements,
   upperSettingsNavegation,
 } from '@/src/utils';
 
@@ -20,12 +20,13 @@ const Settings = async ({ params }: { params: { id: string } }) => {
     bottomSettingsNavegation,
   ]);
 
+  // todo: dynamic content required @@
   return (
-    <div className="flex">
+    <div className="flex w-full">
       <Navegation whitoutLogo navElements={navElements} />
-      <div className="py-6 px-4">
-        <RadioGroup />
-      </div>
+      <ConfigLayout title="Font Theme" subtitle="Choose your color theme:">
+        <RadioGroup elements={radioDummyElements} />
+      </ConfigLayout>
     </div>
   );
 };

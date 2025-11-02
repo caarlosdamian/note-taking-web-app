@@ -17,7 +17,7 @@ const HomePage = async ({
     // </div>
 
     <div className="flex w-full flex-col gap-4 p-4 md:px-8">
-      <h1 className="font-preset-1 text-neutral-950 dark:text-white lg:hidden">
+      <h1 className="font-preset-1 text-custom-neutral-950 dark:text-white lg:hidden">
         All notes
       </h1>
       <NoteLayout

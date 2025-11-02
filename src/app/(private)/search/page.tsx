@@ -27,7 +27,7 @@ const page = async ({
   return (
     <div className="flex w-full flex-col gap-4 px-8 lg:px-0">
       <div className="flex flex-col gap-4 lg:hidden">
-        <h1 className="font-preset-1 text-neutral-950 dark:text-white ">
+        <h1 className="font-preset-1 text-custom-neutral-950 dark:text-white ">
           Search
         </h1>
         <SearchInput />

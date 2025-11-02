@@ -6,7 +6,10 @@ import {
 } from '@/src/utils';
 
 const Settings = () => {
-   const navElements = generateNavElements([upperSettingsNavegation, bottomSettingsNavegation]);
+  const navElements = generateNavElements([
+    upperSettingsNavegation,
+    bottomSettingsNavegation,
+  ]);
 
   return (
     <div>

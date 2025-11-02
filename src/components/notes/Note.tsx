@@ -125,7 +125,7 @@ export const Note = () => {
         />
       ) : (
         <h1
-          className="font-preset-1 text-neutral-950 dark:text-white"
+          className="font-preset-1 text-custom-neutral-950 dark:text-white"
           onClick={() => dispatch({ type: 'SET_TITLE_EDIT' })}
         >
           {state?.noteData?.isEdited
@@ -142,7 +142,7 @@ export const Note = () => {
             }}
           >
             <Icon icon="tag" color="#717784" />
-            <span className="text-neutral-950 dark:text-white">Tags</span>
+            <span className="text-custom-neutral-950 dark:text-white">Tags</span>
           </div>
 
           {state.fields.tags.isEditMode ? (
@@ -170,7 +170,7 @@ export const Note = () => {
                   <span
                     {...(index !== 0 ? { before: ',' } : {})}
                     key={tag}
-                    className="text-neutral-950 dark:text-white after:content before:content-[attr(before)]"
+                    className="text-custom-neutral-950 dark:text-white after:content before:content-[attr(before)]"
                   >
                     {tag}
                   </span>
@@ -187,13 +187,13 @@ export const Note = () => {
           <div className="flex item-center gap-2">
             <div className="flex items-center gap-1.5">
               <Icon icon="clock" color="#717784" />
-              <span className="text-neutral-950 dark:text-white">
+              <span className="text-custom-neutral-950 dark:text-white">
                 Last edited
               </span>
             </div>
             {/* tags van a ser ids */}
             <div className="flex items-center">
-              <span className="text-neutral-950 dark:text-white after:content before:content-[attr(before)]">
+              <span className="text-custom-neutral-950 dark:text-white after:content before:content-[attr(before)]">
                 {lastEdited && date && <span>{date}</span>}
               </span>
             </div>
@@ -203,7 +203,7 @@ export const Note = () => {
       <hr className="bg-custom-neutral-200 dark:bg-custom-neutral-800 border-0 h-[1px] w-full" />
       <div className="flex justify-between flex-col h-full gap-4 overflow-scroll">
         <div
-          className={`text-neutral-950 dark:text-white overflow-scroll basis-full flex`}
+          className={`text-custom-neutral-950 dark:text-white overflow-scroll basis-full flex`}
         >
           {state.fields.content.isEditMode ? (
             <TextArea

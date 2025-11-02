@@ -25,7 +25,7 @@ const NotesPage = async ({
   if (innerNotes.includes('archived') && innerNotes.length === 1)
     return (
       <div className="flex w-full flex-col gap-4 px-8 lg:px-0">
-        <h1 className="font-preset-1 text-neutral-950 dark:text-white lg:hidden">
+        <h1 className="font-preset-1 text-custom-neutral-950 dark:text-white lg:hidden">
           Archived Notes
         </h1>
         <NoteLayout

@@ -1,5 +1,5 @@
 import { ItemListI } from '../components/shared/itemList';
-import { InputItem, Note } from '../types';
+import { InputItem, Note, RadioElement } from '../types';
 
 const homeNavegation: ItemListI[] = [
   {
@@ -213,6 +213,27 @@ const resertPasswordFormItems: InputItem[] = [
   },
 ];
 
+const radioDummyElements: RadioElement[] = [
+  {
+    label: 'Color Theme',
+    id: 'sun',
+    subtitle: 'Pick a clean and classic light theme',
+    icon: 'sun',
+  },
+  {
+    label: 'Font Theme',
+    subtitle: 'Select a sleek and modern dark theme',
+    id: 'font',
+    icon: 'font',
+  },
+  {
+    label: 'Change Password',
+    subtitle: 'Adapts to your device’s theme',
+    id: 'lock',
+    icon: 'lock',
+  },
+];
+
 export {
   homeNavegation,
   sectionTitles,
@@ -223,4 +244,5 @@ export {
   singupFormItems,
   upperSettingsNavegation,
   bottomSettingsNavegation,
+  radioDummyElements,
 };

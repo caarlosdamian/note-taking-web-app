@@ -54,7 +54,7 @@ export const Header = () => {
         <Logo />
       </div>
       <div className="hidden lg:flex justify-between items-center">
-        <span className="font-preset-1 text-neutral-950 dark:text-white">
+        <span className="font-preset-1 text-custom-neutral-950 dark:text-white">
           {generateTitle()}
         </span>
         <div className="flex items-center gap-6">

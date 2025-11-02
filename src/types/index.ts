@@ -114,3 +114,10 @@ export interface GetNotesParams {
   tagName?: string;
   isArchived?: boolean;
 }
+
+export interface RadioElement {
+  label: string;
+  subtitle: string;
+  id: string;
+  icon: IconList;
+}

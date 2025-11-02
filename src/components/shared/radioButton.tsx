@@ -2,24 +2,31 @@
 import { themeContext } from '@/src/context';
 import { Icon } from '../icon';
 import { use } from 'react';
+import { RadioElement } from '@/src/types';
 
 // props
 // elemento => id , label, action , activeElement => id
+// todo: agregar accion cuando se de click maybe ira en componente padre
 // active se calcula por la prop active
-// todo: change any
-export const RadioButton = ({ item, selectedOption }: any) => {
-  const { label, id, action, subtitle, icon } = item;
+export const RadioButton = ({
+  item,
+  selectedOption,
+  handleSelectOption,
+}: {
+  item: RadioElement;
+  selectedOption: string;
+  handleSelectOption: (s: string) => void;
+}) => {
+  const { label, id, subtitle, icon } = item;
   const isActive = selectedOption === id;
   const { isDarkMode } = use(themeContext);
 
   return (
-    <div
-      className={`flex py-[18px] gap-4 rounded-xl px-4 items-center border-[1px]  border-custom-neutral-200 dark:border-custom-neutral-800 cursor-pointer justify-between  ${
-        isActive
-          ? 'bg-custom-neutral-100 dark:bg-custom-neutral-800'
-          : ''
+    <section
+      className={`flex py-[18px] gap-4 rounded-xl px-4 items-center border-[1px]  border-custom-neutral-200 dark:border-custom-neutral-800 cursor-pointer justify-between w-full ${
+        isActive ? 'bg-custom-neutral-100 dark:bg-custom-neutral-800' : ''
       }`}
-      onClick={() => action()}
+      onClick={() => handleSelectOption(id)}
       role="radio"
     >
       <div className="flex gap-4 items-center">
@@ -51,6 +58,6 @@ export const RadioButton = ({ item, selectedOption }: any) => {
           }`}
         />
       </div>
-    </div>
+    </section>
   );
 };
