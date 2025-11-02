@@ -16,6 +16,36 @@ const homeNavegation: ItemListI[] = [
   },
 ];
 
+const upperSettingsNavegation: ItemListI[] = [
+  {
+    label: 'Color Theme',
+    icon: 'sun',
+    path: '/settings/color',
+    keywords: ['/color'],
+  },
+  {
+    label: 'Font Theme',
+    icon: 'font',
+    path: '/settings/font',
+    keywords: ['/font'],
+  },
+  {
+    label: 'Change Password',
+    icon: 'lock',
+    path: '/settings/password',
+    keywords: ['/password'],
+  },
+];
+
+const bottomSettingsNavegation: ItemListI[] = [
+  {
+    label: 'Logout',
+    icon: 'logout',
+    path: '/Logout',
+    keywords: ['/Logout'],
+  },
+];
+
 // const tagsNavegation: ItemListI[] = [
 //   {
 //     label: 'React',
@@ -43,6 +73,10 @@ const sectionTitles = {
 
   tags: {
     title: 'Notes Tagged: {tag}',
+  },
+
+  settings: {
+    title: 'Settings',
   },
 };
 const notes: Note[] = [
@@ -187,4 +221,6 @@ export {
   forgotPasswordFormItems,
   resertPasswordFormItems,
   singupFormItems,
+  upperSettingsNavegation,
+  bottomSettingsNavegation,
 };

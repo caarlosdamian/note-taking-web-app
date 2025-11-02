@@ -44,14 +44,9 @@ export const icons = {
 
   info: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="#0E121B" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0ZM12.006 15.693v-4.3M12 8.355v-.063"/></svg>`,
 
-  lock: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
-    <rect x="6" y="10" width="12" height="10" stroke="#000" stroke-width="1.5"/>
-    <path stroke="#000" stroke-width="1.5" d="M8 10V6a4 4 0 0 1 8 0v4"/>
-  </svg>`,
+  lock: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="#0E121B" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16.424 9.448V7.3a4.552 4.552 0 0 0-4.551-4.551 4.55 4.55 0 0 0-4.57 4.53v2.168"/><path stroke="#0E121B" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15.683 21.25H8.042a3.792 3.792 0 0 1-3.792-3.792v-4.29a3.792 3.792 0 0 1 3.792-3.791h7.641a3.792 3.792 0 0 1 3.792 3.792v4.289a3.792 3.792 0 0 1-3.792 3.792Z" clip-rule="evenodd"/><path stroke="#0E121B" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M11.862 14.203v2.22"/></svg>`,
 
-  logout: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
-    <path stroke="#000" stroke-width="1.5" d="M16 17l5-5-5-5M21 12H9"/>
-  </svg>`,
+  logout: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="#0E121B" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 11.998H8.945m12.055 0-2.932-2.934M21 11.998l-2.932 2.936M14.556 8.266V7.251c0-1.56-1.121-2.891-2.651-3.15L6.702 3.046C4.765 2.718 3 4.219 3 6.195v11.61c0 1.976 1.765 3.477 3.702 3.15l5.203-1.057a3.188 3.188 0 0 0 2.65-3.149v-1.014"/></svg>`,
 
   menu: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
     <path stroke="#000" stroke-width="1.5" d="M3 6h18M3 12h18M3 18h18"/>
@@ -76,9 +71,7 @@ export const icons = {
     <circle cx="12" cy="12" r="10" stroke="#000" stroke-width="1.5"/>
   </svg>`,
 
-  sun: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
-    <circle cx="12" cy="12" r="5" stroke="#000" stroke-width="1.5"/>
-  </svg>`,
+  sun: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="#0E121B" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12.055 3v1.372m0 15.256V21m9-9h-1.372M4.427 12H3.055m15.364-6.364-.97.97M6.66 17.394l-.97.97m12.728 0-.97-.97M6.66 6.606l-.97-.97"/><path stroke="#0E121B" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12.055 7.805a4.195 4.195 0 1 1 0 8.39 4.195 4.195 0 0 1 0-8.39Z" clip-rule="evenodd"/></svg>`,
 
   systemTheme: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
     <rect x="4" y="4" width="16" height="16" stroke="#000" stroke-width="1.5"/>
@@ -98,6 +91,7 @@ export const icons = {
   globe: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
     <circle cx="12" cy="12" r="10" stroke="#000" stroke-width="1.5"/>
   </svg>`,
+  font: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="#0E121B" fill-rule="evenodd" d="M20.999 10.979H14.63a1 1 0 0 0-1 1v1.13a1 1 0 1 0 2 0v-.13h1.154v4.409h-.39a1 1 0 1 0 0 2h2.84a1 1 0 1 0 0-2h-.45v-4.41h1.214v.13a1 1 0 1 0 2 0v-1.13a1 1 0 0 0-1-1Z" clip-rule="evenodd"/><path fill="#0E121B" fill-rule="evenodd" d="M12.185 17.388H10.29V6.61h4.415v1.25a1 1 0 0 0 2 0V5.61a1 1 0 0 0-1-1H2.999a1 1 0 0 0-1 1v2.25a1 1 0 0 0 2 0V6.61H8.29v10.78H6.517a1 1 0 1 0 0 2h5.668a1 1 0 1 0 0-2Z" clip-rule="evenodd"/></svg>`,
 };
 
 export type IconKeys = typeof icons;

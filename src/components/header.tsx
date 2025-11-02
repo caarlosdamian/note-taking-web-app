@@ -1,7 +1,12 @@
 'use client';
 import React, { use } from 'react';
 import { Logo } from './shared/logo';
-import { useParams, usePathname, useSearchParams } from 'next/navigation';
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 import { sectionTitles } from '../utils';
 import { Icon } from './icon';
 import { themeContext } from '../context';
@@ -14,6 +19,7 @@ export const Header = () => {
   const { isDarkMode } = use(themeContext);
   const getTitle = pathname.split('/');
   const titleKey = getTitle[1] !== '' ? getTitle[1] : 'home';
+  const router = useRouter();
 
   const generateTitle = () => {
     if (pathname.includes('archived')) {
@@ -58,6 +64,8 @@ export const Header = () => {
             height={24}
             color={isDarkMode ? '#99A0AE' : '#525866'}
             icon="settings"
+            className="cursor-pointer"
+            onClick={() => router.push('/settings')}
           />
         </div>
       </div>

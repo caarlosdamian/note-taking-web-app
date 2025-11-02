@@ -125,12 +125,13 @@ export const getIdAndArchivedFromParams = (params: string[]) => {
 };
 
 export const normalizeTags = (tagsData: string): ItemListI[] => {
-  return (JSON.parse(tagsData as string) as []).map(
+  return tagsData ? 
+   (JSON.parse(tagsData as string) as []).map(
     (tag: { name: string }) => ({
       label: tag.name,
       icon: 'tags',
       path: `/tags/${tag.name}`,
       keywords: [tag.name],
     })
-  );
+  ): [];
 };

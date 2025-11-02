@@ -1,7 +1,17 @@
+import { ActionBar, Navegation } from '@/src/components';
+import {
+  bottomSettingsNavegation,
+  generateNavElements,
+  upperSettingsNavegation,
+} from '@/src/utils';
 
+const Settings = () => {
+   const navElements = generateNavElements([upperSettingsNavegation, bottomSettingsNavegation]);
 
-export const Settings = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div>
+      <Navegation whitoutLogo navElements={navElements} />
+    </div>
+  );
+};
+export default Settings;
