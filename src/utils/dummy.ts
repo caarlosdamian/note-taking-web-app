@@ -234,12 +234,56 @@ const radioDummyElements: RadioElement[] = [
   },
 ];
 
+const fontRadioElements: RadioElement[] = [
+  {
+    label: 'Sans-serif',
+    id: 'inter',
+    subtitle: 'Clean and modern, easy to read.',
+    icon: 'sansSerif',
+  },
+  {
+    label: 'Serif',
+    subtitle: 'Classic and elegant for a timeless feel.',
+    id: 'codePro',
+    icon: 'serif',
+  },
+  {
+    label: 'Monospace',
+    subtitle: 'Code-like, great for a technical vibe.',
+    id: 'noto',
+    icon: 'mono',
+  },
+];
+
+const colorRadioElements: RadioElement[] = [
+  {
+    label: 'Light Mode',
+    id: 'light',
+    subtitle: 'Pick a clean and classic light theme',
+    icon: 'sun',
+  },
+  {
+    label: 'Dark Mode',
+    subtitle: 'Select a sleek and modern dark theme',
+    id: 'dark',
+    icon: 'moon',
+  },
+  {
+    label: 'System',
+    subtitle: 'Adapts to your device’s theme',
+    id: 'system',
+    icon: 'system',
+  },
+];
+
 export {
+  colorRadioElements,
   homeNavegation,
   sectionTitles,
   notes,
   singinFormItems,
   forgotPasswordFormItems,
+  fontRadioElements,
   resertPasswordFormItems,
   singupFormItems,
   upperSettingsNavegation,
