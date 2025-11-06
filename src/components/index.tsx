@@ -19,3 +19,4 @@ export { ActionBar } from './shared/actionBar';
 export { SearchInput } from './shared/searchInput';
 export { RadioButton } from './shared/radioButton';
 export { RadioGroup } from './shared/radioGroup';
+export { ResetPassword } from './forms/resetPassword';

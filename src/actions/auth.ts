@@ -1,9 +1,11 @@
 'use server';
 
+import { compare } from 'bcrypt';
 import dbConnect from '../lib/connectDB';
 import User from '../models/user';
 import { IUser } from '../types';
 import { hashPassword } from '../utils';
+import { auth } from '@/auth';
 
 export const getUser = async (email: string) => {
   try {
@@ -76,6 +78,34 @@ export const updatePassword = async (values: {
       email: user.email,
       password: values.password,
       resetPasswordCode: '',
+    });
+
+    return newUser;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const changePassword = async ({
+  password,
+  newPasword,
+}: {
+  password: string;
+  newPasword: string;
+}) => {
+  try {
+    await dbConnect();
+    const {
+      user: { email },
+    } = (await auth()) as { user: { email: string } };
+    const user = await User.findOne({ email });
+    if (!user) throw Error('Algo salio mal.');
+
+    const isPassowrdCorrect = await compare(password as string, user.password);
+    if (!isPassowrdCorrect) throw Error('Algo salio mal.');
+    const newUser = await updateUser({
+      email: user.email,
+      password: newPasword,
     });
 
     return newUser;

@@ -7,6 +7,7 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { getConfig } from '../actions/user';
 
 export type ThemeType = 'dark' | 'light' | 'system';
 interface themeContextI {
@@ -58,6 +59,15 @@ export const ThemeContextProvider = ({ children }: PropsWithChildren) => {
       selectedTheme: theme,
     }));
   };
+
+  const getInitialValue = async () => {
+    const config = (await getConfig({ key: 'theme' })) as ThemeType;
+    handleThemeChange(config || 'system');
+  };
+
+  useEffect(() => {
+    getInitialValue();
+  }, []);
 
   return (
     <themeContext.Provider

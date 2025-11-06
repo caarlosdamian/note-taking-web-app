@@ -41,8 +41,8 @@ const bottomSettingsNavegation: ItemListI[] = [
   {
     label: 'Logout',
     icon: 'logout',
-    path: '/Logout',
-    keywords: ['/Logout'],
+    path: '/settings/logout',
+    keywords: ['/logout'],
   },
 ];
 

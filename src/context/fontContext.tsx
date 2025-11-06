@@ -1,6 +1,7 @@
 'use client';
 import { Inter, Noto_Serif, Source_Code_Pro } from 'next/font/google';
-import { createContext, PropsWithChildren, useState } from 'react';
+import { createContext, PropsWithChildren, useEffect, useState } from 'react';
+import { getConfig } from '../actions/user';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -34,6 +35,15 @@ export const FontContextProvider = ({ children }: PropsWithChildren) => {
   const handleFontChange = (id: string) => {
     setFont(() => ({ font: fonts[id as keyof typeof fonts], selectedKey: id }));
   };
+
+  const getInitialValue = async () => {
+    const config = (await getConfig({ key: 'font' })) as string;
+    handleFontChange(config);
+  };
+
+  useEffect(() => {
+    getInitialValue();
+  }, []);
 
   return (
     <fontContext.Provider

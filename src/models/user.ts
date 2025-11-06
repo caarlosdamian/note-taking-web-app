@@ -21,6 +21,16 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    config: {
+      theme: {
+        type: String,
+        default: 'system',
+      },
+      font: {
+        type: String,
+        default: 'default',
+      },
+    },
   },
   { timestamps: true }
 );
