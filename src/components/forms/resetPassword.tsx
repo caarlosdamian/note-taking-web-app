@@ -1,11 +1,14 @@
 'use client';
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { PasswordInput } from '../shared/passwordInput';
 import { InputItem } from '@/src/types';
 import { Button } from '../button';
 import { changePassword } from '@/src/actions/auth';
+import { toastContext } from '@/src/context';
 
 export const ResetPassword = () => {
+  const { addNewInstance } = use(toastContext);
+
   const formItems: InputItem[] = [
     {
       label: 'Old Password',
@@ -42,24 +45,33 @@ export const ResetPassword = () => {
     }));
   };
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const values = Object.fromEntries(formData.entries()) as unknown as {
+      password: string;
+      oldPassword: string;
+    };
+    // todo reutilizable usar prop
+    const response = await changePassword({
+      newPasword: values['password'],
+      password: values['oldPassword'],
+    });
+    if (response.status === 'success') {
+      setFormValues({
+        confirmPassword: '',
+        password: '',
+        oldPassword: '',
+      } as InputItem);
+      addNewInstance({ id: 'password', title: 'Password Reset' });
+    }
+  };
+
   return (
     <form
       className="flex flex-col gap-4 mt-4 self-stretch"
-      onSubmit={async (event) => {
-        event.preventDefault();
-
-        const formData = new FormData(event.currentTarget);
-        const values = Object.fromEntries(formData.entries()) as unknown as {
-          password: string;
-          oldPassword: string;
-        };
-        console.log('values', values);
-        // todo reutilizable usar prop
-        await changePassword({
-          newPasword: values['password'],
-          password: values['oldPassword'],
-        });
-      }}
+      onSubmit={handleSubmit}
     >
       {formItems.map((input) => {
         return (

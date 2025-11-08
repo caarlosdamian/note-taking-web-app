@@ -103,13 +103,16 @@ export const changePassword = async ({
 
     const isPassowrdCorrect = await compare(password as string, user.password);
     if (!isPassowrdCorrect) throw Error('Algo salio mal.');
-    const newUser = await updateUser({
+    await updateUser({
       email: user.email,
       password: newPasword,
     });
 
-    return newUser;
+    return { status: 'success' };
   } catch (error) {
     console.log(error);
+    return {
+      status: 'failed',
+    };
   }
 };

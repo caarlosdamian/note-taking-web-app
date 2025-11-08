@@ -3,11 +3,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { use, useEffect } from 'react';
 import { toastContext, ToastI } from '../context/toastContext';
+import { Icon } from './icon';
 
 interface Props extends ToastI {}
 
 // todo
-// Agregar funcionalidad de cerrar con click on link 
+// Agregar funcionalidad de cerrar con click on link
 
 export const Toast = ({ title, linkPath, linkLabel, ...props }: Props) => {
   const { handleClose } = use(toastContext);
@@ -22,18 +23,12 @@ export const Toast = ({ title, linkPath, linkLabel, ...props }: Props) => {
     return () => {
       clearTimeout(timeout as unknown as string);
     };
-  }, []); 
+  }, []);
 
   return (
     <div className="transition-all min-w-[274px] md:min-w-[390px] gap-6  mt-5 flex bg-white border-custom-neutral-200 text-custom-neutral-950 dark:text-white dark:bg-custom-neutral-700 justify-between items-center p-2 border-[1px] rounded-lg">
       <div className="flex items-center gap-2">
-        <Image
-          src="./assets/images/icon-checkmark.svg"
-          width={16}
-          height={16}
-          alt="icon"
-          className=""
-        />
+        <Icon color="#21C16B" height={16} width={16} icon="checkmark" />
         <span className="font-preset-6">{title}</span>
       </div>
       <div className="flex gap-2 items-center">
@@ -45,14 +40,7 @@ export const Toast = ({ title, linkPath, linkLabel, ...props }: Props) => {
             {linkLabel}
           </Link>
         )}
-        <Image
-          src="./assets/images/icon-cross.svg"
-          width={16}
-          height={16}
-          alt="cross-icon"
-          className="cursor-pointer dark:invert"
-          onClick={() => handleClose(props.id as string)}
-        />
+        <Icon color="#99A0AE" height={16} width={16} icon="cross" />
       </div>
     </div>
   );
