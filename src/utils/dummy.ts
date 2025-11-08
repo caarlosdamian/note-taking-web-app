@@ -34,6 +34,7 @@ const upperSettingsNavegation: ItemListI[] = [
     icon: 'lock',
     path: '/settings/password',
     keywords: ['/password'],
+
   },
 ];
 
@@ -43,6 +44,7 @@ const bottomSettingsNavegation: ItemListI[] = [
     icon: 'logout',
     path: '/settings/logout',
     keywords: ['/logout'],
+    action: 'logout'
   },
 ];
 

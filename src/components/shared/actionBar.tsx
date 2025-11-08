@@ -29,9 +29,8 @@ export const ActionBar = ({ className }: { className?: string }) => {
         actionLabel: 'Archive Note',
         icon: 'archived',
       };
-      console.log('note',noteId)
 
-  // if (!noteId) return null;
+  if (!noteId) return null;
 
   return (
     <div className="basis-1/3 lg:px-4 lg:py-5 bg-white dark:bg-custom-neutral-950 hidden lg:flex lg:flex-col gap-3 border-l-2 border-custom-neutral-200 dark:border-custom-neutral-800">

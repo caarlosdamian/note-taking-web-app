@@ -96,6 +96,7 @@ export const generateNavElements = (
     id: crypto.randomUUID(),
     items: el,
     title: opts?.index === index + 1 ? opts.title : undefined,
+    ...el,
   }));
 };
 
@@ -125,13 +126,12 @@ export const getIdAndArchivedFromParams = (params: string[]) => {
 };
 
 export const normalizeTags = (tagsData: string): ItemListI[] => {
-  return tagsData ? 
-   (JSON.parse(tagsData as string) as []).map(
-    (tag: { name: string }) => ({
-      label: tag.name,
-      icon: 'tags',
-      path: `/tags/${tag.name}`,
-      keywords: [tag.name],
-    })
-  ): [];
+  return tagsData
+    ? (JSON.parse(tagsData as string) as []).map((tag: { name: string }) => ({
+        label: tag.name,
+        icon: 'tags',
+        path: `/tags/${tag.name}`,
+        keywords: [tag.name],
+      }))
+    : [];
 };

@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { themeContext } from '@/src/context';
 import { use } from 'react';
 import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 
 export interface ItemListI {
   label: string;
@@ -13,6 +14,7 @@ export interface ItemListI {
   isNavegation?: Boolean;
   keywords: string[];
   withBorder?: boolean;
+  action?: string;
 }
 
 export const ItemList = ({
@@ -22,9 +24,29 @@ export const ItemList = ({
   isNavegation,
   keywords,
   withBorder,
+  action,
 }: ItemListI) => {
   const pathname = usePathname();
   const { isDarkMode } = use(themeContext);
+
+  const renderLink = (content: React.ReactNode) =>
+    action ? (
+      <button
+        className="cursor-pointer"
+        onClick={() => {
+          if (action === 'logout') {
+            signOut({ redirectTo: '/signin', redirect: true });
+          }
+        }}
+      >
+        {content}
+      </button>
+    ) : (
+      <Link href={path} className="flex items-center gap-2 justify-between">
+        {content}
+      </Link>
+    );
+
   return (
     <li
       className={`${
@@ -37,30 +59,33 @@ export const ItemList = ({
           : 'rounded-lg'
       }`}
     >
-      <Link href={path} className="flex items-center gap-2 justify-between">
-        <div className="flex items-center gap-2">
-          <Icon
-            icon={icon}
-            color={
-              isActive(pathname, keywords)
-                ? '#335CFF'
-                : isDarkMode
-                ? '#99A0AE'
-                : '#525866'
-            }
-          />
-          <span className="font-preset-4 text-custom-neutral-950 dark:text-white capitalize">
-            {label}
-          </span>
-        </div>
-        {isActive(pathname, keywords) && (
-          <Icon
-            icon="arrowLeft"
-            className="rotate-180"
-            color={isDarkMode ? '#99A0AE' : '#525866'}
-          />
-        )}
-      </Link>
+
+      {renderLink(
+        <>
+          <div className="flex items-center gap-2">
+            <Icon
+              icon={icon}
+              color={
+                isActive(pathname, keywords)
+                  ? '#335CFF'
+                  : isDarkMode
+                  ? '#99A0AE'
+                  : '#525866'
+              }
+            />
+            <span className="font-preset-4 text-custom-neutral-950 dark:text-white capitalize">
+              {label}
+            </span>
+          </div>
+          {isActive(pathname, keywords) && (
+            <Icon
+              icon="arrowLeft"
+              className="rotate-180"
+              color={isDarkMode ? '#99A0AE' : '#525866'}
+            />
+          )}
+        </>
+      )}
     </li>
   );
 };
